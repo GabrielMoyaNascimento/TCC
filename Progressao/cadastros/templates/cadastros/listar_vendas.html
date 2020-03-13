@@ -1,0 +1,57 @@
+{% extends 'cadastros/formulario.html' %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+<div class="container mt-5 py-5">
+
+    <div class="row pt-5 mt-3">
+        <div class="col-lg">
+
+            <a href="{% url 'cadastrar-venda' %}" class="btn btn-warning">Adicionar Venda</a>
+            <table class="table table-striped">
+            
+                <tr>
+                    <th>ID</th>
+                    <th>Data da Venda</th>
+                    <th>Desconto</th>
+                    <th>Valor</th>
+                    <th>Parcelas</th>
+                    <th>Pessoa</th>
+                    <th>Forma de Pagamento</th>
+                    <th>Forma de Envio</th>                    
+                    <th>Opções</th>
+                </tr>
+            
+                {% for venda in object_list %}
+            
+                <tr>
+                    <td>{{venda.pk}}</td>
+                    <td>{{venda.data_da_venda}}</td>
+                    <td>{{venda.desconto}}</td>
+                    <td>{{venda.valor}}</td>
+                    <td>{{venda.parcelas}}</td>
+                    <td>{{venda.pessoa.nome}}</td>
+                    <td>{{venda.formaPagamento.nome}}</td>
+                    <td>{{venda.formaEnvio.nome}}</td>
+                    <td>
+                        <a href="{% url 'atualizar-venda' venda.pk %}" class="btn btn-warning">Editar</a>
+                        <a href="{% url 'deletar-venda' venda.pk %}" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            
+                {% empty %}
+                <tr>
+                    <td colspan="3">Nenhum venda Registrada!</td>
+                </tr>
+                {% endfor %}
+            
+            </table>
+
+
+
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

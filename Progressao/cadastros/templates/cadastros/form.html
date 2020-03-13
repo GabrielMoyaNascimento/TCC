@@ -1,0 +1,29 @@
+{% extends 'cadastros/formulario.html' %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+<div class="container mt-5 py-5">
+
+    <div class="row pt-5 mt-3">
+        <div class="col-lg">
+            <h1>Cadastro de nova entidade</h1>
+            <p class="lead">
+                Depois você muda o título, lá na frente vamos aprender...
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+            
+                {{form|crispy }}
+            
+                <button type="submit" class="btn btn-success">
+                    Cadastrar
+                </button>
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

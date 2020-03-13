@@ -1,0 +1,23 @@
+{% extends 'cadastros/formulario.html' %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+<div class="container mt-5 py-5">
+
+    <div class="row pt-5 mt-3">
+        <div class="col-lg">
+            
+
+            <form method="post">
+                {% csrf_token %}
+                <p>Tem certeza que deseja excluir o registro "{{ object }}"?</p>
+                <input type="submit" class="btn btn-danger" value="Sim, excluir.">
+            </form>
+
+
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

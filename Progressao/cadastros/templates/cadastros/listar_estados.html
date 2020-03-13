@@ -1,0 +1,47 @@
+{% extends 'cadastros/formulario.html' %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+<div class="container mt-5 py-5">
+
+    <div class="row pt-5 mt-3">
+        <div class="col-lg">
+
+            <a href="{% url 'cadastrar-estado' %}" class="btn btn-warning">Adicionar Estado</a>
+            <table class="table table-striped">
+                
+                <tr>
+                    <th>ID</th>
+                    <th>Sigla</th>
+                    <th>Nome</th>
+                    <th>Opções</th>
+                </tr>
+            
+                {% for estado in object_list %}
+            
+                <tr>
+                    <td>{{estado.pk}}</td>
+                    <td>{{estado.sigla}}</td>
+                    <td>{{estado.nome}}</td>
+                    <td>
+                        <a href="{% url 'atualizar-estado' estado.pk %}" class="btn btn-warning">Editar</a>
+                        <a href="{% url 'deletar-estado' estado.pk %}" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+                
+                {% empty %}
+                <tr>
+                    <td colspan="3">Nenhuma estado cadastrado!</td>
+                </tr>
+                {% endfor %}
+                
+            </table>
+
+
+
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

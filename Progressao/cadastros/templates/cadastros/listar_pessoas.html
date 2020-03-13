@@ -1,0 +1,63 @@
+{% extends 'cadastros/formulario.html' %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+<div class="container mt-5 py-5">
+
+    <div class="row pt-5 mt-3">
+        <div class="col-lg">
+
+            <a href="{% url 'cadastrar-pessoa' %}" class="btn btn-warning">Adicionar Pessoa</a>
+            <table class="table table-striped">
+            
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Data Nascimento</th>
+                    <th>Email</th>
+                    <th>Endereço</th>
+                    <th>Numero</th>
+                    <th>CEP</th>
+                    <th>RG</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Cidade</th>
+                    <th>Opções</th>
+                </tr>
+            
+                {% for pessoa in object_list %}
+            
+                <tr>
+                    <td>{{pessoa.pk}}</td>
+                    <td>{{pessoa.nome}}</td>
+                    <td>{{pessoa.nascimento}}</td>
+                    <td>{{pessoa.email}}</td>
+                    <td>{{pessoa.endereco}}</td>
+                    <td>{{pessoa.numero}}</td>
+                    <td>{{pessoa.cep}}</td>
+                    <td>{{pessoa.rg}}</td>
+                    <td>{{pessoa.cpf}}</td>
+                    <td>{{pessoa.telefone}}</td>
+                    <td>{{pessoa.cidade.nome}}</td>
+                    <td>
+                        <a href="{% url 'atualizar-pessoa' pessoa.pk %}" class="btn btn-warning">Editar</a>
+                        <a href="{% url 'deletar-pessoa' pessoa.pk %}" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            
+                {% empty %}
+                <tr>
+                    <td colspan="3">Nenhuma pessoa cadastrada!</td>
+                </tr>
+                {% endfor %}
+            
+            </table>
+
+
+
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
