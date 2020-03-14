@@ -64,7 +64,7 @@ class FormaPagamentoCreate(CreateView):
 
 
 class FormaEnvioCreate(CreateView):
-	model = FormaPagamento
+	model = FormaEnvio
 	fields = ['nome', 'descricao']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-formaEnvios')
@@ -131,7 +131,7 @@ class FormaPagamentoUpdate(UpdateView):
 
 
 class FormaEnvioUpdate(UpdateView):
-	model = FormaPagamento
+	model = FormaEnvio
 	fields = ['nome', 'descricao']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-formaEnvios')

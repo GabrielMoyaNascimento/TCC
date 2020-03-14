@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import *
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Importa as views que a gente criou 
 from .views import PaginaInicial,SobreView, AjudaView

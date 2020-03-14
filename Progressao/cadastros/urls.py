@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Importa as views que a gente criou 
 from .views import *
 # Tem que ser urlpatterns porque é padrão do Django

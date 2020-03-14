@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 # adicionar o include para importar urls dos apps
 from django.urls import path, include
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Importa todas as urls criadas no app páginas
     path('', include('paginas.urls') ),
     path('', include('cadastros.urls')),
+    path('', include('usuarios.urls')),
 ]
