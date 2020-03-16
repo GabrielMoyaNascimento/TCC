@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles', 
     'crispy_forms',
     # Ativa o módulo páginas
-    'paginas.apps.PaginasConfig',
     'cadastros.apps.CadastrosConfig',
     'usuarios.apps.UsuariosConfig',
 ]

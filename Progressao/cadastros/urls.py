@@ -1,5 +1,4 @@
 from django.urls import path
-from django.contrib.auth.mixins import LoginRequiredMixin
 # Importa as views que a gente criou 
 from .views import *
 # Tem que ser urlpatterns porque é padrão do Django
@@ -46,6 +45,6 @@ urlpatterns = [
     path('listar/formaEnvios/', FormaEnvioList.as_view(), name="listar-formaEnvios"),
     path('listar/vendas/', VendaList.as_view(), name="listar-vendas"),
 
-
+    
 
 ]

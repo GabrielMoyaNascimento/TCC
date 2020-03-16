@@ -2,14 +2,17 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
-from .models import *
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import *
+
 
 #Create View
 
 
 class PaginaInicial(TemplateView):
     template_name = 'cadastros/index.html'
+	
 
 class EstadoCreate(CreateView):
 	model = Estado
@@ -17,13 +20,11 @@ class EstadoCreate(CreateView):
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-estados')
 
-
 class CidadeCreate(CreateView):
 	model = Cidade
 	fields = ['nome', 'estado']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-cidades')
-
 
 class PessoaCreate(CreateView):
 	model = Pessoa
@@ -32,14 +33,12 @@ class PessoaCreate(CreateView):
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-pessoas')
 
-
 class VendaCreate(CreateView):
 	model = Venda
 	fields = ['data_da_venda', 'valor', 'desconto',
            'parcelas', 'pessoa', 'forma_pagamento']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-vendas')
-
 
 class ProdutoCreate(CreateView):
 	model = Produto
@@ -48,7 +47,6 @@ class ProdutoCreate(CreateView):
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-produtos')
 
-
 #class ProdutoVendaCreate(CreateView):
 #	model = ProdutoVenda
 #	fields = ['produto', 'venda', 'valor_total', 'forma_envio', 'quantidade']
@@ -56,65 +54,66 @@ class ProdutoCreate(CreateView):
 #	success_url = reverse_lazy('index')
 
 
-class FormaPagamentoCreate(CreateView):
+class FormaPagamentoCreate(LoginRequiredMixin,CreateView):
 	model = FormaPagamento
 	fields = ['nome', 'descricao']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-formaPagamentos')
+	login_url = reverse_lazy('login')
 
-
-class FormaEnvioCreate(CreateView):
+class FormaEnvioCreate(LoginRequiredMixin,CreateView):
 	model = FormaEnvio
 	fields = ['nome', 'descricao']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-formaEnvios')
+	login_url = reverse_lazy('login')
 
-
-class CategoriaCreate(CreateView):
+class CategoriaCreate(LoginRequiredMixin,CreateView):
 	model = Categoria
 	fields = ['nome', 'descricao']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-categorias')
-
+	login_url = reverse_lazy('login')
 #Update View
 
-class EstadoUpdate(UpdateView):
+
+class EstadoUpdate(LoginRequiredMixin,UpdateView):
 	model = Estado
 	fields = ['sigla', 'nome']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-estados')
+	login_url = reverse_lazy('login')
 
-
-class CidadeUpdate(UpdateView):
+class CidadeUpdate(LoginRequiredMixin,UpdateView):
 	model = Cidade
 	fields = ['nome', 'estado']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-cidades')
+	login_url = reverse_lazy('login')
 
-
-class PessoaUpdate(UpdateView):
+class PessoaUpdate(LoginRequiredMixin,UpdateView):
 	model = Pessoa
 	fields = ['nome', 'nascimento', 'email', 'cidade',
            'rg', 'cpf', 'endereco', 'cep', 'numero', 'telefone']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-pessoas')
+	login_url = reverse_lazy('login')
 
-
-class VendaUpdate(UpdateView):
+class VendaUpdate(LoginRequiredMixin,UpdateView):
 	model = Venda
 	fields = ['data_da_venda', 'valor', 'desconto',
            'parcelas', 'pessoa', 'forma_pagamento']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-vendas')
+	login_url = reverse_lazy('login')
 
-
-class ProdutoUpdate(UpdateView):
+class ProdutoUpdate(LoginRequiredMixin,UpdateView):
 	model = Produto
 	fields = ['nome', 'codigo', 'descricao', 'estoque',
            'categoria', 'valorVenda', 'forma_envio']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-produtos')
-
+	login_url = reverse_lazy('login')
 
 #class ProdutoVendaUpdate(UpdateView):
 #	model = ProdutoVenda
@@ -123,58 +122,58 @@ class ProdutoUpdate(UpdateView):
 #	success_url = reverse_lazy('index')
 
 
-class FormaPagamentoUpdate(UpdateView):
+class FormaPagamentoUpdate(LoginRequiredMixin,UpdateView):
 	model = FormaPagamento
 	fields = ['nome', 'descricao']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-formaPagamentos')
+	login_url = reverse_lazy('login')
 
-
-class FormaEnvioUpdate(UpdateView):
+class FormaEnvioUpdate(LoginRequiredMixin,UpdateView):
 	model = FormaEnvio
 	fields = ['nome', 'descricao']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-formaEnvios')
+	login_url = reverse_lazy('login')
 
-
-class CategoriaUpdate(UpdateView):
+class CategoriaUpdate(LoginRequiredMixin,UpdateView):
 	model = Categoria
 	fields = ['nome', 'descricao']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-categorias')
-
+	login_url = reverse_lazy('login')
 #Delete View
 
 
-class EstadoDelete(DeleteView):
+class EstadoDelete(LoginRequiredMixin,DeleteView):
 	model = Estado
 	template_name = 'cadastros/formDelete.html'
 	success_url = reverse_lazy('listar-estados')
+	login_url = reverse_lazy('login')
 
-
-class CidadeDelete(DeleteView):
+class CidadeDelete(LoginRequiredMixin,DeleteView):
 	model = Cidade
 	template_name = 'cadastros/formDelete.html'
 	success_url = reverse_lazy('listar-cidades')
+	login_url = reverse_lazy('login')
 
-
-class PessoaDelete(DeleteView):
+class PessoaDelete(LoginRequiredMixin,DeleteView):
 	model = Pessoa
 	template_name = 'cadastros/formDelete.html'
 	success_url = reverse_lazy('listar-pessoas')
+	login_url = reverse_lazy('login')
 
-
-class VendaDelete(DeleteView):
+class VendaDelete(LoginRequiredMixin,DeleteView):
 	model = Venda
 	template_name = 'cadastros/formDelete.html'
 	success_url = reverse_lazy('listar-vendas')
 
 
-class ProdutoDelete(DeleteView):
+class ProdutoDelete(LoginRequiredMixin,DeleteView):
 	model = Produto
 	template_name = 'cadastros/formDelete.html'
 	success_url = reverse_lazy('listar-produtos')
-
+	login_url = reverse_lazy('login')
 
 #class ProdutoVendaDelete(DeleteView):
 #	model = ProdutoVenda
@@ -182,54 +181,62 @@ class ProdutoDelete(DeleteView):
 #	success_url = reverse_lazy('index')
 
 
-class FormaPagamentoDelete(DeleteView):
+class FormaPagamentoDelete(LoginRequiredMixin,DeleteView):
 	model = FormaPagamento
 	template_name = 'cadastros/formDelete.html'
 	success_url = reverse_lazy('listar-formaPagamentos')
+	login_url = reverse_lazy('login')
 
-class FormaEnvioDelete(DeleteView):
+class FormaEnvioDelete(LoginRequiredMixin,DeleteView):
 	model = FormaEnvio
 	template_name = 'cadastros/formDelete.html'
 	success_url = reverse_lazy('listar-formaEnvios')
+	login_url = reverse_lazy('login')
 
-class CategoriaDelete(DeleteView):
+class CategoriaDelete(LoginRequiredMixin,DeleteView):
 	model = Categoria
 	template_name = 'cadastros/formDelete.html'
 	success_url = reverse_lazy('listar-categorias')
-
+	login_url = reverse_lazy('login')
 #List View
 
 
-class EstadoList(ListView):
+class EstadoList(LoginRequiredMixin,ListView):
 	model = Estado
 	template_name = 'cadastros/listar_estados.html'
+	login_url = reverse_lazy('login')
 
-
-class CidadeList(ListView):
+class CidadeList(LoginRequiredMixin,ListView):
 	model = Cidade
 	template_name = 'cadastros/listar_cidades.html'
-
-class PessoaList(ListView):
+	login_url = reverse_lazy('login')
+	login_url = reverse_lazy('login')
+class PessoaList(LoginRequiredMixin,ListView):
 	model = Pessoa
 	template_name = 'cadastros/listar_pessoas.html'
+	login_url = reverse_lazy('login')
 
-class VendaList(ListView):
+class VendaList(LoginRequiredMixin,ListView):
 	model = Venda
 	template_name = 'cadastros/listar_vendas.html'
+	login_url = reverse_lazy('login')
 
-class ProdutoList(ListView):
+class ProdutoList(LoginRequiredMixin,ListView):
 	model = Produto
 	template_name = 'cadastros/listar_produtos.html'
+	login_url = reverse_lazy('login')
 
-class FormaPagamentoList(ListView):
+class FormaPagamentoList(LoginRequiredMixin,ListView):
 	model = FormaPagamento
 	template_name = 'cadastros/listar_formaPagamentos.html'
+	login_url = reverse_lazy('login')
 
-class FormaEnvioList(ListView):
+class FormaEnvioList(LoginRequiredMixin,ListView):
 	model = FormaEnvio
 	template_name = 'cadastros/listar_formaEnvios.html'
 
-class CategoriaList(ListView):
+
+class CategoriaList(LoginRequiredMixin,ListView):
 	model = Categoria
 	template_name = 'cadastros/listar_categorias.html'
 
