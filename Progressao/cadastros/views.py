@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from braces.views import GroupRequiredMixin
 from .models import *
 
 
@@ -14,43 +15,53 @@ class PaginaInicial(LoginRequiredMixin,TemplateView):
     template_name = 'cadastros/index.html'
 	
 
-class EstadoCreate(LoginRequiredMixin,CreateView):
+class EstadoCreate(GroupRequiredMixin,LoginRequiredMixin, CreateView):
 	model = Estado
 	fields = ['sigla', 'nome']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-estados')
 	login_url = reverse_lazy('login')
+	group_required = u"Administrador"
 
-class CidadeCreate(LoginRequiredMixin,CreateView):
+
+class CidadeCreate(GroupRequiredMixin,LoginRequiredMixin, CreateView):
 	model = Cidade
 	fields = ['nome', 'estado']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-cidades')
 	login_url = reverse_lazy('login')
+	group_required = u"Administrador"
 
-class PessoaCreate(LoginRequiredMixin,CreateView):
+
+class PessoaCreate(GroupRequiredMixin,LoginRequiredMixin, CreateView):
 	model = Pessoa
 	fields = ['nome', 'nascimento', 'email', 'cidade',
            'rg', 'cpf', 'endereco', 'cep', 'numero', 'telefone']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-pessoas')
 	login_url = reverse_lazy('login')
+	group_required = u"Administrador"
 
-class VendaCreate(LoginRequiredMixin,CreateView):
+
+class VendaCreate(GroupRequiredMixin,LoginRequiredMixin, CreateView):
 	model = Venda
 	fields = ['data_da_venda', 'valor', 'desconto',
            'parcelas', 'pessoa', 'forma_pagamento']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-vendas')
 	login_url = reverse_lazy('login')
+	group_required = u"Administrador"
 
-class ProdutoCreate(LoginRequiredMixin,CreateView):
+
+class ProdutoCreate(GroupRequiredMixin,LoginRequiredMixin, CreateView):
 	model = Produto
 	fields = ['nome', 'codigo', 'descricao', 'estoque',
            'categoria', 'valorVenda']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-produtos')
 	login_url = reverse_lazy('login')
+	group_required = u"Administrador"
+
 #class ProdutoVendaCreate(CreateView):
 #	model = ProdutoVenda
 #	fields = ['produto', 'venda', 'valor_total', 'forma_envio', 'quantidade']
@@ -58,26 +69,31 @@ class ProdutoCreate(LoginRequiredMixin,CreateView):
 #	success_url = reverse_lazy('index')
 
 
-class FormaPagamentoCreate(LoginRequiredMixin,CreateView):
+class FormaPagamentoCreate(GroupRequiredMixin,LoginRequiredMixin, CreateView):
 	model = FormaPagamento
 	fields = ['nome', 'descricao']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-formaPagamentos')
 	login_url = reverse_lazy('login')
+	group_required = u"Administrador"
 
-class FormaEnvioCreate(LoginRequiredMixin,CreateView):
+
+class FormaEnvioCreate(GroupRequiredMixin,LoginRequiredMixin, CreateView):
 	model = FormaEnvio
 	fields = ['nome', 'descricao']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-formaEnvios')
 	login_url = reverse_lazy('login')
+	group_required = u"Administrador"
 
-class CategoriaCreate(LoginRequiredMixin,CreateView):
+class CategoriaCreate(GroupRequiredMixin,LoginRequiredMixin,CreateView):
 	model = Categoria
 	fields = ['nome', 'descricao']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-categorias')
 	login_url = reverse_lazy('login')
+	group_required = u"Administrador"
+
 #Update View
 
 

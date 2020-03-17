@@ -6,21 +6,27 @@
 
     <div class="row pt-5 mt-3">
         <div class="col-lg">
-            <h1>Novo Cadastro</h1>
-            <p class="lead">
-                Lembre-se de preencher os campos!
-            </p>
-
+           
+            {% if request.user.is_authenticated %}
+            
             <form method="post">
+                <!-- Todo formulário tem que ter essa validação -->
                 {% csrf_token %}
-            
-                {{form|crispy }}
-            
-                <button type="submit" class="btn btn-success">
-                    Cadastrar
+                <!-- Gera o formulário -->
+                {{ form|crispy }}
+                <button type="submit" class="btn {{ classe }}">
+                    {{ botao }}
                 </button>
             </form>
 
+            {% else %}
+            
+            <h4 class="mt-4 text-danger">Você não pode fazer isso!</h4>
+            
+            Redirecionando para a página inicial em 5 segundos...
+            <meta http-equiv="Refresh" content="5; url={% url 'cadastrar-index' %}" />
+            
+            {% endif %}
 
         </div>
     </div>
