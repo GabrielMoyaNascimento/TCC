@@ -10,43 +10,47 @@ from .models import *
 #Create View
 
 
-class PaginaInicial(TemplateView):
+class PaginaInicial(LoginRequiredMixin,TemplateView):
     template_name = 'cadastros/index.html'
 	
 
-class EstadoCreate(CreateView):
+class EstadoCreate(LoginRequiredMixin,CreateView):
 	model = Estado
 	fields = ['sigla', 'nome']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-estados')
+	login_url = reverse_lazy('login')
 
-class CidadeCreate(CreateView):
+class CidadeCreate(LoginRequiredMixin,CreateView):
 	model = Cidade
 	fields = ['nome', 'estado']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-cidades')
+	login_url = reverse_lazy('login')
 
-class PessoaCreate(CreateView):
+class PessoaCreate(LoginRequiredMixin,CreateView):
 	model = Pessoa
 	fields = ['nome', 'nascimento', 'email', 'cidade',
            'rg', 'cpf', 'endereco', 'cep', 'numero', 'telefone']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-pessoas')
+	login_url = reverse_lazy('login')
 
-class VendaCreate(CreateView):
+class VendaCreate(LoginRequiredMixin,CreateView):
 	model = Venda
 	fields = ['data_da_venda', 'valor', 'desconto',
            'parcelas', 'pessoa', 'forma_pagamento']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-vendas')
+	login_url = reverse_lazy('login')
 
-class ProdutoCreate(CreateView):
+class ProdutoCreate(LoginRequiredMixin,CreateView):
 	model = Produto
 	fields = ['nome', 'codigo', 'descricao', 'estoque',
            'categoria', 'valorVenda']
 	template_name = 'cadastros/form.html'
 	success_url = reverse_lazy('listar-produtos')
-
+	login_url = reverse_lazy('login')
 #class ProdutoVendaCreate(CreateView):
 #	model = ProdutoVenda
 #	fields = ['produto', 'venda', 'valor_total', 'forma_envio', 'quantidade']
