@@ -8,7 +8,7 @@
         <div class="col-lg">
            
             {% if request.user.is_authenticated %}
-            
+            <h3>{{ titulo }}</h3>
             <form method="post">
                 <!-- Todo formulário tem que ter essa validação -->
                 {% csrf_token %}
