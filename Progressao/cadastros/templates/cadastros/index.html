@@ -9,7 +9,7 @@ context['ultimos_produtos'] = Produto.objects.all().reverse()[:10]
    
 <div class="container mt-5 py-5 listar-produtos">
 
-    <img width="150" height="150" src="{{produto.foto}}" alt="">
+    <img width="150" height="150" src="{{produto.imagem.url}}" alt="">
     <div>
         {{produto.nome}}
     </div>
@@ -20,6 +20,7 @@ context['ultimos_produtos'] = Produto.objects.all().reverse()[:10]
 {% empty %}
 <span>Nenhum Produto cadastrado.</span>
 {% endfor %}
+
 
 
 {%endblock%}
