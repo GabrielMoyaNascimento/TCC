@@ -6,7 +6,11 @@
 
     <div class="row pt-5 mt-3">
         <div class="col-lg">
-            
+            {% if request.user.groups.all.0.name == "Administrador" %}
+            <h3>Olá Admin,</h3><br>
+            {% else %}
+            <h3>Olá Funcionário,</h3><br>
+            {% endif %}
 
             <form method="post">
                 {% csrf_token %}

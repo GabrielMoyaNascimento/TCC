@@ -138,3 +138,7 @@ LOGIN_REDIRECT_URL = 'cadastrar-index'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+MEDIA_URL="/media/"
+MEDIA_ROOT="media"

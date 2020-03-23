@@ -14,7 +14,7 @@
 
             {% if request.user.is_authenticated %}
             <h3>{{ titulo }}</h3>
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <!-- Todo formulário tem que ter essa validação -->
                 {% csrf_token %}
                 <!-- Gera o formulário -->

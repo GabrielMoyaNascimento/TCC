@@ -135,7 +135,7 @@ class VendaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 class ProdutoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Produto
     fields = ['nome', 'codigo', 'descricao', 'estoque',
-              'categoria', 'valorVenda']
+              'categoria', 'valorVenda', 'imagem']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-produtos')
     login_url = reverse_lazy('login')
@@ -232,6 +232,18 @@ class EstadoUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('listar-estados')
     login_url = reverse_lazy('login')
 
+    def get_context_data(self, *args, **kwargs):
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super(EstadoUpdate, self).get_context_data(*args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Update de Estado"
+        context['botao'] = "Salvar"
+        context['classe'] = "btn-success"
+
+    # Devolve/envia o context para seu comportamento padrão
+        return context
+
 
 class CidadeUpdate(LoginRequiredMixin, UpdateView):
     model = Cidade
@@ -239,6 +251,18 @@ class CidadeUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-cidades')
     login_url = reverse_lazy('login')
+
+    def get_context_data(self, *args, **kwargs):
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super(CidadeUpdate, self).get_context_data(*args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Update de Cidade"
+        context['botao'] = "Salvar"
+        context['classe'] = "btn-success"
+
+    # Devolve/envia o context para seu comportamento padrão
+        return context
 
 
 class PessoaUpdate(LoginRequiredMixin, UpdateView):
@@ -248,6 +272,18 @@ class PessoaUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-pessoas')
     login_url = reverse_lazy('login')
+
+    def get_context_data(self, *args, **kwargs):
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super(PessoaUpdate, self).get_context_data(*args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Update de Pessoa"
+        context['botao'] = "Salvar"
+        context['classe'] = "btn-success"
+
+    # Devolve/envia o context para seu comportamento padrão
+        return context
 
     def form_valid(self, form):
         # Define o usuário como usuário logado
@@ -281,6 +317,20 @@ class VendaUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('listar-vendas')
     login_url = reverse_lazy('login')
 
+    def get_context_data(self, *args, **kwargs):
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super(VendaUpdate, self).get_context_data(*args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Update de Venda"
+        context['botao'] = "Salvar"
+        context['classe'] = "btn-success"
+
+    # Devolve/envia o context para seu comportamento padrão
+        return context
+
+	
+
     def form_valid(self, form):
         # Define o usuário como usuário logado
         form.instance.usuario = self.request.user
@@ -306,16 +356,29 @@ class VendaUpdate(LoginRequiredMixin, UpdateView):
 class ProdutoUpdate(LoginRequiredMixin, UpdateView):
     model = Produto
     fields = ['nome', 'codigo', 'descricao', 'estoque',
-              'categoria', 'valorVenda', 'forma_envio']
+              'categoria', 'valorVenda', 'imagem']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-produtos')
     login_url = reverse_lazy('login')
+
+    def get_context_data(self, *args, **kwargs):
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super(ProdutoUpdate, self).get_context_data(*args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Update de Produto"
+        context['botao'] = "Salvar"
+        context['classe'] = "btn-success"
+
+    # Devolve/envia o context para seu comportamento padrão
+        return context
 
 # class ProdutoVendaUpdate(UpdateView):
 #	model = ProdutoVenda
 #	fields = ['produto', 'venda', 'valor_total', 'valor_envio', 'quantidade']
 #	template_name = 'cadastros/form.html'
 #	success_url = reverse_lazy('index')
+
 
 
 class FormaPagamentoUpdate(LoginRequiredMixin, UpdateView):
@@ -325,6 +388,18 @@ class FormaPagamentoUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('listar-formaPagamentos')
     login_url = reverse_lazy('login')
 
+    def get_context_data(self, *args, **kwargs):
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super(FormaPagamentoUpdate, self).get_context_data(*args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Update de Forma de Pagamento"
+        context['botao'] = "Salvar"
+        context['classe'] = "btn-success"
+
+    # Devolve/envia o context para seu comportamento padrão
+        return context
+
 
 class FormaEnvioUpdate(LoginRequiredMixin, UpdateView):
     model = FormaEnvio
@@ -333,6 +408,18 @@ class FormaEnvioUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('listar-formaEnvios')
     login_url = reverse_lazy('login')
 
+    def get_context_data(self, *args, **kwargs):
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super(FormaEnvioUpdate, self).get_context_data(*args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Update de Forma de Envio"
+        context['botao'] = "Salvar"
+        context['classe'] = "btn-success"
+
+    # Devolve/envia o context para seu comportamento padrão
+        return context
+
 
 class CategoriaUpdate(LoginRequiredMixin, UpdateView):
     model = Categoria
@@ -340,9 +427,24 @@ class CategoriaUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-categorias')
     login_url = reverse_lazy('login')
+
+    def get_context_data(self, *args, **kwargs):
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super(CategoriaUpdate, self).get_context_data(*args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Update de Categoria"
+        context['botao'] = "Salvar"
+        context['classe'] = "btn-success"
+
+    # Devolve/envia o context para seu comportamento padrão
+        return context
+
+
+
+
+
 # Delete View
-
-
 class EstadoDelete(LoginRequiredMixin, DeleteView):
     model = Estado
     template_name = 'cadastros/formDelete.html'

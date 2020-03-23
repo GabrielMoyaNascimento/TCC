@@ -84,6 +84,7 @@ class Produto(models.Model):
     descricao = models.CharField(max_length=100)
     estoque = models.IntegerField()
     valorVenda = models.DecimalField(max_digits=50, decimal_places=2)
+    imagem = models.ImageField(upload_to="imagens/%Y/%m/%d/", max_length=255, null=True, blank=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)
 
     def __str__(self):

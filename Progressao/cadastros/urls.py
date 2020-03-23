@@ -1,6 +1,8 @@
 from django.urls import path
 # Importa as views que a gente criou 
 from .views import *
+from django.conf.urls.static import static 
+from django.conf import settings
 # Tem que ser urlpatterns porque é padrão do Django
 urlpatterns = [
     
@@ -44,7 +46,4 @@ urlpatterns = [
     path('listar/formaPagamentos/', FormaPagamentoList.as_view(), name="listar-formaPagamentos"),
     path('listar/formaEnvios/', FormaEnvioList.as_view(), name="listar-formaEnvios"),
     path('listar/vendas/', VendaList.as_view(), name="listar-vendas"),
-
-    
-
-]
+]+ static(settings.MEDIA_URL, documents_root = settings.MEDIA_ROOT)
