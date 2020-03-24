@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # Ativa o módulo páginas
     'cadastros.apps.CadastrosConfig',
     'usuarios.apps.UsuariosConfig',
+
+    'django_cleanup.apps.CleanupConfig',  # app para remover arquivos antigos
 ]
 
 
@@ -140,5 +142,5 @@ LOGOUT_REDIRECT_URL = 'login'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
-MEDIA_URL="/media/"
-MEDIA_ROOT="media"
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media'

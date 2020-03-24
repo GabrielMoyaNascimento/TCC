@@ -13,7 +13,11 @@
             <h3>Olá Funcionário,</h3><br>
             {% endif %}
 
-            <a href="{% url 'cadastrar-estado' %}" class="btn btn-warning">Adicionar Estado</a>
+
+            <div class="text-right py-2">
+                <a href="{% url 'cadastrar-estado' %}" class="btn btn-primary btn-sm">Adicionar Estado</a>
+            </div>
+            
             <table class="table table-striped">
                 
                 <tr>
@@ -30,8 +34,12 @@
                     <td>{{estado.sigla}}</td>
                     <td>{{estado.nome}}</td>
                     <td>
-                        <a href="{% url 'atualizar-estado' estado.pk %}" class="btn btn-warning">Editar</a>
-                        <a href="{% url 'deletar-estado' estado.pk %}" class="btn btn-danger">Excluir</a>
+                        <a href="{% url 'atualizar-estado' estado.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        <a href="{% url 'deletar-estado' estado.pk %}" class="btn btn-danger btn-sm" title="Excluir">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
                 

@@ -88,7 +88,7 @@ class Produto(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.categoria + " - " + self.categoria.nome
+        return self.categoria.nome + " - " + self.categoria.nome
 
 
 class ProdutoVenda(models.Model):
