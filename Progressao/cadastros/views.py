@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
 from .models import *
 
 
@@ -18,8 +19,8 @@ class PaginaInicial(LoginRequiredMixin, TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['ultimos_produtos'] = Produto.objects.all().reverse()[0:10]
+        context['ultimas_categorias'] = Categoria.objects.all()
         return context
-
 
 class EstadoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Estado
@@ -592,7 +593,14 @@ class ProdutoList(LoginRequiredMixin, ListView):
     model = Produto
     template_name = 'cadastros/listar_produtos.html'
     login_url = reverse_lazy('login')
+    
+    def listing(request):
+        produto_list = Produto.objects.all()
+        paginator = Paginator(produto_list, 10)  # Mostrar 10 produtos por pagina.
 
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'cadastros/listar_produtos.html', {'page_obj': page_obj})
 
 class FormaPagamentoList(LoginRequiredMixin, ListView):
     model = FormaPagamento
