@@ -1,26 +1,33 @@
 {% extends 'cadastros/formulario.html' %}
 
-context['ultimos_produtos'] = Produto.objects.all().reverse()[:10]
 {%block conteudo%}
 
-<!-- {% for produto in ultimos_produtos %}
-
-
-   
 <div class="container mt-5 py-5 listar-produtos">
 
-    <img width="150" height="150" src="{{produto.imagem.url}}" alt="">
-    <div>
-        {{produto.nome}}
-    </div>
-    <span>{{produto.preco}}</span>
+    <br>
+    <br>
+    <br>
+
+    <h2 class="border-bottom py-2 border-secondary">Últimos produtos cadastrados</h2>
+
+    {% for produto in ultimos_produtos %}
+
+    <div class="card float-left m-2" style="width: 18rem;">
+        <img height="150"  src="{{produto.imagem.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{produto.nome}}</h5>
+            <p class="card-text">R${{produto.preco}}</p>
+            <a href="#" class="btn btn-primary btn-sm">Comprar</a>
+        </div>
     </div>
 
+    {% empty %}
+    <span>Nenhum Produto cadastrado.</span>
+    {% endfor %}
+
+    <div class="clearfix">
+        
+    </div>
 </div>
-{% empty %}
-<span>Nenhum Produto cadastrado.</span>
-{% endfor %} -->
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 {%endblock%}

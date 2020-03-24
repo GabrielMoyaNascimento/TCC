@@ -15,6 +15,11 @@ from .models import *
 class PaginaInicial(LoginRequiredMixin, TemplateView):
     template_name = 'cadastros/index.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['ultimos_produtos'] = Produto.objects.all().reverse()[0:10]
+        return context
+
 
 class EstadoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Estado
