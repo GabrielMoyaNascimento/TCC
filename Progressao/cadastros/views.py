@@ -18,9 +18,18 @@ class PaginaInicial(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['ultimos_produtos'] = Produto.objects.all().reverse()[0:10]
+        context['ultimos_produtos'] = Produto.objects.all().reverse()[0:9]
         context['ultimas_categorias'] = Categoria.objects.all()
         return context
+
+    def listing(request):
+        produto_list = Produto.objects.all()
+        # Mostrar 10 produtos por pagina.
+        paginator = Paginator(produto_list, 9)
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'cadastros/listar_produtos.html', {'page_obj': page_obj})
 
 class EstadoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Estado
@@ -594,13 +603,7 @@ class ProdutoList(LoginRequiredMixin, ListView):
     template_name = 'cadastros/listar_produtos.html'
     login_url = reverse_lazy('login')
     
-    def listing(request):
-        produto_list = Produto.objects.all()
-        paginator = Paginator(produto_list, 10)  # Mostrar 10 produtos por pagina.
-
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        return render(request, 'cadastros/listar_produtos.html', {'page_obj': page_obj})
+    
 
 class FormaPagamentoList(LoginRequiredMixin, ListView):
     model = FormaPagamento
