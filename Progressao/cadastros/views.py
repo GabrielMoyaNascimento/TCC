@@ -18,18 +18,23 @@ class PaginaInicial(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['ultimos_produtos'] = Produto.objects.all().reverse()[0:9]
-        context['ultimas_categorias'] = Categoria.objects.all()
+       
+        # Filtra a categoria
+        cat = self.request.GET.get('categoria')  # Recebe a página atual
+        # Se existir, filta pelo nome da categoria
+        if cat:
+            produtos = Produto.objects.filter(categoria__nome=cat).reverse()  # [0:9]
+        # se não, busca todos
+        else:
+            produtos = Produto.objects.all().reverse()  # [0:9] # Busca os produtos
+
+        paginator = Paginator(produtos, 2) # Divide os produtos em páginas
+        page = self.request.GET.get('pagina')  # Recebe a página atual
+        produtos = paginator.get_page(page) # Filtra os produtos dessa página
+        context['produtos'] = produtos
+
+        context['categorias'] = Categoria.objects.all()
         return context
-
-    def listing(request):
-        produto_list = Produto.objects.all()
-        # Mostrar 10 produtos por pagina.
-        paginator = Paginator(produto_list, 9)
-
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        return render(request, 'cadastros/listar_produtos.html', {'page_obj': page_obj})
 
 class EstadoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Estado
