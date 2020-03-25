@@ -12,12 +12,14 @@
 <div class="container">
 	<div class="row">
         <div class="col-xl-3 col-lg-4 col-md-5">
+            <h2 class="text-center mt-2 mb-4">&nbsp;</h2>
 			<div class="sidebar-categories">
                 <div class="head">Categorias</div>
                 {% for categoria in categorias %}
 				<ul class="main-categories">
 					<li class="main-nav-list">
-                        <a href="?categoria={{categoria.nome}}&pagina={{ produtos.number }}"{{produtos.number}}>
+                        
+                        <a href="?categoria={{categoria.nome}}">
                             <i class="fa fa-caret-right" aria-hidden="true"></i>
                             {{categoria.nome}}
                         </a>
@@ -46,16 +48,16 @@
 				</div>
 			</div>				
 			<div class="col-xl-9 col-lg-8 col-md-7">
+
+                <h2 class="text-center mt-2 mb-4">Lista de Produtos</h2>
+
 				<!-- Start Filter Bar -->
-				<div class="filter-bar d-flex flex-wrap align-items-center">
-                    <div class="text-white col-md-6">Lista de Produtos </div>
-                    
-                    <div class="pagination">
+				<div class="filter-bar d-flex flex-wrap align-items-center">                    
+                    <div class="pagination mx-auto">
                         <span class="step-links">
                             
                         {% if produtos.has_previous %}
-                        <!-- <a href="?page=1">&laquo;</a> -->
-                        <a href="?pagina={{ produtos.previous_page_number }}">
+                        <a href="?pagina={{ produtos.previous_page_number }}{% if request.GET.categoria %}&categoria={{request.GET.categoria}}{% endif %}">
                             <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
                         </a>
                         {% endif %}
@@ -65,10 +67,14 @@
                         </span>
 
                         {% if produtos.has_next %}
-                        <a href="?pagina={{ produtos.next_page_number }}">
+                        <a href="?pagina={{ produtos.next_page_number }}{% if request.GET.categoria %}&categoria={{request.GET.categoria}}{% endif %}">
                             <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                         </a>
                         {% endif %}
+
+                        <a href="{% url 'cadastrar-index' %}" class="ml-5" title="Limpar filtro">
+                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                        </a>
                         </span>
                     </div>
 
@@ -82,7 +88,7 @@
                         <!-- single product -->
                         {% for produto in produtos %}
 						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
+							<div class="single-product p-2 shadow-sm">
 								<img class="card-img-top" height="180" src="{{produto.imagem.url}}" alt="">
 								<div class="product-details">
 									<h6>{{produto.nome}}</h6>
@@ -114,27 +120,32 @@
                     </section>
                    
                         <!-- Start Filter Bar -->
-                        <div class="filter-bar d-flex flex-wrap align-items-center">
+                        <div class="filter-bar d-flex flex-wrap align-items-center mb-3">
                             
-                            <div class="pagination">
+                            <div class="pagination mx-auto">
                                 <span class="step-links">
-                    
+                            
                                     {% if produtos.has_previous %}
-                                    <!-- <a href="?page=1">&laquo;</a> -->
-                                    <a href="?pagina={{ produtos.previous_page_number }}">
+                                    <a
+                                        href="?pagina={{ produtos.previous_page_number }}{% if request.GET.categoria %}&categoria={{request.GET.categoria}}{% endif %}">
                                         <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
                                     </a>
                                     {% endif %}
-                    
+                            
                                     <span class="current text-white">
                                         {{ produtos.number }} de {{ produtos.paginator.num_pages }}
                                     </span>
-                    
+                            
                                     {% if produtos.has_next %}
-                                    <a href="?pagina={{ produtos.next_page_number }}">
+                                    <a
+                                        href="?pagina={{ produtos.next_page_number }}{% if request.GET.categoria %}&categoria={{request.GET.categoria}}{% endif %}">
                                         <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                                     </a>
                                     {% endif %}
+                            
+                                    <a href="{% url 'cadastrar-index' %}" class="ml-5" title="Limpar filtro">
+                                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                                    </a>
                                 </span>
                             </div>
                     
