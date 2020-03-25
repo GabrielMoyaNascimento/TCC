@@ -2,33 +2,7 @@
 
 {%block conteudo%}
 
-<!-- <div class="container mt-5 py-5 listar-produtos">
 
-    <br>
-    <br>
-    <br>
-
-    <h2 class="border-bottom py-2 border-secondary">Últimos produtos cadastrados</h2>
-
-    {% for produto in ultimos_produtos %}
-
-    <div class="card float-left m-2" style="width: 18rem;">
-        <img height="150"  src="{{produto.imagem.url}}" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">{{produto.nome}}</h5>
-            <p class="card-text">R${{produto.preco}}</p>
-            <a href="#" class="btn btn-primary btn-sm">Comprar</a>
-        </div>
-    </div>
-
-    {% empty %}
-    <span>Nenhum Produto cadastrado.</span>
-    {% endfor %}
-
-    <div class="clearfix">
-        
-    </div>
-</div> -->
 <br>
 <br>
 <br>
@@ -43,7 +17,7 @@
                 {% for categoria in categorias %}
 				<ul class="main-categories">
 					<li class="main-nav-list">
-                        <a href="?categoria={{categoria.nome}}">
+                        <a href="?categoria={{categoria.nome}}&pagina={{ produtos.number }}"{{produtos.number}}>
                             <i class="fa fa-caret-right" aria-hidden="true"></i>
                             {{categoria.nome}}
                         </a>
@@ -138,6 +112,33 @@
                         {% endfor %}
                     </div>
                     </section>
+                   
+                        <!-- Start Filter Bar -->
+                        <div class="filter-bar d-flex flex-wrap align-items-center">
+                            
+                            <div class="pagination">
+                                <span class="step-links">
+                    
+                                    {% if produtos.has_previous %}
+                                    <!-- <a href="?page=1">&laquo;</a> -->
+                                    <a href="?pagina={{ produtos.previous_page_number }}">
+                                        <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                    </a>
+                                    {% endif %}
+                    
+                                    <span class="current text-white">
+                                        {{ produtos.number }} de {{ produtos.paginator.num_pages }}
+                                    </span>
+                    
+                                    {% if produtos.has_next %}
+                                    <a href="?pagina={{ produtos.next_page_number }}">
+                                        <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                    </a>
+                                    {% endif %}
+                                </span>
+                            </div>
+                    
+                        </div>
                     </div>
                     </div>
                     </div>
