@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     # Ativa o módulo páginas
     'cadastros.apps.CadastrosConfig',
     'usuarios.apps.UsuariosConfig',
-
+    'clientes.apps.ClientesConfig',
     'django_cleanup.apps.CleanupConfig',  # app para remover arquivos antigos
 ]
 

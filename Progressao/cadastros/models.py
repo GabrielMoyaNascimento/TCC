@@ -33,7 +33,7 @@ class Pessoa(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.nome + ' - ' + str(self.nascimento)
+        return self.nome + ' - ' + str(self.email)
         
 
 

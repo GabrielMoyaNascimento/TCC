@@ -4,5 +4,5 @@ from .views import *
 # Tem que ser urlpatterns porque é padrão do Django
 urlpatterns = [
     
-    
+    path('clientes/index/', PaginaInicial.as_view(), name="clientes-index"),
 ]

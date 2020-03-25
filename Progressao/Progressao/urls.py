@@ -26,4 +26,5 @@ urlpatterns = [
     # Importa todas as urls criadas no app páginas
     path('', include('cadastros.urls')),
     path('', include('usuarios.urls')),
+    path('', include('clientes.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
