@@ -30,7 +30,7 @@ class Pessoa(models.Model):
     cpf = models.CharField(max_length=25)
     telefone = models.CharField(max_length=25)
     cidade = models.ForeignKey(Cidade, on_delete=models.PROTECT)
-    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
+    usuario = models.OneToOneField(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.nome + ' - ' + str(self.nascimento)
