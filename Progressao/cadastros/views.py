@@ -25,10 +25,10 @@ class PaginaInicial(LoginRequiredMixin, TemplateView):
         if cat:
             produtos = Produto.objects.filter(categoria__nome=cat).reverse()  # [0:9]
         # se não, busca todos
-        else: 
+        else:
             produtos = Produto.objects.all().reverse()  # [0:9] # Busca os produtos
 
-        paginator = Paginator(produtos, 9) # Divide os produtos em páginas
+        paginator = Paginator(produtos, 2) # Divide os produtos em páginas
         page = self.request.GET.get('pagina')  # Recebe a página atual
         produtos = paginator.get_page(page) # Filtra os produtos dessa página
         context['produtos'] = produtos
