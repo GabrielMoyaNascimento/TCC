@@ -34,3 +34,6 @@ class PaginaInicial(LoginRequiredMixin, TemplateView):
         context['categorias'] = Categoria.objects.all()
         return context
 
+
+class Carrinho(LoginRequiredMixin, TemplateView):
+    template_name = 'clientes/carrinho.html'

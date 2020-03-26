@@ -56,15 +56,9 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="/clientes/index">Inicio</a></li> 
-                            <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                                    aria-haspopup="true" aria-expanded="false">Comprar</a>
-                            </li>
-                            <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                                    aria-haspopup="true" aria-expanded="false">Carrinho</a>
-                            </li>
+                            <li class="nav-item active"><a class="nav-link" href="{% url 'clientes-index' %}">Inicio</a></li> 
+                            <li class="nav-item"><a class="nav-link" href="#">Comprar</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'clientes-carrinho' %}">Carrinho</a></li>
                             {% if request.user.is_authenticated %}
                             <li class="nav-item"><a class="nav-link" href="{% url 'alterar-senha' %}">Alterar senha</a></li>
                             <li class="nav-item submenu dropdown">
@@ -77,7 +71,9 @@
                                 </ul>
                             </li>
                             {% else %}
-                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Entrar</a></li>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                aria-expanded="false">Entrar</a>
+                            <!-- <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Entrar</a></li> -->
                             {% endif %}
                             
                         </ul>
