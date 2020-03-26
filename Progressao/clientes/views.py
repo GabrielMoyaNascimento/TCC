@@ -37,3 +37,11 @@ class PaginaInicial(LoginRequiredMixin, TemplateView):
 
 class Carrinho(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/carrinho.html'
+
+
+class Login(LoginRequiredMixin, TemplateView):
+    template_name = 'clientes/login.html'
+
+
+class Cadastro(LoginRequiredMixin, TemplateView):
+    template_name = 'clientes/novaConta.html'
