@@ -8,6 +8,7 @@ from braces.views import GroupRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from cadastros.models import Categoria, Produto
+from .models import Carrinho
 
 class PaginaInicial(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/index.html'
@@ -35,7 +36,7 @@ class PaginaInicial(LoginRequiredMixin, TemplateView):
         return context
 
 
-class Carrinho(LoginRequiredMixin, TemplateView):
+class CarrinhoView(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/carrinho.html'
 
 
@@ -45,3 +46,31 @@ class Login(LoginRequiredMixin, TemplateView):
 
 class Cadastro(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/novaConta.html'
+
+
+class AdicionarCarrinho(LoginRequiredMixin, TemplateView):
+    template_name = 'clientes/carrinho.html'
+
+    # Método executado para processar a requisição. É executado antes de renderizar o template
+    def dispatch(self, *args, **kwargs):
+
+        # Busca os dados do produto que esta na URL
+        prod = get_object_or_404(Produto, pk=kwargs['id_produto'])
+
+        # Cria um objeto "Carrinho" com os dados do produto e a quantidade da URL
+        carrinho = Carrinho.objects.create(
+            quantidade=kwargs['quantidade'],
+            produto=prod,
+            valor_unid=prod.valorVenda,
+            usuario=self.request.user)
+
+        return super().dispatch(*args, **kwargs)
+
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        # Listar tudo do carrinho desse usuário
+        context["carrinho"] = Carrinho.objects.filter(usuario=self.request.user)
+        return context
+
+

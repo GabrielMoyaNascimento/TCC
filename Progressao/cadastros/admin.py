@@ -3,7 +3,7 @@ from .models import *
 
 admin.site.register(Estado)
 admin.site.register(Cidade)
-admin.site.register(Pessoa)
+# admin.site.register(Pessoa)
 admin.site.register(Categoria)
 admin.site.register(Venda)
 admin.site.register(FormaPagamento)
