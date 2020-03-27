@@ -150,7 +150,7 @@ class CarrinhoDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("clientes-carrinho")
 
     def get_context_data(self, *args, **kwargs):
-        context = super(ProdutoDeleteCarrinhoVenda,
+        context = super(CarrinhoDelete,
                         self).get_context_data(*args, **kwargs)
 
         # adiciona coisas ao contextos das coisas

@@ -1,10 +1,8 @@
 from django.db import models
-# from cadastros.models import *
 from django.contrib.auth.models import User
 
 from cadastros.models import Produto
 
-# class Pessoa(models.Model):
 
 
 
