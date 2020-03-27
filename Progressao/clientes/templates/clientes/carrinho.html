@@ -29,8 +29,24 @@
                             </td>
                             <td>{{c.produto.nome}}</td>
                             <td>{{c.valor_unid}}</td>
-                            <td>{{c.quantidade}}</td>
+                            <!-- <td>{{c.quantidade}}</td> -->
+                            <td>
+                                <div class="product_count">
+                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                                    <button
+                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                        class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                    <button
+                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                        class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                </div>
+                            </td>
                             <td>{% widthratio c.valor_unid 1 c.quantidade %}</td>
+                            <td>
+                                <a href="{% url 'deletar-produto' produto.pk 1 %}" class="btn btn-danger btn-sm" title="Remover">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
                         </tr>
                         {% empty %}
                         <tr>
