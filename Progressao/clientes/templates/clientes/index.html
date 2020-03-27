@@ -9,10 +9,6 @@
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div class="col-first">
                 <h1>Lista de Produtos</h1>
-                <!-- <nav class="d-flex align-items-center">
-                    <a href="index.html"><span class="lnr lnr-arrow-right"></span></a>
-                    <a href="category.html">Login/Register</a>
-                </nav> -->
             </div>
         </div>
     </div>
@@ -98,7 +94,7 @@
                     <!-- single product -->
                     {% for produto in produtos %}
                     <div class="col-lg-4 col-md-6">
-                        <div class="single-product p-2 shadow-sm">
+                        <div class="single-product p-2 border rounded ">
                             <img class="card-img-top" height="180" src="{{produto.imagem.url}}" alt="">
                             <div class="product-details">
                                 <h6>{{produto.nome}}</h6>
