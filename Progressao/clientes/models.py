@@ -15,4 +15,4 @@ class Carrinho(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.produto + " x" + self.valor_unid
+        return self.produto + " x" + self.valor_unid + "x" + self.produto.imagem

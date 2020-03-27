@@ -166,9 +166,7 @@ class CarrinhoList(LoginRequiredMixin, ListView):
     template_name = "clientes/carrinho.html"
 
     def get_context_data(self, *args, **kwargs):
-        context = super(CarrinhoList,
-                        self).get_context_data(*args, **kwargs)
-
-
-        context['titulo'] = "Carrinho"
+        context = super().get_context_data(*args, **kwargs)
+        # Listar tudo do carrinho desse usuário
+        context["carrinho"] = Carrinho.objects.filter(usuario=self.request.user)
         return context

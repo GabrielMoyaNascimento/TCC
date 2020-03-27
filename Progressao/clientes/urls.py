@@ -5,8 +5,8 @@ from .views import *
 urlpatterns = [
     
     path('clientes/index/', PaginaInicial.as_view(), name="clientes-index"),
-    path('clientes/carrinho/', CarrinhoView.as_view(), name="clientes-carrinho"),
+    path('clientes/carrinho/', CarrinhoList.as_view(), name="clientes-carrinho"),
     path('clientes/login/', Login.as_view(), name="clientes-login"),
     path('clientes/novaConta/', Cadastro.as_view(), name="clientes-novaConta"),
-    path('comprar/produto/<int:id_produto>/<int:quantidade>/', AdicionarCarrinho.as_view(), name="adicionar-produto"),
+    path('clientes/carrinho/<int:id_produto>/<int:quantidade>/', AdicionarCarrinho.as_view(), name="adicionar-produto"),
 ]
