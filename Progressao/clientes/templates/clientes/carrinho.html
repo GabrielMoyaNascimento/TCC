@@ -43,7 +43,7 @@
                             </td>
                             <td>{% widthratio c.valor_unid 1 c.quantidade %}</td>
                             <td>
-                                <a href="{% url 'deletar-produto' produto.pk 1 %}" class="btn btn-danger btn-sm" title="Remover">
+                                <a href="{% url 'deletar-produto' c.pk %}" class="btn btn-danger btn-sm" title="Remover">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>
                             </td>

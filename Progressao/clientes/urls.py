@@ -9,5 +9,5 @@ urlpatterns = [
     path('clientes/login/', Login.as_view(), name="clientes-login"),
     path('clientes/novaConta/', Cadastro.as_view(), name="clientes-novaConta"),
     path('clientes/carrinho/<int:id_produto>/<int:quantidade>/', AdicionarCarrinho.as_view(), name="adicionar-produto"),
-    path('clientes/carrinho/<int:id_produto>/<int:quantidade>/', CarrinhoDelete.as_view(), name="deletar-produto"),
+    path('clientes/carrinho/<int:id_produto>', CarrinhoDelete.as_view(), name="deletar-produto"),
 ]
