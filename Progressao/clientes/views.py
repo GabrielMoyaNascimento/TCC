@@ -148,8 +148,32 @@ class CarrinhoDelete(LoginRequiredMixin, DeleteView):
     template_name = "clientes/carrinho.html"
     # Pra onde redirecionar o usuario  depois de inserir
     success_url = reverse_lazy("clientes-carrinho")
-    
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProdutoDeleteCarrinhoVenda,
+                        self).get_context_data(*args, **kwargs)
+
+        # adiciona coisas ao contextos das coisas
+        context['titulo'] = "Remover produto da venda"
+        context['botao'] = "Remover"
+        context['classbotao'] = "btn-danger"
+        context['urlvoltar'] = "lista-vender-produtos"
+
+        return context
+    
+    def dispatch(self, *args, **kwargs):
+
+        # Busca os dados do produto que esta na URL
+        prod = get_object_or_404(Produto, pk=kwargs['id_produto'])
+
+        # Cria um objeto "Carrinho" com os dados do produto e a quantidade da URL
+        carrinho = Carrinho.objects.create(
+            quantidade=kwargs['quantidade'],
+            produto=prod,
+            valor_unid=prod.valorVenda
+           )
+
+        return super().dispatch(*args, **kwargs)
     
 
 class CarrinhoList(LoginRequiredMixin, ListView):
