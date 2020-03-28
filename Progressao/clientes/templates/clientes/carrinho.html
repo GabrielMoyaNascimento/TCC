@@ -86,7 +86,7 @@
                             </td>
                             <td>
                                 {% for c in carrinho %}
-                                <h5>R${% widthratio c.valor_unid 1 c.quantidade %} +</h5>
+                                <h5>R${{ valor }} +</h5>
                                 {% endfor %}
                             </td>
                         </tr>
@@ -102,12 +102,6 @@
                             </td>
                             <td>
                                 <div class="shipping_box">
-                                    <!-- <ul class="list">
-                                        <li><a href="#">Flat Rate: $5.00</a></li>
-                                        <li><a href="#">Free Shipping</a></li>
-                                        <li><a href="#">Flat Rate: $10.00</a></li>
-                                        <li class="active"><a href="#">Local Delivery: $2.00</a></li>
-                                    </ul> -->
                                     <h6>&nbsp;</h6>
                                     <input type="text" placeholder="CEP">
                                     <a class="gray_btn" href="#">Calcular</a>

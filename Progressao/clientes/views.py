@@ -95,72 +95,6 @@ class CadastroCreate( LoginRequiredMixin, CreateView):
         return context
 
 
-# class CarrinhoCreate (LoginRequiredMixin, CreateView):
-#     # defini qual o modelo pra classe
-#     model = Carrinho
-#     template_name = "clientes/carrinho.html"
-
-#     # Pra onde redirecionar o usuario  depois de inserir
-#     success_url = reverse_lazy("adicionar-produto")
-#     # quais campos vai aparecer no formulario
-#     fields = ['quantidade','valor_unid','produto', 'usuario']
-
-#     # Valida o formulário e salva no banco
-#     def form_valid(self, form):
-
-#         # Recebe os dados do formulário
-#         quantidade = form.cleaned_data['quantidade']
-#         produto = form.cleaned_data['produto']
-
-#         # Verificar se o estoque do produto é maior que a quantidade
-#         if(int(produto.estoque) < int(quantidade)):
-
-#             # Pode fazer o procedimento padrão
-#             form.add_error(None, 'A quantidade informada não tem no estoque.')
-
-#             # Chamar o super
-#             return self.form_invalid(form)
-#         # se ok
-#         else:    
-#             return super().form_valid(form)
-
-
-
-#     def get_context_data(self, *args, **kwargs):
-#         context = super( CarrinhoCreate, self).get_context_data(*args, **kwargs)
-
-
-#         context['titulo'] = "Adicionar produto no Carrinho"
-#         context['botao'] = "Adicionar"
-#         context['classbotao'] = "btn-success"
-#         context['urlvoltar'] = "clientes-carrinho"
-
-#         return context
-
-
-# class CarrinhoUpdate (LoginRequiredMixin, UpdateView):
-#     # defini qual o modelo pra classe
-
-#     model = Carrinho
-#     template_name = "clientes/carrinho.html"
-
-#     # Pra onde redirecionar o usuario  depois de inserir
-#     success_url = reverse_lazy("clientes-carrinho")
-#     # quais campos vai aparecer no formulario
-#     fields = ['quantidade','valor_unid','produto', 'usuario']
-
-#     def get_context_data(self, *args, **kwargs):
-#         context = super(CarrinhoUpdate, self).get_context_data(*args, **kwargs)
-
-#         # adiciona coisas ao contextos das coisas
-#         context['titulo'] = "Atualizar carrinho"
-#         context['botao'] = "Atualizar"
-#         context['classbotao'] = "btn-success"
-#         context['urlvoltar'] = "clientes-carrinho"
-
-#         return context
-
-
 # View para adicionar produtos no Carrinho
 class AdicionarProdutoCarrinho(LoginRequiredMixin, TemplateView):
     # Também não vai ter template, só colocamos isso porque é obrigatório
@@ -232,6 +166,22 @@ class CarrinhoList(LoginRequiredMixin, ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+        
+        #Pegando valor total dos produtos
+        
+        carrinho = get_object_or_404(Carrinho, pk=kwargs['id_carrinho'])
+        valor = int(kwargs['valor_unid'])
+        for valor in self.carrinho.all():
+            total = 0
+            total += carrinho.valor
+        context["valor"] = Carrinho.objects.filter(total,usuario=self.request.user)
+        
+        # valortotal=0
+        # for valor_unid in Carrinho:
+        #     valor_unid=+valortotal
+        # context["valor"] = Carrinho.objects.filter(valortotal,usuario=self.request.user)
+        
         # Listar tudo do carrinho desse usuário
         context["carrinho"] = Carrinho.objects.filter(usuario=self.request.user)
+
         return context
