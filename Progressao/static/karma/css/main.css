@@ -56,22 +56,22 @@
 /* Start Gradient Area css
 ============================================================================================ */
 .gradient-bg, .primary-btn, .add-bag .add-btn, .single-product .product-details .prd-bottom .social-info span:after, .grid-btn:hover, .list-btn:hover, .grid-btn.active, .list-btn.active, .pagination a.active, .pagination a:hover, .s_Product_carousel .owl-dots div.active, .s_product_text .card_area .icon_btn:after, .product_description_area .nav.nav-tabs li a.active, .blog-pagination .page-item.active .page-link, .single-footer-widget .click-btn {
-  background: -webkit-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
-  background: -moz-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
-  background: -o-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
-  background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%); }
+  background: -webkit-linear-gradient(90deg, #dc80d2 0%, #d174b5 100%);
+  background: -moz-linear-gradient(90deg, #dc80d2 0%, #d174b5 100%);
+  background: -o-linear-gradient(90deg, #dc80d2 0%, #d174b5 100%);
+  background: linear-gradient(90deg, #dc80d2 0%, #d174b5 100%); }
 
 .gradient-bg-reverse, #search_input_box {
-  background: -webkit-linear-gradient(270deg, #ffba00 0%, #ff6c00 100%);
-  background: -moz-linear-gradient(270deg, #ffba00 0%, #ff6c00 100%);
-  background: -o-linear-gradient(270deg, #ffba00 0%, #ff6c00 100%);
-  background: linear-gradient(270deg, #ffba00 0%, #ff6c00 100%); }
+  background: -webkit-linear-gradient(270deg, #dc80d2 0%, #d174b5 100%);
+  background: -moz-linear-gradient(270deg, #dc80d2 0%, #d174b5 100%);
+  background: -o-linear-gradient(270deg, #dc80d2 0%, #d174b5 100%);
+  background: linear-gradient(270deg, #dc80d2 0%, #d174b5 100%); }
 
 .gradient-color, .s_product_text h2, .s_product_text .list li a.active, .product_description_area .tab-content .total_rate .box_total h4, .single-footer-widget .bb-btn {
-  background: -webkit-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
-  background: -moz-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
-  background: -o-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
-  background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+  background: -webkit-linear-gradient(90deg, #dc80d2 0%, #d174b5 100%);
+  background: -moz-linear-gradient(90deg, #dc80d2 0%, #d174b5 100%);
+  background: -o-linear-gradient(90deg, #dc80d2 0%, #d174b5 100%);
+  background: linear-gradient(90deg, #dc80d2 0%, #d174b5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; }
 
@@ -264,19 +264,19 @@ h1, h2, h3, h4, h5, h6 {
       border: 1px solid transparent; }
   .genric-btn.primary {
     color: #fff;
-    background: #ffba00;
+    background: #d174b5;
     border: 1px solid transparent; }
     .genric-btn.primary:hover {
-      color: #ffba00;
-      border: 1px solid #ffba00;
+      color: #d174b5;
+      border: 1px solid #d174b5;
       background: #fff; }
   .genric-btn.primary-border {
-    color: #ffba00;
-    border: 1px solid #ffba00;
+    color: #d174b5;
+    border: 1px solid #d174b5;
     background: #fff; }
     .genric-btn.primary-border:hover {
       color: #fff;
-      background: #ffba00;
+      background: #d174b5;
       border: 1px solid transparent; }
   .genric-btn.success {
     color: #fff;
@@ -532,7 +532,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 20px; }
   .single-input-primary:focus {
     outline: none;
-    border: 1px solid #ffba00; }
+    border: 1px solid #d174b5; }
 
 .single-input-accent {
   display: block;
@@ -1053,7 +1053,7 @@ h1, h2, h3, h4, h5, h6 {
         .header_area .navbar .nav .nav-item .nav-link:after {
           display: none; }
       .header_area .navbar .nav .nav-item:hover .nav-link, .header_area .navbar .nav .nav-item.active .nav-link {
-        color: #ffba00; }
+        color: #d174b5; }
       .header_area .navbar .nav .nav-item.submenu {
         position: relative; }
         .header_area .navbar .nav .nav-item.submenu ul {
@@ -3308,7 +3308,7 @@ label {
   padding-left: 10px;
   border-bottom: 1px solid #eee; }
   .sidebar-categories .main-nav-list a:hover {
-    color: #ffba00; }
+    color: #d174b5; }
   .sidebar-categories .main-nav-list a .number {
     color: #cccccc;
     margin-left: 10px; }
