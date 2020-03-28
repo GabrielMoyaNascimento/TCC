@@ -210,20 +210,13 @@ class CarrinhoList(LoginRequiredMixin, ListView):
         context = super().get_context_data(*args, **kwargs)
         
         #Pegando valor total dos produtos
-        
-        # carrinho = get_object_or_404(Carrinho, pk=kwargs['id_carrinho'])
-        # valor = int(kwargs['valor_unid'])
-        # for valor in self.carrinho.all():
-        #     total = 0
-        #     total += carrinho.valor
-        # context["valor"] = Carrinho.objects.filter(total,usuario=self.request.user)
-        
-        # valortotal=0
-        # for valor_unid in Carrinho:
-        #     valor_unid=+valortotal
-        # context["valor"] = Carrinho.objects.filter(valortotal,usuario=self.request.user)
+        carrinho = Carrinho.objects.filter(usuario=self.request.user)
+        total = 0
+        for c in carrinho:
+            total += c.valor_unid * c.quantidade
         
         # Listar tudo do carrinho desse usuário
-        context["carrinho"] = Carrinho.objects.filter(usuario=self.request.user)
+        context["carrinho"] = carrinho
+        context["valor"] = total
 
         return context

@@ -31,7 +31,6 @@
                             </td>
                             <td>{{c.produto.nome}}</td>
                             <td>R${{c.valor_unid|floatformat:2}}</td>
-                            <!-- <td>{{c.quantidade}}</td> -->
                             <td>
                                 <div class="product_count">
                                     <input type="text" name="qtde" maxlength="12" value="{{c.quantidade}}" title="Quantidade:" class="input-text qty">
@@ -85,9 +84,9 @@
                                 <h5>Subtotal</h5>
                             </td>
                             <td>
-                                {% for c in carrinho %}
-                                <h5>R${{ valor }} +</h5>
-                                {% endfor %}
+                        {% for c in carrinho %}
+                                <h5>R${{ valor }} </h5>
+                        {% endfor %}
                             </td>
                         </tr>
                         <tr class="shipping_area">
