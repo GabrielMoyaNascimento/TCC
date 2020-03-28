@@ -85,7 +85,9 @@
                                 <h5>Subtotal</h5>
                             </td>
                             <td>
-                                <h5>$2160.00</h5>
+                                {% for c in carrinho %}
+                                <h5>R${% widthratio c.valor_unid 1 c.quantidade %} +</h5>
+                                {% endfor %}
                             </td>
                         </tr>
                         <tr class="shipping_area">
@@ -109,6 +111,9 @@
                                     <h6>&nbsp;</h6>
                                     <input type="text" placeholder="CEP">
                                     <a class="gray_btn" href="#">Calcular</a>
+                                </div>
+                                <div class="my-3">    
+                                    <h5>Total</h5>
                                 </div>
                             </td>
                         </tr>

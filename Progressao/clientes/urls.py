@@ -5,8 +5,11 @@ from .views import *
 urlpatterns = [
     
     path('clientes/index/', PaginaInicial.as_view(), name="clientes-index"),
+    path('clientes/contato/', ContatoView.as_view(), name="clientes-contato"),
+    path('clientes/confirmacaoCompra/', ConfirmacaoView.as_view(), name="clientes-confirmacao"),
     path('clientes/login/', Login.as_view(), name="clientes-login"),
     path('clientes/novaConta/', Cadastro.as_view(), name="clientes-novaConta"),
+    path('clientes/paginaProduto/', ProdutoView.as_view(), name="clientes-paginaProduto"),
     path('clientes/novaConta/cadastrar', CadastroCreate.as_view(), name="clientes-cadastrar"),
     
     path('adicionar/produto/<int:id_produto>/<int:quantidade>/', AdicionarProdutoCarrinho.as_view(), name="adicionar-produto"),

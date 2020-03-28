@@ -1,0 +1,110 @@
+{% extends 'clientes/formulario.html' %}
+{% load static %}
+
+{%block conteudo%}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Confirmação de Compra</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Order Details Area =================-->
+<section class="order_details section_gap">
+    <div class="container">
+        <h3 class="title_confirmation">Obrigado por comprar Conosco. Ja recebemos seu pedido.</h3>
+        <div class="row order_d_inner">
+            <div class="col-lg-4">
+                <div class="details_item">
+                    <h4>Informações da Compra</h4>
+                    <ul class="list">
+                        <li><a href="#"><span>Numero do Pedido</span> : 60235</a></li>
+                        <li><a href="#"><span>Data</span> : 23/03/2020</a></li>
+                        <li><a href="#"><span>Total</span> : R$2210,00</a></li>
+                        <li><a href="#"><span>Forma Pagamento</span> : Cartão de Crédito</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="details_item">
+                    <h4>Endereço de Envio</h4>
+                    <ul class="list">
+                        <li><a href="#"><span>Cidade</span> : Londrina</a></li>
+                        <li><a href="#"><span>Rua</span> : Curitiba</a></li>
+                        <li><a href="#"><span>Número</span> : 2345</a></li>
+                        <li><a href="#"><span>CEP </span> : 87703300</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="order_details_table">
+            <h2>Detalhes da Compra</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Produto</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>Bolsa de Couro</p>
+                            </td>
+                            <td>
+                                <h5>x 02</h5>
+                            </td>
+                            <td>
+                                <p>r$720.00</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>Subtotal</h4>
+                            </td>
+                            <td>
+                                <h5></h5>
+                            </td>
+                            <td>
+                                <p>R$2160.00</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>Frete</h4>
+                            </td>
+                            <td>
+                                <h5></h5>
+                            </td>
+                            <td>
+                                <p> R$50.00</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>Total</h4>
+                            </td>
+                            <td>
+                                <h5></h5>
+                            </td>
+                            <td>
+                                <p>R$2210.00</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <a class="primary-btn my-3" href="{% url 'clientes-index' %}">Voltar ao Inicio</a>
+    </div>
+</section>
+
+{% endblock %}

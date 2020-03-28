@@ -56,20 +56,22 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="{% url 'clientes-index' %}">Inicio</a></li> 
-                            <li class="nav-item"><a class="nav-link" href="{% url 'clientes-carrinho' %}">Carrinho</a></li>
                             {% if request.user.is_authenticated %}
+                            <li class="nav-item active"><a class="nav-link" href="{% url 'clientes-index' %}">Inicio</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'clientes-carrinho' %}">Carrinho</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'alterar-senha' %}">Alterar senha</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'clientes-contato' %}">Contato</a></li>
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                     aria-expanded="false">Informações Pessoais</a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a class="nav-link" href="{% static 'karma/login.html' %}">Perfil</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% static 'karma/tracking.html' %}">Configurações</a></li>
                                     <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                                 </ul>
                             </li>
                             {% else %}
+                            <li class="nav-item active"><a class="nav-link" href="{% url 'clientes-index' %}">Inicio</a></li> 
+                            <li class="nav-item"><a class="nav-link" href="{% url 'clientes-carrinho' %}">Carrinho</a></li>
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                 aria-expanded="false">Entrar</a>
                             <!-- <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Entrar</a></li> -->
@@ -1068,6 +1070,7 @@
     <footer class="footer-area section_gap">
         <div class="container">
             <div class="row">
+                <div class="col-lg-4  col-md-6 col-sm-6"></div>
                 <div class="col-lg-3  col-md-6 col-sm-6">
                     <div class="single-footer-widget">
                         <h6>Sobre Nós</h6>
@@ -1075,39 +1078,6 @@
                            Somos uma empresa familiar fundada com o propósito de criar soluções
                            viáveis para você em seus afazeres diários.
                         </p>
-                    </div>
-                </div>
-                <div class="col-lg-4  col-md-6 col-sm-6">
-                    <div class="single-footer-widget">
-                        <h6>Contato por Email:</h6>
-                        <p>Contate-nos</p>
-                        <div class="" id="mc_embed_signup">
-
-                            <form target="_blank" novalidate="true"
-                                action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                method="get" class="form-inline">
-
-                                <div class="d-flex flex-row">
-
-                                    <input class="form-control" name="EMAIL" placeholder="Seu Email"
-                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
-                                        required="" type="email">
-
-
-                                    <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right"
-                                            aria-hidden="true"></i></button>
-                                    <div style="position: absolute; left: -5000px;">
-                                        <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value=""
-                                            type="text">
-                                    </div>
-
-                                    <!-- <div class="col-lg-4 col-md-4">
-												<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
-											</div>  -->
-                                </div>
-                                <div class="info"></div>
-                            </form>
-                        </div>
                     </div>
                 </div>
                 
@@ -1126,7 +1096,7 @@
                 <p class="footer-text m-0">
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     Copyright &copy;
-                    <script>document.write(new Date().getFullYear());</script> All rights reserved  <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://github.com/GabrielMoyaIFPR"
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved by <a href="https://github.com/GabrielMoyaIFPR"
                         target="_blank">Gabriel Moya</a>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </p>

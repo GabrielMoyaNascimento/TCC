@@ -40,12 +40,24 @@ class CarrinhoView(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/carrinho.html'
 
 
+class ProdutoView(LoginRequiredMixin, TemplateView):
+    template_name = 'clientes/paginaProduto.html'
+
+class ContatoView(LoginRequiredMixin, TemplateView):
+    template_name = 'clientes/contato.html'
+
+
+class ConfirmacaoView(LoginRequiredMixin, TemplateView):
+    template_name = 'clientes/confirmacao.html'
+
+
 class Login(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/login.html'
 
 
 class Cadastro(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/novaConta.html'
+
 
 
 class CadastroCreate( LoginRequiredMixin, CreateView):
