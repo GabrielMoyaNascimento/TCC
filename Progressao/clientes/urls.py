@@ -5,10 +5,12 @@ from .views import *
 urlpatterns = [
     
     path('clientes/index/', PaginaInicial.as_view(), name="clientes-index"),
-    path('clientes/carrinho/', CarrinhoList.as_view(), name="clientes-carrinho"),
     path('clientes/login/', Login.as_view(), name="clientes-login"),
     path('clientes/novaConta/', Cadastro.as_view(), name="clientes-novaConta"),
-    path('clientes/carrinho/<int:id_produto>/<int:quantidade>/', AdicionarCarrinho.as_view(), name="adicionar-produto"),
-    path('clientes/carrinho/<int:id_produto>', CarrinhoDelete.as_view(), name="deletar-produto"),
     path('clientes/novaConta/cadastrar', CadastroCreate.as_view(), name="clientes-cadastrar"),
+    
+    path('adicionar/produto/<int:id_produto>/<int:quantidade>/', AdicionarProdutoCarrinho.as_view(), name="adicionar-produto"),
+    path('atualizar/carrinho/<int:id_carrinho>/<int:quantidade>/', AtualizarProdutoCarrinho.as_view(), name="atualizar-carrinho"),
+    path('remover/produto/<int:id_carrinho>', ExcluirProdutoCarrinho.as_view(), name="deletar-produto"),
+    path('carrinho/', CarrinhoList.as_view(), name="clientes-carrinho"),
 ]

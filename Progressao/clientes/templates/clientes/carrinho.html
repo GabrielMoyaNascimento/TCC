@@ -1,5 +1,6 @@
 {% extends 'clientes/formulario.html' %}
 {% load static %}
+
 {%block conteudo%}
 
 <br>
@@ -19,6 +20,7 @@
                             <th scope="col">Preço</th>
                             <th scope="col">Quantidade</th>
                             <th scope="col">Total</th>
+                            <th scope="col">Opções</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,21 +30,20 @@
                                 <img src="{{ c.produto.imagem.url }}" width="150" />
                             </td>
                             <td>{{c.produto.nome}}</td>
-                            <td>{{c.valor_unid}}</td>
+                            <td>R${{c.valor_unid|floatformat:2}}</td>
                             <!-- <td>{{c.quantidade}}</td> -->
                             <td>
                                 <div class="product_count">
-                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantidade:" class="input-text qty">
-                                    <button
-                                        onclick="var result = document.getElementById('c.quantidade'); c.quantidade++;"
-                                        class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                    <button
-                                        onclick="var result = document.getElementById('c.quantidade');"
-                                        class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                    <input type="text" name="qtde" maxlength="12" value="{{c.quantidade}}" title="Quantidade:" class="input-text qty">
+                                    <button class="increase items-count btn-mais" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                    <button class="reduced items-count btn-menos" type="button"><i class="lnr lnr-chevron-down"></i></button>
                                 </div>
                             </td>
-                            <td>{% widthratio c.valor_unid 1 c.quantidade %}</td>
+                            <!-- Isso aqui multiplica o valor unitário * quantidade -->
+                            <td>R${% widthratio c.valor_unid 1 c.quantidade %}</td>
                             <td>
+                                <a class="btn btn-light btn-sm btn-atualizar" href="{% url 'atualizar-carrinho' c.pk 1 %}"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                                <!-- Para o excluir, você está passando o ID deste "objeto" carrinho. É isso mesmo do jeito que fiz -->
                                 <a href="{% url 'deletar-produto' c.pk %}" class="btn btn-danger btn-sm" title="Remover">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>
@@ -135,4 +136,49 @@
     </div>
 </section>
 
+
 {%endblock%}
+
+{% block scripts %}
+<!-- Coloquei aqui, mas tem que ver a compatibilidade pq seu template usa a versão 2. -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".items-count").click(function (e) { 
+            e.preventDefault();
+            // Pega a quantidade atual do input que está anterior ao botão clicado porque tem um input pra cada produto
+            // Pega a quantidade, passa pra Int e já soma 1
+            var qtde = parseInt($(this).prevAll('input[name="qtde"]').first().val());
+            // Se for o botão "mais", adiciona, se não remove
+            if( $(this).hasClass("btn-mais") ){
+                qtde = qtde + 1;
+            } else {
+                // se for maior que zero diminui
+                if(qtde > 0){
+                    qtde = qtde - 1;
+                }
+            }
+            // Atualiza o valor no campo
+            $(this).prevAll('input[name="qtde"]').first().val(qtde);
+        });
+
+        // Ao alicar no atualizar
+        $(".btn-atualizar").click(function (e) { 
+            e.preventDefault();
+            // var qtde
+            var qtde = $(this).closest('td').prev('td').prev('td').find('input[name="qtde"]').val();
+            // Pega a URL atual
+            var url = $(this).attr("href");
+            // quebra a url onde tem /
+            var partes = url.split("/");
+            // Atualiza a qtde (-2 pq tem a / no final que também gera uma pos vazia)
+            partes[partes.length-2] = qtde;
+            // Transforma o array numa string novamente
+            var url_nova = partes.join('/');
+            // Redireciona para a url nova
+            window.location.href = url_nova;
+        });
+    });
+</script>
+{% endblock %}

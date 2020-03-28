@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -83,8 +83,75 @@ class CadastroCreate( LoginRequiredMixin, CreateView):
         return context
 
 
+# class CarrinhoCreate (LoginRequiredMixin, CreateView):
+#     # defini qual o modelo pra classe
+#     model = Carrinho
+#     template_name = "clientes/carrinho.html"
 
-class AdicionarCarrinho(LoginRequiredMixin, TemplateView):
+#     # Pra onde redirecionar o usuario  depois de inserir
+#     success_url = reverse_lazy("adicionar-produto")
+#     # quais campos vai aparecer no formulario
+#     fields = ['quantidade','valor_unid','produto', 'usuario']
+
+#     # Valida o formulário e salva no banco
+#     def form_valid(self, form):
+
+#         # Recebe os dados do formulário
+#         quantidade = form.cleaned_data['quantidade']
+#         produto = form.cleaned_data['produto']
+
+#         # Verificar se o estoque do produto é maior que a quantidade
+#         if(int(produto.estoque) < int(quantidade)):
+
+#             # Pode fazer o procedimento padrão
+#             form.add_error(None, 'A quantidade informada não tem no estoque.')
+
+#             # Chamar o super
+#             return self.form_invalid(form)
+#         # se ok
+#         else:    
+#             return super().form_valid(form)
+
+
+
+#     def get_context_data(self, *args, **kwargs):
+#         context = super( CarrinhoCreate, self).get_context_data(*args, **kwargs)
+
+
+#         context['titulo'] = "Adicionar produto no Carrinho"
+#         context['botao'] = "Adicionar"
+#         context['classbotao'] = "btn-success"
+#         context['urlvoltar'] = "clientes-carrinho"
+
+#         return context
+
+
+# class CarrinhoUpdate (LoginRequiredMixin, UpdateView):
+#     # defini qual o modelo pra classe
+
+#     model = Carrinho
+#     template_name = "clientes/carrinho.html"
+
+#     # Pra onde redirecionar o usuario  depois de inserir
+#     success_url = reverse_lazy("clientes-carrinho")
+#     # quais campos vai aparecer no formulario
+#     fields = ['quantidade','valor_unid','produto', 'usuario']
+
+#     def get_context_data(self, *args, **kwargs):
+#         context = super(CarrinhoUpdate, self).get_context_data(*args, **kwargs)
+
+#         # adiciona coisas ao contextos das coisas
+#         context['titulo'] = "Atualizar carrinho"
+#         context['botao'] = "Atualizar"
+#         context['classbotao'] = "btn-success"
+#         context['urlvoltar'] = "clientes-carrinho"
+
+#         return context
+
+
+# View para adicionar produtos no Carrinho
+class AdicionarProdutoCarrinho(LoginRequiredMixin, TemplateView):
+    # Também não vai ter template, só colocamos isso porque é obrigatório
     template_name = 'clientes/carrinho.html'
 
     # Método executado para processar a requisição. É executado antes de renderizar o template
@@ -99,119 +166,54 @@ class AdicionarCarrinho(LoginRequiredMixin, TemplateView):
             produto=prod,
             valor_unid=prod.valorVenda,
             usuario=self.request.user)
-
-        return super().dispatch(*args, **kwargs)
-
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        # Listar tudo do carrinho desse usuário
-        context["carrinho"] = Carrinho.objects.filter(usuario=self.request.user)
-        return context
+        # Redireciona o usuário para a lista
+        return redirect('clientes-carrinho')
 
 
-
-class CarrinhoCreate (LoginRequiredMixin, CreateView):
-    # defini qual o modelo pra classe
-    model = Carrinho
+# View para excluir itens do carrinho
+class ExcluirProdutoCarrinho(LoginRequiredMixin, TemplateView):
+    # defini qual o modelo pra classe, só pra não bugar
     template_name = "clientes/carrinho.html"
-
-    # Pra onde redirecionar o usuario  depois de inserir
-    success_url = reverse_lazy("adicionar-produto")
-    # quais campos vai aparecer no formulario
-    fields = ['quantidade','valor_unid','produto', 'usuario']
-
-    # Valida o formulário e salva no banco
-    def form_valid(self, form):
-
-        # Recebe os dados do formulário
-        quantidade = form.cleaned_data['quantidade']
-        produto = form.cleaned_data['produto']
-
-        # Verificar se o estoque do produto é maior que a quantidade
-        if(int(produto.estoque) < int(quantidade)):
-
-            # Pode fazer o procedimento padrão
-            form.add_error(None, 'A quantidade informada não tem no estoque.')
-
-            # Chamar o super
-            return self.form_invalid(form)
-        # se ok
-        else:    
-            return super().form_valid(form)
-
-
-
-    def get_context_data(self, *args, **kwargs):
-        context = super( CarrinhoCreate, self).get_context_data(*args, **kwargs)
-
-
-        context['titulo'] = "Adicionar produto no Carrinho"
-        context['botao'] = "Adicionar"
-        context['classbotao'] = "btn-success"
-        context['urlvoltar'] = "clientes-carrinho"
-
-        return context
-
-
-class CarrinhoUpdate (LoginRequiredMixin, UpdateView):
-    # defini qual o modelo pra classe
-
-    model = Carrinho
-    template_name = "clientes/carrinho.html"
-
-    # Pra onde redirecionar o usuario  depois de inserir
-    success_url = reverse_lazy("clientes-carrinho")
-    # quais campos vai aparecer no formulario
-    fields = ['quantidade','valor_unid','produto', 'usuario']
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(CarrinhoUpdate, self).get_context_data(*args, **kwargs)
-
-        # adiciona coisas ao contextos das coisas
-        context['titulo'] = "Atualizar carrinho"
-        context['botao'] = "Atualizar"
-        context['classbotao'] = "btn-success"
-        context['urlvoltar'] = "clientes-carrinho"
-
-        return context
-
-
-class CarrinhoDelete(LoginRequiredMixin, DeleteView):
-    # defini qual o modelo pra classe
-
-    model = Carrinho
-    template_name = "clientes/carrinho.html"
-    # Pra onde redirecionar o usuario  depois de inserir
-    success_url = reverse_lazy("clientes-carrinho")
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(CarrinhoDelete,
-                        self).get_context_data(*args, **kwargs)
-
-        # adiciona coisas ao contextos das coisas
-        context['titulo'] = "Remover produto da venda"
-        context['botao'] = "Remover"
-        context['classbotao'] = "btn-danger"
-        context['urlvoltar'] = "lista-vender-produtos"
-
-        return context
     
     def dispatch(self, *args, **kwargs):
 
-        # Busca os dados do produto que esta na URL
-        prod = get_object_or_404(Produto, pk=kwargs['id_produto'])
+        # Busca o objeto do carrinho que está na URL
+        carrinho = get_object_or_404(Carrinho, pk=kwargs['id_carrinho'])
+        # Deleta esse carrinho (objeto)
+        carrinho.delete()
 
-        # Cria um objeto "Carrinho" com os dados do produto e a quantidade da URL
-        carrinho = Carrinho.objects.create(
-            quantidade=kwargs['quantidade'],
-            produto=prod,
-            valor_unid=prod.valorVenda
-           )
-
-        return super().dispatch(*args, **kwargs)
+        # depois de remover, já redirecina o usuário de novo pra lista
+        # Ou seja, o excluir nem tela vai ter... ele vai deletar e voltar pra lista
+        return redirect('clientes-carrinho')
     
 
+# View para excluir itens do carrinho
+class AtualizarProdutoCarrinho(LoginRequiredMixin, TemplateView):
+    # defini qual o modelo pra classe, só pra não bugar
+    template_name = "clientes/carrinho.html"
+    
+    def dispatch(self, *args, **kwargs):
+
+        # Busca o objeto do carrinho que está na URL
+        carrinho = get_object_or_404(Carrinho, pk=kwargs['id_carrinho'])
+        # Busca a quantidade nova e transforma pra int
+        qtde = int(kwargs['quantidade'])
+        
+        # Se a quantidade for zero, remove ele, se não atualiza
+        if(qtde <= 0):
+            carrinho.delete()
+        else:
+            # Atualiza o objeto, adicionando a qtde na quantidade
+            carrinho.quantidade = qtde
+            # Salva o objeto
+            carrinho.save()
+
+        # depois de remover, já redirecina o usuário de novo pra lista
+        # Ou seja, o excluir nem tela vai ter... ele vai deletar e voltar pra lista
+        return redirect('clientes-carrinho')
+    
+
+# View para listar o carrinho para o usuário
 class CarrinhoList(LoginRequiredMixin, ListView):
     model = Carrinho
     template_name = "clientes/carrinho.html"
