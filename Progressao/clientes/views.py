@@ -95,6 +95,48 @@ class CadastroCreate( LoginRequiredMixin, CreateView):
         return context
 
 
+class CadastroUpdate(LoginRequiredMixin, UpdateView):
+    model = Pessoa
+    fields = ['nome', 'nascimento', 'email', 'cidade',
+              'rg', 'cpf', 'endereco', 'cep', 'numero', 'telefone']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-pessoas')
+    login_url = reverse_lazy('login')
+
+    def get_context_data(self, *args, **kwargs):
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super(CadastroUpdate, self).get_context_data(*args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Update de Pessoa"
+        context['botao'] = "Salvar"
+        context['classe'] = "btn-success"
+
+    # Devolve/envia o context para seu comportamento padrão
+        return context
+
+    def form_valid(self, form):
+        # Define o usuário como usuário logado
+        form.instance.usuario = self.request.user
+
+        url = super().form_valid(form)
+
+    # código a fazer depois de salvar objeto no banco
+        self.object.atributo = 'usuario'
+
+    # Salva o objeto novamente
+        self.object.save()
+
+        return url
+
+	# Altera a query para buscar o objeto do usuário logado
+
+    def get_object(self, queryset=None):
+       self.object = get_object_or_404(
+           Pessoa, pk=self.kwargs['pk'], usuario=self.request.user)
+       return self.object
+
+
 # View para adicionar produtos no Carrinho
 class AdicionarProdutoCarrinho(LoginRequiredMixin, TemplateView):
     # Também não vai ter template, só colocamos isso porque é obrigatório
@@ -169,12 +211,12 @@ class CarrinhoList(LoginRequiredMixin, ListView):
         
         #Pegando valor total dos produtos
         
-        carrinho = get_object_or_404(Carrinho, pk=kwargs['id_carrinho'])
-        valor = int(kwargs['valor_unid'])
-        for valor in self.carrinho.all():
-            total = 0
-            total += carrinho.valor
-        context["valor"] = Carrinho.objects.filter(total,usuario=self.request.user)
+        # carrinho = get_object_or_404(Carrinho, pk=kwargs['id_carrinho'])
+        # valor = int(kwargs['valor_unid'])
+        # for valor in self.carrinho.all():
+        #     total = 0
+        #     total += carrinho.valor
+        # context["valor"] = Carrinho.objects.filter(total,usuario=self.request.user)
         
         # valortotal=0
         # for valor_unid in Carrinho:
