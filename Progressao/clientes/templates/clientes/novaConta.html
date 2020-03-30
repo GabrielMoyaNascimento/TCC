@@ -1,5 +1,6 @@
 {% extends 'clientes/formulario.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {%block conteudo%}
 <section class="banner-area organic-breadcrumb">
@@ -15,62 +16,14 @@
     <div class="row">
         <div class="col-lg-8 mx-auto">
             <h3>Informações</h3>
-            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="first" name="name">
-                    <span class="placeholder" data-placeholder="Primeiro Nome"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="last" name="name">
-                    <span class="placeholder" data-placeholder="Sobrenome"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="number" name="number">
-                    <span class="placeholder" data-placeholder="Telefone"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="email" name="compemailany">
-                    <span class="placeholder" data-placeholder="Email"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="number" name="number">
-                    <span class="placeholder" data-placeholder="RG"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="email" name="compemailany">
-                    <span class="placeholder" data-placeholder="CPF"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <select class="country_select">
-                        <option value="1">Estado</option>
-                        <option value="2">Country</option>
-                    </select>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <select class="country_select">
-                        <option value="1">Cidade</option>
-                        <option value="2">District</option>
-                        <option value="4">District</option>
-                    </select>
-                </div>
-                <div class="col-md-12 form-group p_star">
-                    <input type="text" class="form-control" id="add1" name="add1">
-                    <span class="placeholder" data-placeholder="Endereço"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="number" name="number">
-                    <span class="placeholder" data-placeholder="Número"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="email" name="compemailany">
-                    <span class="placeholder" data-placeholder="Complemento"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="zip" name="zip" placeholder="CEP">
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <a class="btn-lg btn-primary my-3" href="{% url 'clientes-cadastrar' %}">Cadastrar-se</a>
-                </div>
+            <form method="post" enctype="multipart/form-data">
+                <!-- Todo formulário tem que ter essa validação -->
+                {% csrf_token %}
+                <!-- Gera o formulário -->
+                {{ form|crispy }}
+                <button type="submit" class="btn {{ classe }}">
+                    {{ botao }}
+                </button>
             </form>
         </div>
     </div>

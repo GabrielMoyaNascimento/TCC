@@ -22,17 +22,17 @@
                 <div class="col-lg-6">
                     <div class="s_Product_carousel">
                         <div class="single-prd-item">
-                            <img class="img-fluid" src="/static/karma/img/category/s-p1.jpg" alt="">
+                            <img class="img-fluid" src="{{object.imagem.url}}" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5 offset-lg-1">
                     <div class="s_product_text">
-                        <h3>Exemplo de Produto</h3>
-                        <h2>R$149,99</h2>
+                        <h3>{{object.nome}}</h3>
+                        <h2>R${{object.valorVenda}}</h2>
                         <ul class="list">
-                            <li><a class="active" href="#"><span>Categoria</span> : Bolsa</a></li>
-                            <li><a href="#"><span>Info</span> : em estoque</a></li>
+                            <li><a class="active" href="#"><span>Categoria</span> : {{object.categoria.nome}}</a></li>
+                            <li><a href="#"><span>Info</span> : {{object.estoque}} em estoque</a></li>
                         </ul>
                         <p>&nbsp;</p>
                         <div class="product_count">
@@ -47,8 +47,7 @@
                                 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
                         </div>
                         <div class="card_area d-flex align-items-center">
-                            <a class="primary-btn" href="#">Adicionar no Carrinho</a>
-                            <a class="icon_btn" href="#"><i class="ti-money"></i></a>
+                            <a class="primary-btn" href="{% url 'adicionar-produto' produto.pk 1  %}">Adicionar no Carrinho</a>
                         </div>
                     </div>
                 </div>
@@ -68,7 +67,7 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <p>Aqui ficará toda a descrição do produto</p>
+                    <p>{{object.descricao}}</p>
                 </div>
                 
             </div>

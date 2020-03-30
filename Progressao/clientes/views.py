@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
@@ -147,13 +148,25 @@ class AdicionarProdutoCarrinho(LoginRequiredMixin, TemplateView):
 
         # Busca os dados do produto que esta na URL
         prod = get_object_or_404(Produto, pk=kwargs['id_produto'])
+        carrinho_tem = False
+       #Se o produto ja estiver no carrinho, ele aumenta a quantidade
+        carrinho = Carrinho.objects.filter(usuario=self.request.user)
+        qtde = int(kwargs['quantidade'])
+        for c in carrinho:
+            if c.produto == prod:
+                c.quantidade = c.quantidade + qtde
+                c.save()
+                carrinho_tem = True
+                break
+
 
         # Cria um objeto "Carrinho" com os dados do produto e a quantidade da URL
-        carrinho = Carrinho.objects.create(
-            quantidade=kwargs['quantidade'],
-            produto=prod,
-            valor_unid=prod.valorVenda,
-            usuario=self.request.user)
+        if carrinho_tem == False:
+            carrinho = Carrinho.objects.create(
+                quantidade=kwargs['quantidade'],
+                produto=prod,
+                valor_unid=prod.valorVenda,
+                usuario=self.request.user)
         # Redireciona o usuário para a lista
         return redirect('clientes-carrinho')
 
@@ -220,3 +233,8 @@ class CarrinhoList(LoginRequiredMixin, ListView):
         context["valor"] = total
 
         return context
+
+class ProdutoDetailView(DetailView):
+    template_name = "clientes/paginaProduto.html"
+    model = Produto
+    
