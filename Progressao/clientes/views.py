@@ -85,7 +85,7 @@ class CadastroCreate( LoginRequiredMixin, CreateView):
 
     def get_context_data(self, *args, **kwargs):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
-        context = super(PessoaCreate, self).get_context_data(*args, **kwargs)
+        context = super(CadastroCreate, self).get_context_data(*args, **kwargs)
 
         # Adicionar coisas ao contexto que serão enviadas para o html
         context['titulo'] = "Cadastro de nova Pessoa"
@@ -100,7 +100,7 @@ class CadastroUpdate(LoginRequiredMixin, UpdateView):
     model = Pessoa
     fields = ['nome', 'nascimento', 'email', 'cidade',
               'rg', 'cpf', 'endereco', 'cep', 'numero', 'telefone']
-    template_name = 'cadastros/form.html'
+    template_name = 'clientes/novaConta.html'
     success_url = reverse_lazy('listar-pessoas')
     login_url = reverse_lazy('login')
 
@@ -148,8 +148,8 @@ class AdicionarProdutoCarrinho(LoginRequiredMixin, TemplateView):
 
         # Busca os dados do produto que esta na URL
         prod = get_object_or_404(Produto, pk=kwargs['id_produto'])
-        carrinho_tem = False
        #Se o produto ja estiver no carrinho, ele aumenta a quantidade
+        carrinho_tem = False
         carrinho = Carrinho.objects.filter(usuario=self.request.user)
         qtde = int(kwargs['quantidade'])
         for c in carrinho:

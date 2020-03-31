@@ -8,9 +8,9 @@ urlpatterns = [
     path('clientes/contato/', ContatoView.as_view(), name="clientes-contato"),
     path('clientes/confirmacaoCompra/', ConfirmacaoView.as_view(), name="clientes-confirmacao"),
     path('clientes/login/', Login.as_view(), name="clientes-login"),
-    path('clientes/novaConta/', Cadastro.as_view(), name="clientes-novaConta"),
+    path('clientes/novaConta/', CadastroCreate.as_view(), name="clientes-novaConta"),
     path('clientes/paginaProduto/<int:pk>', ProdutoDetailView.as_view(), name="clientes-paginaProduto"),
-    path('clientes/novaConta/cadastrar', CadastroCreate.as_view(), name="clientes-cadastrar"),
+    
     
     path('adicionar/produto/<int:id_produto>/<int:quantidade>/', AdicionarProdutoCarrinho.as_view(), name="adicionar-produto"),
     path('atualizar/carrinho/<int:id_carrinho>/<int:quantidade>/', AtualizarProdutoCarrinho.as_view(), name="atualizar-carrinho"),

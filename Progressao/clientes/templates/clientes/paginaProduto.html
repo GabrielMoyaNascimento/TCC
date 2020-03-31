@@ -37,14 +37,12 @@
                         <p>&nbsp;</p>
                         <div class="product_count">
                             <label for="qty">Quantidade:</label>
-                            <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
+                            <input type="text" name="qty" id="sst" maxlength="12" value="{{c.quantidade}}" title="Quantidade:"
                                 class="input-text qty">
                             <button
-                                onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                class="increase items-count btn-mais" type="button"><i class="lnr lnr-chevron-up"></i></button>
                             <button
-                                onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                class="reduced items-count btn-menos" type="button"><i class="lnr lnr-chevron-down"></i></button>
                         </div>
                         <div class="card_area d-flex align-items-center">
                             <a class="primary-btn" href="{% url 'adicionar-produto' produto.pk 1  %}">Adicionar no Carrinho</a>
@@ -73,4 +71,48 @@
             </div>
         </div>
 <div class="clearfix"></div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Coloquei aqui, mas tem que ver a compatibilidade pq seu template usa a versão 2. -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".items-count").click(function (e) {
+            e.preventDefault();
+            // Pega a quantidade atual do input que está anterior ao botão clicado porque tem um input pra cada produto
+            // Pega a quantidade, passa pra Int e já soma 1
+            var qtde = parseInt($(this).prevAll('input[name="qtde"]').first().val());
+            // Se for o botão "mais", adiciona, se não remove
+            if ($(this).hasClass("btn-mais")) {
+                qtde = qtde + 1;
+            } else {
+                // se for maior que zero diminui
+                if (qtde > 0) {
+                    qtde = qtde - 1;
+                }
+            }
+            // Atualiza o valor no campo
+            $(this).prevAll('input[name="qtde"]').first().val(qtde);
+        });
+
+        // Ao alicar no atualizar
+        $(".btn-atualizar").click(function (e) {
+            e.preventDefault();
+            // var qtde
+            var qtde = $(this).closest('td').prev('td').prev('td').find('input[name="qtde"]').val();
+            // Pega a URL atual
+            var url = $(this).attr("href");
+            // quebra a url onde tem /
+            var partes = url.split("/");
+            // Atualiza a qtde (-2 pq tem a / no final que também gera uma pos vazia)
+            partes[partes.length - 2] = qtde;
+            // Transforma o array numa string novamente
+            var url_nova = partes.join('/');
+            // Redireciona para a url nova
+            window.location.href = url_nova;
+        });
+    });
+</script>
 {% endblock %}
