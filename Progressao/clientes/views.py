@@ -56,9 +56,6 @@ class Login(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/login.html'
 
 
-class Cadastro(LoginRequiredMixin, TemplateView):
-    template_name = 'clientes/novaConta.html'
-
 
 
 class CadastroCreate( LoginRequiredMixin, CreateView):

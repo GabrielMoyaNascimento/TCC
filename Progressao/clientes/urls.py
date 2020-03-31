@@ -1,13 +1,14 @@
 from django.urls import path
 # Importa as views que a gente criou 
 from .views import *
+from usuarios.views import UsuarioCreate
 # Tem que ser urlpatterns porque é padrão do Django
 urlpatterns = [
     
     path('', PaginaInicial.as_view(), name="clientes-index"),
     path('clientes/contato/', ContatoView.as_view(), name="clientes-contato"),
     path('clientes/confirmacaoCompra/', ConfirmacaoView.as_view(), name="clientes-confirmacao"),
-    path('clientes/novaConta/', CadastroCreate.as_view(), name="clientes-novaConta"),
+    path('clientes/novaConta/', UsuarioCreate.as_view(), name="clientes-novaConta"),
     path('produto/<int:pk>', ProdutoDetailView.as_view(), name="clientes-paginaProduto"),
     
     # path('clientes/login/', Login.as_view(), name="clientes-login"),
