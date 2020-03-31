@@ -50,61 +50,49 @@
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="4" class="text-center">
+                            <td colspan="6" class="text-center">
                                 Nenhum produto no seu carrinho!
                             </td>
                         </tr>
                         {% endfor %}
                             
-                        <tr class="bottom_button">
+                        <!-- <tr class="bottom_button">
                             <td>
                                 <a class="gray_btn" href="{% url 'clientes-carrinho' %}">Atualizar Carrinho</a>
                             </td>
-                            <td>
-
-                            </td>
-                            <td>
-
-                            </td>
+                            <td colspan="4"></td>
                             <td>
                                 <div class="cupon_text d-flex align-items-center">
                                     <input type="text" placeholder="Cupom">
                                     <a class="primary-btn" href="#">Aplicar desconto</a>
                                 </div>
                             </td>
-                        </tr>
+                        </tr> -->
+                        
                         <tr>
-                            <td>
-
-                            </td>
-                            <td>
-
-                            </td>
+                            <td colspan="4"></td>
                             <td>
                                 <h5>Subtotal</h5>
                             </td>
                             <td>
                                 <h5>R${{ valor }} </h5>
                             </td>
+                            
                         </tr>
-                        <tr class="shipping_area">
-                            <td>
-
+                        <tr>
+                            <td colspan="1"></td>
+                            <td colspan="2" class="text-dark text-right">
+                                
                             </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                <h5>Frete</h5>
-                            </td>
-                            <td>
-                                <div class="shipping_box">
-                                    <h6>&nbsp;</h6>
-                                    <input type="text" placeholder="CEP">
-                                    <a class="gray_btn" href="#">Calcular</a>
-                                </div>
-                                <div class="my-3">    
-                                    <h5>Total</h5>
+                            <td colspan="3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text text-dark">Frete</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="CEP" id="cep">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="btn-cep">Calcular</button>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -115,10 +103,10 @@
                             <td>
 
                             </td>
-                            <td>
+                            <td colspan="2">
 
                             </td>
-                            <td>
+                            <td colspan="2">
                                 <div class="checkout_btn_inner d-flex align-items-center">
                                     <a class="gray_btn" href="{% url 'clientes-index' %}">Continuar comprando</a>
                                     <a class="primary-btn" href="#">Continuar</a>

@@ -37,7 +37,7 @@
                         <p>&nbsp;</p>
                         <div class="product_count">
                             <label for="qty">Quantidade:</label>
-                            <input type="text" name="qty" id="sst" maxlength="12" value="{{c.quantidade}}" title="Quantidade:"
+                            <input type="text" name="qtde" id="qtde" maxlength="12" value="1" title="Quantidade:"
                                 class="input-text qty">
                             <button
                                 class="increase items-count btn-mais" type="button"><i class="lnr lnr-chevron-up"></i></button>
@@ -45,7 +45,8 @@
                                 class="reduced items-count btn-menos" type="button"><i class="lnr lnr-chevron-down"></i></button>
                         </div>
                         <div class="card_area d-flex align-items-center">
-                            <a class="primary-btn" href="{% url 'adicionar-produto' produto.pk 1  %}">Adicionar no Carrinho</a>
+                            <a class="primary-btn" id="btn-adicionar"
+                                href="{% url 'adicionar-produto' produto.pk 1  %}">Adicionar no Carrinho</a>
                         </div>
                     </div>
                 </div>
@@ -83,25 +84,28 @@
             e.preventDefault();
             // Pega a quantidade atual do input que está anterior ao botão clicado porque tem um input pra cada produto
             // Pega a quantidade, passa pra Int e já soma 1
-            var qtde = parseInt($(this).prevAll('input[name="qtde"]').first().val());
+            var qtde = parseInt( $("#qtde").val() );
             // Se for o botão "mais", adiciona, se não remove
-            if ($(this).hasClass("btn-mais")) {
+            if ( $(this).hasClass("btn-mais") ) {
                 qtde = qtde + 1;
             } else {
                 // se for maior que zero diminui
-                if (qtde > 0) {
+                if (qtde > 1) {
                     qtde = qtde - 1;
+                } else {
+                    qtde = 1;
                 }
             }
             // Atualiza o valor no campo
-            $(this).prevAll('input[name="qtde"]').first().val(qtde);
+            $("#qtde").val(qtde);
         });
 
         // Ao alicar no atualizar
-        $(".btn-atualizar").click(function (e) {
+        $("#btn-adicionar").click(function (e) {
+            // Parar o comportamento que seria padrão acontecer
             e.preventDefault();
             // var qtde
-            var qtde = $(this).closest('td').prev('td').prev('td').find('input[name="qtde"]').val();
+            var qtde = $("#qtde").val();
             // Pega a URL atual
             var url = $(this).attr("href");
             // quebra a url onde tem /

@@ -4,12 +4,12 @@ from .views import *
 # Tem que ser urlpatterns porque é padrão do Django
 urlpatterns = [
     
-    path('clientes/index/', PaginaInicial.as_view(), name="clientes-index"),
+    path('', PaginaInicial.as_view(), name="clientes-index"),
     path('clientes/contato/', ContatoView.as_view(), name="clientes-contato"),
     path('clientes/confirmacaoCompra/', ConfirmacaoView.as_view(), name="clientes-confirmacao"),
     path('clientes/login/', Login.as_view(), name="clientes-login"),
     path('clientes/novaConta/', CadastroCreate.as_view(), name="clientes-novaConta"),
-    path('clientes/paginaProduto/<int:pk>', ProdutoDetailView.as_view(), name="clientes-paginaProduto"),
+    path('produto/<int:pk>', ProdutoDetailView.as_view(), name="clientes-paginaProduto"),
     
     
     path('adicionar/produto/<int:id_produto>/<int:quantidade>/', AdicionarProdutoCarrinho.as_view(), name="adicionar-produto"),

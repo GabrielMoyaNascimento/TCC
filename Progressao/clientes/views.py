@@ -145,13 +145,16 @@ class AdicionarProdutoCarrinho(LoginRequiredMixin, TemplateView):
 
     # Método executado para processar a requisição. É executado antes de renderizar o template
     def dispatch(self, *args, **kwargs):
-
+        # Recebe a quantidade da url
+        qtde = int(kwargs['quantidade'])
+        if qtde <= 0:
+            return redirect('clientes-carrinho')
+            
         # Busca os dados do produto que esta na URL
         prod = get_object_or_404(Produto, pk=kwargs['id_produto'])
        #Se o produto ja estiver no carrinho, ele aumenta a quantidade
         carrinho_tem = False
         carrinho = Carrinho.objects.filter(usuario=self.request.user)
-        qtde = int(kwargs['quantidade'])
         for c in carrinho:
             if c.produto == prod:
                 c.quantidade = c.quantidade + qtde
