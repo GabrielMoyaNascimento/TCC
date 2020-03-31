@@ -11,7 +11,7 @@ from django.core.paginator import Paginator
 from cadastros.models import Categoria, Produto, Pessoa
 from .models import Carrinho
 
-class PaginaInicial(LoginRequiredMixin, TemplateView):
+class PaginaInicial(TemplateView):
     template_name = 'clientes/index.html'
 
     def get_context_data(self, *args, **kwargs):
@@ -145,6 +145,11 @@ class AdicionarProdutoCarrinho(LoginRequiredMixin, TemplateView):
 
     # Método executado para processar a requisição. É executado antes de renderizar o template
     def dispatch(self, *args, **kwargs):
+
+        # Verifica se o usuário está logado
+        if not self.request.user.is_authenticated:
+            return redirect('login')
+
         # Recebe a quantidade da url
         qtde = int(kwargs['quantidade'])
         if qtde <= 0:
@@ -181,6 +186,10 @@ class ExcluirProdutoCarrinho(LoginRequiredMixin, TemplateView):
     
     def dispatch(self, *args, **kwargs):
 
+        # Verifica se o usuário está logado
+        if not self.request.user.is_authenticated:
+            return redirect('login')
+
         # Busca o objeto do carrinho que está na URL
         carrinho = get_object_or_404(Carrinho, pk=kwargs['id_carrinho'])
         # Deleta esse carrinho (objeto)
@@ -197,6 +206,10 @@ class AtualizarProdutoCarrinho(LoginRequiredMixin, TemplateView):
     template_name = "clientes/carrinho.html"
     
     def dispatch(self, *args, **kwargs):
+
+        # Verifica se o usuário está logado
+        if not self.request.user.is_authenticated:
+            return redirect('login')
 
         # Busca o objeto do carrinho que está na URL
         carrinho = get_object_or_404(Carrinho, pk=kwargs['id_carrinho'])
