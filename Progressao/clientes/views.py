@@ -10,9 +10,21 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from cadastros.models import Categoria, Produto, Pessoa
 from .models import Carrinho
+from django.contrib.auth.models import User,Group
 
 class PaginaInicial(TemplateView):
     template_name = 'clientes/index.html'
+
+    # def dispatch(self, *args, **kwargs):
+    #     # Verifica se o usuário está logado
+    #     group = self.request.user.groups.values_list('name')
+    #     if group == 'Admin':
+    #         return redirect('cadastrar-index')    
+    #     else:
+    #         return redirect('clientes-index')
+
+    #     if not self.request.user.is_authenticated:
+    #         return redirect('clientes-index')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -41,20 +53,16 @@ class CarrinhoView(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/carrinho.html'
 
 
-class ProdutoView(LoginRequiredMixin, TemplateView):
-    template_name = 'clientes/paginaProduto.html'
+class PagamentoView(LoginRequiredMixin, TemplateView):
+    template_name = 'clientes/pagamento.html'
 
-class ContatoView(LoginRequiredMixin, TemplateView):
+
+class ContatoView( TemplateView):
     template_name = 'clientes/contato.html'
 
 
 class ConfirmacaoView(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/confirmacao.html'
-
-
-class Login(LoginRequiredMixin, TemplateView):
-    template_name = 'clientes/login.html'
-
 
 
 

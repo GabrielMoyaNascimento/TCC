@@ -1,0 +1,104 @@
+{% extends 'clientes/formulario.html' %}
+{% load static %}
+
+{%block conteudo%}
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Checkout/Pagamento</h1> 
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Checkout Area =================-->
+<section class="checkout_area section_gap">
+    <div class="container">
+        <div class="cupon_area">
+            <div class="check_title">
+                <h2>Tem um Cupom?</h2>
+            </div>
+            <input type="text" placeholder="Código do Cupom">
+            <a class="primary-btn" href="#">Aplicar Cupom</a>
+        </div>
+        <div class="billing_details">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Detalhes</h3>
+                    <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" class="form-control" id="first" name="name">
+                            <span class="placeholder" data-placeholder="Nome"></span>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" class="form-control" id="number" name="number">
+                            <span class="placeholder" data-placeholder="Telefone"></span>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" class="form-control" id="email" name="compemailany">
+                            <span class="placeholder" data-placeholder="Email"></span>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" class="form-control" id="add1" name="add1">
+                            <span class="placeholder" data-placeholder="Endereço"></span>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" class="form-control" id="city" name="city">
+                            <span class="placeholder" data-placeholder="Cidade"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="zip" name="zip" placeholder="CEP">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <div class="creat_account">
+                                <h3>Complemento</h3>
+                                <textarea class="form-control" name="message" id="message" rows="1"
+                                placeholder="Informações Adicionais"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4">
+                    <div class="order_box">
+                        <h2>Seu Pedido</h2>
+                        <ul class="list">
+                            <li><a href="#">Produto <span>Total</span></a></li>
+                            <li><a href="#">Fresh Blackberry <span class="middle">x 02</span> <span
+                                        class="last">R$720.00</span></a></li>
+                            <li><a href="#">Fresh Tomatoes <span class="middle">x 02</span> <span
+                                        class="last">R$720.00</span></a></li>
+                            <li><a href="#">Fresh Brocoli <span class="middle">x 02</span> <span
+                                        class="last">R$720.00</span></a></li>
+                        </ul>
+                        <ul class="list list_2">
+                            <li><a href="#">Subtotal <span>R$2160.00</span></a></li>
+                            <li><a href="#">Frete <span>Flat rate: R$50.00</span></a></li>
+                            <li><a href="#">Total <span>R$2210.00</span></a></li>
+                        </ul>
+                        <div class="payment_item active">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option5" name="selector">
+                                <label for="f-option5">Boleto </label>
+                                <img src="{% static 'karma/img/product/boleto.png'%}" alt="">
+                                <div class="check"></div>
+                            </div>
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option6" name="selector">
+                                <label for="f-option6">Cartão de Crédito </label>
+                                <img src="{% static 'karma/img/product/cartoes.png'%}" alt="">
+                                <div class="check"></div>
+                            </div>
+                            <p>Pague com seu cartão de Crédito em até 12x</p>
+                        </div>
+                        <a class="primary-btn" href="#">Finalizar Pagamento</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{%endblock%}

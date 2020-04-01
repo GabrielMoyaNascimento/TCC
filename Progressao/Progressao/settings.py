@@ -136,7 +136,7 @@ STATICFILES_DIRS = [
 
 # Nome da URL em que o usuário será redirecionado
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth
-LOGIN_REDIRECT_URL = 'cadastrar-index'
+LOGIN_REDIRECT_URL = 'clientes-index'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

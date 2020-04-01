@@ -6,12 +6,12 @@ from usuarios.views import UsuarioCreate
 urlpatterns = [
     
     path('', PaginaInicial.as_view(), name="clientes-index"),
-    path('clientes/contato/', ContatoView.as_view(), name="clientes-contato"),
+    path('contato/', ContatoView.as_view(), name="clientes-contato"),
     path('clientes/confirmacaoCompra/', ConfirmacaoView.as_view(), name="clientes-confirmacao"),
-    path('clientes/novaConta/', UsuarioCreate.as_view(), name="clientes-novaConta"),
+    path('novaConta/', UsuarioCreate.as_view(), name="clientes-novaConta"),
     path('produto/<int:pk>', ProdutoDetailView.as_view(), name="clientes-paginaProduto"),
     
-    # path('clientes/login/', Login.as_view(), name="clientes-login"),
+    path('pagamento/', PagamentoView.as_view(), name="clientes-pagamento"),
     
     path('adicionar/produto/<int:id_produto>/<int:quantidade>/', AdicionarProdutoCarrinho.as_view(), name="adicionar-produto"),
     path('atualizar/carrinho/<int:id_carrinho>/<int:quantidade>/', AtualizarProdutoCarrinho.as_view(), name="atualizar-carrinho"),
