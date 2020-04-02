@@ -22,7 +22,6 @@ class Pessoa(models.Model):
 
     nome = models.CharField(max_length=50, verbose_name="Qual seu nome?", help_text="Digite seu nome completo", null=True)
     nascimento = models.DateField(verbose_name='data de nascimento', null=True)
-    # email = models.CharField(max_length=100)
     endereco = models.CharField(max_length=100, null=True)
     numero = models.CharField(max_length=10, verbose_name="Número", null=True)
     cep = models.CharField(max_length=25, null=True)

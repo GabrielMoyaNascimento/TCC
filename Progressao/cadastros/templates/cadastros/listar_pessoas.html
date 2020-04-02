@@ -13,7 +13,6 @@
             <h3>Olá Funcionário,</h3><br>
             {% endif %}
 
-            <a href="{% url 'cadastrar-pessoa' %}" class="btn btn-warning">Adicionar Pessoa</a>
             <table class="table table-striped">
             
                 <tr>
@@ -28,7 +27,6 @@
                     <th>CPF</th>
                     <th>Telefone</th>
                     <th>Cidade</th>
-                    <th>Opções</th>
                 </tr>
             
                 {% for pessoa in object_list %}
@@ -45,10 +43,6 @@
                     <td>{{pessoa.cpf}}</td>
                     <td>{{pessoa.telefone}}</td>
                     <td>{{pessoa.cidade.nome}}</td>
-                    <td>
-                        <a href="{% url 'atualizar-pessoa' pessoa.pk %}" class="btn btn-warning">Editar</a>
-                        <a href="{% url 'deletar-pessoa' pessoa.pk %}" class="btn btn-danger">Excluir</a>
-                    </td>
                 </tr>
             
                 {% empty %}

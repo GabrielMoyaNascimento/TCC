@@ -79,42 +79,6 @@ class CidadeCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
         return context
 
 
-class PessoaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
-    model = Pessoa
-    fields = ['nome', 'nascimento', 'email', 'cidade',
-              'rg', 'cpf', 'endereco', 'cep', 'numero', 'telefone']
-    template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-pessoas')
-    login_url = reverse_lazy('login')
-    group_required = u"Administrador"
-
-
-    def form_valid(self, form):
-        # Define o usuário como usuário logado
-        form.instance.usuario = self.request.user
-
-        url = super().form_valid(form)
-
-    # código a fazer depois de salvar objeto no banco
-        self.object.atributo = 'usuario'
-
-    # Salva o objeto novamente
-        self.object.save()
-
-        return url
-
-    def get_context_data(self, *args, **kwargs):
-        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
-        context = super(PessoaCreate, self).get_context_data(*args, **kwargs)
-
-        # Adicionar coisas ao contexto que serão enviadas para o html
-        context['titulo'] = "Cadastro de nova Pessoa"
-        context['botao'] = "Cadastrar"
-        context['classe'] = "btn-success"
-
-    # Devolve/envia o context para seu comportamento padrão
-        return context
-
 
 class VendaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Venda
