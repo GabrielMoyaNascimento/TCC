@@ -5,13 +5,13 @@ from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User, Group
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import CreateView
 from cadastros.models import Pessoa
+from .forms import UsuarioForm
 
 class UsuarioCreate(CreateView):
-    form_class = UserCreationForm
+    form_class = UsuarioForm
     template_name = "clientes/novaConta.html"
     success_url = reverse_lazy("login")
 
