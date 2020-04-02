@@ -1,0 +1,148 @@
+{% extends 'clientes/formulario.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block conteudo %}
+
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Perfil</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container emp-profile my-3">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+                    alt="" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        Olá, Ana
+                    </h5>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                            aria-controls="home" aria-selected="true">Informações</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                            aria-controls="profile" aria-selected="false">Histórico de Compra</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="primary-btn" name="btnAddMore" value="Editar Perfil" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Nome</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Ana</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>ana@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>RG</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>13.634.514-1</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>CPF</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>093.555.478-06</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Telefone</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>(44)99999-9999</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Endereço</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Rua Amapá</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Número</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>1234</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>CEP</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>87703-360</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Cidade</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Paranavaí-PR</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <table class="table table-striped">
+                        
+                            <tr>
+                                <th>Data da Compra</th>
+                                <th>Desconto</th>
+                                <th>Valor</th>
+                                <th>Parcelas</th>
+                                <th>Forma de Pagamento</th>
+                                <th>Forma de Envio</th>
+                            </tr>
+                        </table>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+
+{%endblock%}
+

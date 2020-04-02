@@ -16,7 +16,6 @@ from django.contrib.auth.models import User,Group
 class PaginaInicial(TemplateView):
     template_name = 'clientes/index.html'
     
-
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 
@@ -44,6 +43,9 @@ class PaginaInicial(TemplateView):
 class CarrinhoView(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/carrinho.html'
 
+
+class PerfilView(LoginRequiredMixin,TemplateView):
+    template_name = 'clientes/perfil.html'
 
 class PagamentoView(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/pagamento.html'
