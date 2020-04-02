@@ -11,6 +11,9 @@ urlpatterns = [
     path('novaConta/', UsuarioCreate.as_view(), name="clientes-novaConta"),
     path('produto/<int:pk>', ProdutoDetailView.as_view(), name="clientes-paginaProduto"),
     
+    #Verificar Usuário para redirecionar para a pagina referente a seu grupo
+    path('verificar/', Verificar.as_view(), name="verificar"),
+
     path('pagamento/', PagamentoView.as_view(), name="clientes-pagamento"),
     
     path('adicionar/produto/<int:id_produto>/<int:quantidade>/', AdicionarProdutoCarrinho.as_view(), name="adicionar-produto"),

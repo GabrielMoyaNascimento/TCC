@@ -12,22 +12,17 @@ from cadastros.models import Categoria, Produto, Pessoa
 from .models import Carrinho
 from django.contrib.auth.models import User,Group
 
+
 class PaginaInicial(TemplateView):
     template_name = 'clientes/index.html'
 
-    # def dispatch(self, *args, **kwargs):
-    #     # Verifica se o usuário está logado
-    #     group = self.request.user.groups.values_list('name')
-    #     if group == 'Admin':
-    #         return redirect('cadastrar-index')    
-    #     else:
-    #         return redirect('clientes-index')
 
-    #     if not self.request.user.is_authenticated:
-    #         return redirect('clientes-index')
+        # if not self.request.user.is_authenticated:
+        #     return redirect('clientes-index')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+
 
         # Filtra a categoria
         cat = self.request.GET.get('categoria')  # Recebe a página atual
@@ -65,7 +60,18 @@ class ConfirmacaoView(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/confirmacao.html'
 
 
-
+class Verificar(TemplateView):
+    
+    def dispatch(self, *args, **kwargs):
+        # Verifica se o usuário está logado
+        user = self.request.user
+        if user.groups.filter(name='Administrador'):
+            return redirect('cadastrar-index')    
+        elif not self.request.user.is_authenticated:
+            return redirect('clientes-index')
+        else:
+            return redirect('clientes-index')
+            
 class CadastroCreate( LoginRequiredMixin, CreateView):
     model = Pessoa
     fields = ['nome', 'nascimento', 'email', 'cidade',
