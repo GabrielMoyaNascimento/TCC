@@ -13,9 +13,9 @@ from .models import *
 # Create View
 
 
-class PaginaInicial(LoginRequiredMixin, TemplateView):
+class PaginaInicial(GroupRequiredMixin,LoginRequiredMixin, TemplateView):
     template_name = 'cadastros/index.html'
-
+    group_required = u"Administrador"
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
        
@@ -36,13 +36,13 @@ class PaginaInicial(LoginRequiredMixin, TemplateView):
         context['categorias'] = Categoria.objects.all()
         return context
 
-class EstadoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
+class EstadoCreate(LoginRequiredMixin, CreateView):
     model = Estado
     fields = ['sigla', 'nome']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-estados')
     login_url = reverse_lazy('login')
-    group_required = u"Administrador"
+    
 
     def get_context_data(self, *args, **kwargs):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso

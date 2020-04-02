@@ -15,10 +15,7 @@ from django.contrib.auth.models import User,Group
 
 class PaginaInicial(TemplateView):
     template_name = 'clientes/index.html'
-
-
-        # if not self.request.user.is_authenticated:
-        #     return redirect('clientes-index')
+    
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -71,7 +68,7 @@ class Verificar(TemplateView):
             return redirect('clientes-index')
         else:
             return redirect('clientes-index')
-            
+
 class CadastroCreate( LoginRequiredMixin, CreateView):
     model = Pessoa
     fields = ['nome', 'nascimento', 'email', 'cidade',
