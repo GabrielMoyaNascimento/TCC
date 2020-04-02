@@ -1,20 +1,17 @@
 from django.urls import path
 # Importa as views que a gente criou 
 from .views import *
-from usuarios.views import UsuarioCreate
 # Tem que ser urlpatterns porque é padrão do Django
 urlpatterns = [
     
     path('', PaginaInicial.as_view(), name="clientes-index"),
     path('contato/', ContatoView.as_view(), name="clientes-contato"),
     path('clientes/confirmacaoCompra/', ConfirmacaoView.as_view(), name="clientes-confirmacao"),
-    path('novaConta/', UsuarioCreate.as_view(), name="clientes-novaConta"),
     path('produto/<int:pk>', ProdutoDetailView.as_view(), name="clientes-paginaProduto"),
     
     #Verificar Usuário para redirecionar para a pagina referente a seu grupo
     path('verificar/', Verificar.as_view(), name="verificar"),
 
-    path('perfil/', PerfilView.as_view(), name="clientes-perfil"),
     path('pagamento/', PagamentoView.as_view(), name="clientes-pagamento"),
     
     path('adicionar/produto/<int:id_produto>/<int:quantidade>/', AdicionarProdutoCarrinho.as_view(), name="adicionar-produto"),

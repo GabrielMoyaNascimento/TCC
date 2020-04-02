@@ -44,9 +44,6 @@ class CarrinhoView(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/carrinho.html'
 
 
-class PerfilView(LoginRequiredMixin,TemplateView):
-    template_name = 'clientes/perfil.html'
-
 class PagamentoView(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/pagamento.html'
 
@@ -66,86 +63,44 @@ class Verificar(TemplateView):
         user = self.request.user
         if user.groups.filter(name='Administrador'):
             return redirect('cadastrar-index')    
-        elif not self.request.user.is_authenticated:
+        elif user.groups.filter(name='Clientes'):
             return redirect('clientes-index')
         else:
-            return redirect('clientes-index')
+            return redirect('clientes-login')
 
-class CadastroCreate( LoginRequiredMixin, CreateView):
-    model = Pessoa
-    fields = ['nome', 'nascimento', 'email', 'cidade',
-              'rg', 'cpf', 'endereco', 'cep', 'numero', 'telefone']
-    template_name = 'clientes/novaConta.html'
-    success_url = reverse_lazy('clientes-novaConta')
-    login_url = reverse_lazy('login')
+# class CadastroCreate( LoginRequiredMixin, CreateView):
+#     model = Pessoa
+#     fields = ['nome', 'nascimento', 'email', 'cidade',
+#               'rg', 'cpf', 'endereco', 'cep', 'numero', 'telefone']
+#     template_name = 'clientes/novaConta.html'
+#     success_url = reverse_lazy('clientes-novaConta')
+#     login_url = reverse_lazy('login')
     
-    def form_valid(self, form):
-        # Define o usuário como usuário logado
-        form.instance.usuario = self.request.user
+#     def form_valid(self, form):
+#         # Define o usuário como usuário logado
+#         form.instance.usuario = self.request.user
 
-        url = super().form_valid(form)
+#         url = super().form_valid(form)
 
-    # código a fazer depois de salvar objeto no banco
-        self.object.atributo = 'usuario'
+#     # código a fazer depois de salvar objeto no banco
+#         self.object.atributo = 'usuario'
 
-    # Salva o objeto novamente
-        self.object.save()
+#     # Salva o objeto novamente
+#         self.object.save()
 
-        return url
+#         return url
 
-    def get_context_data(self, *args, **kwargs):
-        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
-        context = super(CadastroCreate, self).get_context_data(*args, **kwargs)
+#     def get_context_data(self, *args, **kwargs):
+#         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+#         context = super(CadastroCreate, self).get_context_data(*args, **kwargs)
 
-        # Adicionar coisas ao contexto que serão enviadas para o html
-        context['titulo'] = "Cadastro de nova Pessoa"
-        context['botao'] = "Cadastrar"
-        context['classe'] = "btn-success"
+#         # Adicionar coisas ao contexto que serão enviadas para o html
+#         context['titulo'] = "Cadastro de nova Pessoa"
+#         context['botao'] = "Cadastrar"
+#         context['classe'] = "btn-success"
 
-    # Devolve/envia o context para seu comportamento padrão
-        return context
-
-
-class CadastroUpdate(LoginRequiredMixin, UpdateView):
-    model = Pessoa
-    fields = ['nome', 'nascimento', 'email', 'cidade',
-              'rg', 'cpf', 'endereco', 'cep', 'numero', 'telefone']
-    template_name = 'clientes/novaConta.html'
-    success_url = reverse_lazy('listar-pessoas')
-    login_url = reverse_lazy('login')
-
-    def get_context_data(self, *args, **kwargs):
-        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
-        context = super(CadastroUpdate, self).get_context_data(*args, **kwargs)
-
-        # Adicionar coisas ao contexto que serão enviadas para o html
-        context['titulo'] = "Update de Pessoa"
-        context['botao'] = "Salvar"
-        context['classe'] = "btn-success"
-
-    # Devolve/envia o context para seu comportamento padrão
-        return context
-
-    def form_valid(self, form):
-        # Define o usuário como usuário logado
-        form.instance.usuario = self.request.user
-
-        url = super().form_valid(form)
-
-    # código a fazer depois de salvar objeto no banco
-        self.object.atributo = 'usuario'
-
-    # Salva o objeto novamente
-        self.object.save()
-
-        return url
-
-	# Altera a query para buscar o objeto do usuário logado
-
-    def get_object(self, queryset=None):
-       self.object = get_object_or_404(
-           Pessoa, pk=self.kwargs['pk'], usuario=self.request.user)
-       return self.object
+#     # Devolve/envia o context para seu comportamento padrão
+#         return context
 
 
 # View para adicionar produtos no Carrinho

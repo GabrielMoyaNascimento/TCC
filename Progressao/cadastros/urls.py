@@ -8,7 +8,6 @@ urlpatterns = [
     path('cadastrar/index/', PaginaInicial.as_view(), name="cadastrar-index"),
     path('cadastrar/estado/', EstadoCreate.as_view(), name="cadastrar-estado"),
     path('cadastrar/cidade/', CidadeCreate.as_view(), name="cadastrar-cidade"),
-    path('cadastrar/pessoa/', PessoaCreate.as_view(), name="cadastrar-pessoa"),
     path('cadastrar/produto/', ProdutoCreate.as_view(), name="cadastrar-produto"),
     path('cadastrar/categoria/', CategoriaCreate.as_view(), name="cadastrar-categoria"),
     path('cadastrar/formaPagamento/', FormaPagamentoCreate.as_view(), name="cadastrar-formaPagamento"),
@@ -18,7 +17,6 @@ urlpatterns = [
     #Update View
     path('atualizar/estado/<int:pk>/',EstadoUpdate.as_view(), name="atualizar-estado"),
     path('atualizar/cidade/<int:pk>/',CidadeUpdate.as_view(), name="atualizar-cidade"),
-    path('atualizar/pessoa/<int:pk>/',PessoaUpdate.as_view(), name="atualizar-pessoa"),
     path('atualizar/produto/<int:pk>/',ProdutoUpdate.as_view(), name="atualizar-produto"),
     path('atualizar/categoria/<int:pk>/',CategoriaUpdate.as_view(), name="atualizar-categoria"),
     path('atualizar/formaPagamento/<int:pk>/',FormaPagamentoUpdate.as_view(), name="atualizar-formaPagamento"),
@@ -28,7 +26,6 @@ urlpatterns = [
     #Delete View
     path('excluir/estado/<int:pk>/', EstadoDelete.as_view(), name="deletar-estado"),
     path('excluir/cidade/<int:pk>/', CidadeDelete.as_view(), name="deletar-cidade"),
-    path('excluir/pessoa/<int:pk>/', PessoaDelete.as_view(), name="deletar-pessoa"),
     path('excluir/produto/<int:pk>/', ProdutoDelete.as_view(), name="deletar-produto"),
     path('excluir/categoria/<int:pk>/', CategoriaDelete.as_view(), name="deletar-categoria"),
     path('excluir/formaPagamento/<int:pk>/', FormaPagamentoDelete.as_view(), name="deletar-formaPagamento"),
