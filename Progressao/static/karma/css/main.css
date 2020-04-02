@@ -3864,9 +3864,9 @@ label {
     color: #cccccc;
     border: none; }
   .cat_page .pagination li:hover a, .cat_page .pagination li.active a {
-    background: #ffba00;
+    background: #d174b5;
     color: #fff;
-    border-color: #ffba00; }
+    border-color: #d174b5; }
 
 .most_p_withoutbox {
   padding-bottom: 120px; }
@@ -4130,8 +4130,8 @@ label {
         top: 14px;
         @icnlude transition; }
         .review_item .media .media-body .reply_btn:hover {
-          background: #ffba00;
-          border-color: #ffba00;
+          background: #d174b5;
+          border-color: #d174b5;
           color: #fff; }
   .review_item p {
     padding-top: 10px;
@@ -4314,7 +4314,7 @@ label {
         height: 10px;
         width: 10px;
         border-radius: 50%;
-        background: #ffba00;
+        background: #d174b5;
         display: inline-block;
         position: absolute;
         right: 3px;
@@ -4505,9 +4505,9 @@ label {
   font-weight: 500;
   border-radius: 3px; }
   .tp_btn:hover {
-    background: #ffba00;
+    background: #d174b5;
     color: #fff;
-    border-color: #ffba00; }
+    border-color: #d174b5; }
 
 .billing_details h3 {
   font-size: 18px;
@@ -4548,7 +4548,7 @@ label {
   .billing_details .contact_form .form-group .creat_account #f-option3 {
     margin-right: 5px; }
   .billing_details .contact_form .form-group .creat_account a {
-    color: #ffba00; }
+    color: #d174b5; }
 
 .order_box {
   background: #e5ecee;
@@ -4623,8 +4623,8 @@ label {
     background: #fff;
     padding: 20px; }
   .order_box .payment_item.active h4:before {
-    background: #ffba00;
-    border-color: #ffba00; }
+    background: #d174b5;
+    border-color: #d174b5; }
   .order_box .creat_account {
     margin-bottom: 15px; }
     .order_box .creat_account label {
@@ -4899,8 +4899,8 @@ label {
   -webkit-transition: background 0.25s linear; }
 
 .radion_btn input[type=radio]:checked ~ .check {
-  border: 1px solid #ffba00;
-  background: #ffba00; }
+  border: 1px solid #d174b5;
+  background: #d174b5; }
 
 .radion_btn input[type=radio]:checked ~ .check::before {
   background: #fff; }
@@ -5108,7 +5108,7 @@ label {
       .blog_info .post_tag a:hover {
         color: #777777; }
       .blog_info .post_tag a.active {
-        color: #ffba00; }
+        color: #d174b5; }
   .blog_info .blog_meta li a {
     font: 300 14px/20px "Roboto", sans-serif;
     color: #777777;
@@ -5123,7 +5123,7 @@ label {
       line-height: 20px;
       vertical-align: middle; }
     .blog_info .blog_meta li a:hover {
-      color: #ffba00; }
+      color: #d174b5; }
 
 .blog_post img {
   max-width: 100%; }
@@ -5165,7 +5165,7 @@ label {
   .blog_right_sidebar .widget_title {
     font-size: 18px;
     line-height: 25px;
-    background: #ffba00;
+    background: #d174b5;
     text-align: center;
     color: #fff;
     padding: 8px 0px;
@@ -5180,7 +5180,7 @@ label {
     padding-left: 20px;
     border-radius: 45px;
     z-index: 0;
-    background: #ffba00; }
+    background: #d174b5; }
     .blog_right_sidebar .search_widget .input-group .form-control.placeholder {
       color: #fff; }
     .blog_right_sidebar .search_widget .input-group .form-control:-moz-placeholder {
@@ -5234,7 +5234,7 @@ label {
       margin-bottom: 4px;
       transition: all 0.3s linear; }
       .blog_right_sidebar .popular_post_widget .post_item .media-body h3:hover {
-        color: #ffba00; }
+        color: #d174b5; }
     .blog_right_sidebar .popular_post_widget .post_item .media-body p {
       font-size: 12px;
       line-height: 21px;
@@ -5254,9 +5254,9 @@ label {
     .blog_right_sidebar .post_category_widget .cat-list li + li {
       padding-top: 15px; }
     .blog_right_sidebar .post_category_widget .cat-list li:hover {
-      border-color: #ffba00; }
+      border-color: #d174b5; }
       .blog_right_sidebar .post_category_widget .cat-list li:hover a {
-        color: #ffba00; }
+        color: #d174b5; }
   .blog_right_sidebar .newsletter_widget {
     text-align: center; }
     .blog_right_sidebar .newsletter_widget .form-group {
@@ -5291,7 +5291,7 @@ label {
         outline: none;
         box-shadow: none; }
     .blog_right_sidebar .newsletter_widget .bbtns {
-      background: #ffba00;
+      background: #d174b5;
       color: #fff;
       font-size: 12px;
       line-height: 38px;
@@ -5313,7 +5313,7 @@ label {
       color: #222222;
       font-size: 12px; }
       .blog_right_sidebar .tag_cloud_widget ul li a:hover {
-        background: #ffba00;
+        background: #d174b5;
         color: #fff; }
   .blog_right_sidebar .br {
     width: 100%;
@@ -5579,7 +5579,7 @@ label {
     top: 0;
     font-size: 20px;
     line-height: 24px;
-    color: #ffba00;
+    color:#d174b5;
     font-weight: 600; }
   .contact_info .info_item h6 {
     font-size: 16px;
@@ -5621,7 +5621,7 @@ label {
     .contact_form .form-group textarea.form-control {
       height: 134px; }
 .contact_form .primary-btn {
-  background: #ffba00;
+  background: #d174b5;
   color: #fff;
   margin-top: 20px;
   border: none;
@@ -5654,7 +5654,7 @@ label {
     .modal-message .modal-dialog .modal-content .modal-header h2 {
       display: block;
       text-align: center;
-      color: #ffba00;
+      color: #d174b5;
       padding-bottom: 10px;
       font-family: "Roboto", sans-serif; }
     .modal-message .modal-dialog .modal-content .modal-header p {
@@ -5676,7 +5676,7 @@ label {
 
 .copy-right-text i,
 .copy-right-text a {
-  color: #ffba00; }
+  color: #d174b5; }
 
 .instafeed {
   margin: -5px; }
@@ -5693,7 +5693,7 @@ label {
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s; }
   .footer-social a:hover i {
-    color: #ffba00; }
+    color: #d174b5; }
 .footer-social i {
   color: #cccccc;
   -webkit-transition: all 0.3s ease 0s;
@@ -5789,6 +5789,6 @@ label {
       padding-top: 40px; } }
   .footer-text a,
   .footer-text i {
-    color: #ffba00; }
+    color: #d174b5; }
 
 /*# sourceMappingURL=main.css.map */
