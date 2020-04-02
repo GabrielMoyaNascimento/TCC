@@ -90,3 +90,6 @@ class PessoaUpdate(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
        self.object = get_object_or_404(Pessoa, usuario=self.request.user)
        return self.object
+
+
+

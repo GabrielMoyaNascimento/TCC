@@ -13,6 +13,7 @@ urlpatterns = [
         success_url=reverse_lazy('index')
     ), name="alterar-senha"),
 
+
     path('registrar/', UsuarioCreate.as_view(), name="clientes-novaConta"),
     path('perfil/', PerfilView.as_view(), name="clientes-perfil"),
     path('alterar/perfil/', PessoaUpdate.as_view(), name="clientes-alterar-perfil"),
