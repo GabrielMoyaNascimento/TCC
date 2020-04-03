@@ -3,6 +3,7 @@
 
 
 {%block conteudo%}
+
 <section class="banner-area organic-breadcrumb">
     <div class="container">
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
@@ -12,6 +13,29 @@
         </div>
     </div>
 </section>
+{% if request.user.is_authenticated %}
+<div class="row">
+    <div class="col-md">
+        <meta http-equiv="refresh" content="5; url={% url 'clientes-index' %}">
+
+        <div class="text-center">
+
+            <h3 class="text-warning">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                Você já está autenticado e não é possivel acessar essa página.
+            </h3>
+
+            <img src="{% static 'img/loading.gif' %}" alt="" class="img-fluid">
+
+            <h5 class="text-dark">
+                Redirecionando para a página inicial em 5 segundos...
+            </h5>
+        </div>
+    </div>
+</div>
+
+
+{% else %}
 <section class="login_box_area section_gap">
     <div class="container">
         <div class="row">
@@ -39,15 +63,9 @@
                             <input type="password" class="form-control" id="password" name="password" placeholder="Senha"
                                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Senha'">
                         </div>
-                        <!-- <div class="col-md-12 form-group">
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option2" name="selector">
-                                <label for="f-option2">Manter Conectado</label>
-                            </div>
-                        </div> -->
                         <div class="col-md-12 form-group">
                             <button type="submit" value="submit" class="primary-btn">Entrar</button>
-                            <a href="#">Esqueceu a senha?</a>
+                            <a href="{% url 'password_reset' %}">Esqueceu a senha?</a>
                         </div>
                     </form>
                 </div>
@@ -55,5 +73,5 @@
         </div>
     </div>
 </section>
-
+{%endif%}
 {% endblock %}
