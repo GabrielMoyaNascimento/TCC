@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
-from cadastros.models import Categoria, Produto, Pessoa, Venda
+from cadastros.models import Categoria, Produto, Pessoa, Venda, ProdutoVenda
 from .models import Carrinho
 from django.contrib.auth.models import User,Group
 
@@ -221,7 +221,7 @@ class VendaCreate(LoginRequiredMixin, CreateView):
             valorTotal = valorTotal + subtotal
 
             # Cria um objeto no ItemsVenda no banco de dados para saber os produtos que foram vendidos
-            ItemsVenda.objects.create(
+            ProdutoVenda.objects.create(
                 preco=subtotal,
                 qtde=Carrinho.quantidade,
                 produto=Carrinho.produto,
@@ -230,7 +230,7 @@ class VendaCreate(LoginRequiredMixin, CreateView):
 
             # Da baixa no estoque no produto
             ProdutoCarrinho.produto.estoque = Carrinho.produto.estoque - \
-               ItemsVenda.qtde
+               ProdutoVenda.qtde
             # Atualiza o produto no banco de dados
             ProdutosCarrinho.produto.save()
 

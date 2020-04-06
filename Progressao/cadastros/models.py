@@ -65,13 +65,30 @@ class FormaEnvio(models.Model):
 
 
 class Venda(models.Model):
+
+    DESCONTO_CHOICES = (
+        (u"00%", u'Venda sem desconto'),
+        (u'05%', u'05%'),
+        (u'10%', u'10%'),
+        (u'15%', u'15%'),
+        (u'20%', u'20%'),
+        (u'25%', u'25%'),
+        (u'35%', u'35%'),
+        (u'40%', u'40%'),
+        (u'45%', u'45%'),
+        (u'50%', u'50%'),
+        (u'60%', u'60%'),
+        (u'70%', u'70%'),
+        (u'75%', u'75%'),
+    )
+
     data_da_venda = models.DateTimeField(auto_now=True)
-    desconto = models.DecimalField(max_digits=50, decimal_places=2)
-    valor = models.DecimalField(max_digits=50, decimal_places=2)
+    desconto = models.CharField(max_length=4, null=True, blank=True, choices=DESCONTO_CHOICES)
+    valor = models.DecimalField(max_digits=50, decimal_places=2,null=True, blank=True)
     parcelas = models.IntegerField()
-    forma_pagamento = models.ForeignKey(FormaPagamento, on_delete=models.PROTECT)
-    forma_envio = models.ForeignKey(FormaEnvio, on_delete=models.PROTECT)
-    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
+    forma_pagamento = models.ForeignKey(FormaPagamento, on_delete=models.PROTECT,null=True, blank=True)
+    forma_envio = models.ForeignKey(FormaEnvio, on_delete=models.PROTECT,null=True, blank=True)
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT,)
 
     def __str__(self):
         return self.usuario + " - " + self.usuario.nome,
