@@ -126,11 +126,11 @@ USE_TZ = True
 # Configurações de envio de email
 # https://docs.djangoproject.com/en/2.2/topics/email/
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'moyasartesanatos2020@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'moyasartesanatos2020@gmail.com'
-DEFAULT_FROM_EMAIL = 'moyasartesanatos2020@gmail.com'
-EMAIL_HOST_PASSWORD = 'moyas2020'
+EMAIL_HOST_USER = 'moyasartesanatospvai@gmail.com'
+DEFAULT_FROM_EMAIL = 'moyasartesanatospvai@gmail.com'
+EMAIL_HOST_PASSWORD = 'Moyas2020'
 EMAIL_USE_TLS = True
 
 # Static files (CSS, JavaScript, Images)

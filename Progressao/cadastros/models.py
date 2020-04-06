@@ -69,13 +69,12 @@ class Venda(models.Model):
     desconto = models.DecimalField(max_digits=50, decimal_places=2)
     valor = models.DecimalField(max_digits=50, decimal_places=2)
     parcelas = models.IntegerField()
-    # pessoa = models.ForeignKey(Pessoa, on_delete=models.PROTECT)
     forma_pagamento = models.ForeignKey(FormaPagamento, on_delete=models.PROTECT)
     forma_envio = models.ForeignKey(FormaEnvio, on_delete=models.PROTECT)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.pessoa + " - " + self.pessoa.nome,
+        return self.usuario + " - " + self.usuario.nome,
         self.forma_pagamento + " - " + self.forma_pagamento.nome,
         self.forma_envio + " - " + self.forma_envio.nome
 

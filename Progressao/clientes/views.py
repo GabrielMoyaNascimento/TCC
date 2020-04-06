@@ -186,3 +186,13 @@ class ProdutoDetailView(DetailView):
     template_name = "clientes/paginaProduto.html"
     model = Produto
     
+class CarrinhoDetailView(DetailView):
+    template_name = "clientes/pagamento.html"
+    model = Carrinho
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        #Pegando o carrinho do Usuário Logado
+        carrinho = Carrinho.objects.filter(usuario=self.request.user)
+        # Listar tudo do carrinho desse usuário
+        context["carrinho"] = carrinho
