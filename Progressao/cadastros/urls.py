@@ -1,6 +1,7 @@
 from django.urls import path
 # Importa as views que a gente criou 
 from .views import *
+from clientes.views import VendaCreate
 # Tem que ser urlpatterns porque é padrão do Django
 urlpatterns = [
     
@@ -21,7 +22,7 @@ urlpatterns = [
     path('atualizar/categoria/<int:pk>/',CategoriaUpdate.as_view(), name="atualizar-categoria"),
     path('atualizar/formaPagamento/<int:pk>/',FormaPagamentoUpdate.as_view(), name="atualizar-formaPagamento"),
     path('atualizar/formaEnvio/<int:pk>/',FormaEnvioUpdate.as_view(), name="atualizar-formaEnvio"),
-    path('atualizar/venda/<int:pk>/',VendaUpdate.as_view(), name="atualizar-venda"),
+    # path('atualizar/venda/<int:pk>/',VendaUpdate.as_view(), name="atualizar-venda"),
 
     #Delete View
     path('excluir/estado/<int:pk>/', EstadoDelete.as_view(), name="deletar-estado"),
@@ -30,7 +31,7 @@ urlpatterns = [
     path('excluir/categoria/<int:pk>/', CategoriaDelete.as_view(), name="deletar-categoria"),
     path('excluir/formaPagamento/<int:pk>/', FormaPagamentoDelete.as_view(), name="deletar-formaPagamento"),
     path('excluir/formaEnvio/<int:pk>/', FormaEnvioDelete.as_view(), name="deletar-formaEnvio"),
-    path('excluir/venda/<int:pk>/', VendaDelete.as_view(), name="deletar-venda"),
+    # path('excluir/venda/<int:pk>/', VendaDelete.as_view(), name="deletar-venda"),
     
     #List View
     path('listar/estados/', EstadoList.as_view(), name="listar-estados"),

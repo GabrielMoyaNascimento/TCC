@@ -65,7 +65,7 @@ class FormaEnvio(models.Model):
 
 
 class Venda(models.Model):
-    data_da_venda = models.DateField(verbose_name='data da venda')
+    data_da_venda = models.DateTimeField(auto_now=True)
     desconto = models.DecimalField(max_digits=50, decimal_places=2)
     valor = models.DecimalField(max_digits=50, decimal_places=2)
     parcelas = models.IntegerField()
@@ -93,12 +93,10 @@ class Produto(models.Model):
 
 
 class ProdutoVenda(models.Model):
-    quantidade = models.IntegerField()
-    valor_envio = models.DecimalField(max_digits=50, decimal_places=2)
-    valor_total = models.DecimalField(max_digits=50, decimal_places=2)
-    venda = models.ForeignKey(Venda, on_delete=models.PROTECT)
+    preco = models.DecimalField(max_digits=8, decimal_places=2)
+    qtde = models.IntegerField()
     produto = models.ForeignKey(Produto, on_delete=models.PROTECT)
+    venda = models.ForeignKey(Venda, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.produto + " - " + self.produto.valor,
-        self.venda + " - " + self.venda.forma_pagamento
+        return "[Venda ID: " + str(self.venda.pk) + "] " + self.produto.nome + " x " + str(self.qtde) + " = " + str(self.preco)

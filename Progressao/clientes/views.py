@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
-from cadastros.models import Categoria, Produto, Pessoa
+from cadastros.models import Categoria, Produto, Pessoa, Venda
 from .models import Carrinho
 from django.contrib.auth.models import User,Group
 
@@ -182,17 +182,83 @@ class CarrinhoList(LoginRequiredMixin, ListView):
 
         return context
 
+#View para lista detalhada de apenas um produto
 class ProdutoDetailView(DetailView):
     template_name = "clientes/paginaProduto.html"
     model = Produto
-    
-class CarrinhoDetailView(DetailView):
-    template_name = "clientes/pagamento.html"
-    model = Carrinho
+
+
+#Criando a venda
+class VendaCreate(LoginRequiredMixin, CreateView):
+    model = Venda
+    fields = ['valor', 'desconto', 'parcelas', 'pessoa', 'forma_pagamento']
+    template_name = 'clientes/pagamento.html'
+    login_url = reverse_lazy('login')
+
+    def form_valid(self, form):
+        # Define o usuário como usuário logado
+        form.instance.usuario = self.request.user
+
+        url = super().form_valid(form)
+
+        # Executa o form_valid padrão para validar e salvar no banco de dados
+        redirect_url = super(VendaCreate, self).form_valid(form)
+
+        # Cria uma variável pra essa venda
+        valorTotal = 0
+
+        """ Agora temos a venda no banco, vamos pegar os produtos do carrinho e salvar nessa venda """
+        # buscar todos os objetos da classe ItensCarrinho no banco
+        ProdutosCarrinho = Carrinho.objects.all()
+
+ 
+        # Para cada produto no carrinho, salva no ItemsVenda (foreach)
+        for Carrinho in ProdutosCarrinho:
+
+            # Calcula o subtotal = quantidade x valor do produto
+            subtotal = Carrinho.produto.valorVenda * Carrinho.quantidade
+            # Atualiza o valor total da venda
+            valorTotal = valorTotal + subtotal
+
+            # Cria um objeto no ItemsVenda no banco de dados para saber os produtos que foram vendidos
+            ItemsVenda.objects.create(
+                preco=subtotal,
+                qtde=Carrinho.quantidade,
+                produto=Carrinho.produto,
+                venda=self.object
+            )
+
+            # Da baixa no estoque no produto
+            ProdutoCarrinho.produto.estoque = Carrinho.produto.estoque - \
+               ItemsVenda.qtde
+            # Atualiza o produto no banco de dados
+            ProdutosCarrinho.produto.save()
+
+            # Deleta o item do carrinho
+            ProdutoCarrinho.delete()
+
+        # Atualiza o objeto dessa venda com o valor total
+        # Primeiro tira a % do desconto e transforma ele para inteiro e depois faz a conta
+        desconto = valorTotal * \
+            int(self.object.desconto.replace("%", "")) / 100
+        # Define o valor bruto (sem desconto)
+        self.object.valor_bruto = valorTotal
+        # Calcula o valor com desconto
+        self.object.valor_total = self.object.valor_bruto - desconto
+        # Salva a venda
+        self.object.save()
+
+        # Fim do form_valid
+        return redirect_url
 
     def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        #Pegando o carrinho do Usuário Logado
-        carrinho = Carrinho.objects.filter(usuario=self.request.user)
-        # Listar tudo do carrinho desse usuário
-        context["carrinho"] = carrinho
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super(VendaCreate, self).get_context_data(*args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Cadastro de nova Venda"
+        context['botao'] = "Cadastrar"
+        context['classe'] = "btn-success"
+
+    # Devolve/envia o context para seu comportamento padrão
+        return context

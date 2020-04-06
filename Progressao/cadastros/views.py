@@ -80,40 +80,7 @@ class CidadeCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
 
 
-class VendaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
-    model = Venda
-    fields = ['data_da_venda', 'valor', 'desconto',
-              'parcelas', 'pessoa', 'forma_pagamento']
-    template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-vendas')
-    login_url = reverse_lazy('login')
-    group_required = u"Administrador"
 
-    def form_valid(self, form):
-        # Define o usuário como usuário logado
-        form.instance.usuario = self.request.user
-
-        url = super().form_valid(form)
-
-    # código a fazer depois de salvar objeto no banco
-        self.object.atributo = 'usuario'
-
-    # Salva o objeto novamente
-        self.object.save()
-
-        return url
-
-    def get_context_data(self, *args, **kwargs):
-        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
-        context = super(VendaCreate, self).get_context_data(*args, **kwargs)
-
-        # Adicionar coisas ao contexto que serão enviadas para o html
-        context['titulo'] = "Cadastro de nova Venda"
-        context['botao'] = "Cadastrar"
-        context['classe'] = "btn-success"
-
-    # Devolve/envia o context para seu comportamento padrão
-        return context
 
 
 class ProdutoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
@@ -249,49 +216,6 @@ class CidadeUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-class VendaUpdate(LoginRequiredMixin, UpdateView):
-    model = Venda
-    fields = ['data_da_venda', 'valor', 'desconto',
-              'parcelas', 'pessoa', 'forma_pagamento']
-    template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-vendas')
-    login_url = reverse_lazy('login')
-
-    def get_context_data(self, *args, **kwargs):
-        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
-        context = super(VendaUpdate, self).get_context_data(*args, **kwargs)
-
-        # Adicionar coisas ao contexto que serão enviadas para o html
-        context['titulo'] = "Update de Venda"
-        context['botao'] = "Salvar"
-        context['classe'] = "btn-success"
-
-    # Devolve/envia o context para seu comportamento padrão
-        return context
-
-	
-
-    def form_valid(self, form):
-        # Define o usuário como usuário logado
-        form.instance.usuario = self.request.user
-
-        url = super().form_valid(form)
-
-    # código a fazer depois de salvar objeto no banco
-        self.object.atributo = 'usuario'
-
-    # Salva o objeto novamente
-        self.object.save()
-
-        return url
-	
-	# Altera a query para buscar o objeto do usuário logado
-
-
-    def get_object(self, queryset=None):
-       self.object = get_object_or_404(Pessoa, pk=self.kwargs['pk'], usuario=self.request.user)
-       return self.object
-
 
 class ProdutoUpdate(LoginRequiredMixin, UpdateView):
     model = Produto
@@ -399,31 +323,6 @@ class CidadeDelete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
 
 
-class VendaDelete(LoginRequiredMixin, DeleteView):
-    model = Venda
-    template_name = 'cadastros/formDelete.html'
-    success_url = reverse_lazy('listar-vendas')
-
-    def form_valid(self, form):
-        # Define o usuário como usuário logado
-        form.instance.usuario = self.request.user
-
-        url = super().form_valid(form)
-
-    # código a fazer depois de salvar objeto no banco
-        self.object.atributo = 'usuario'
-
-    # Salva o objeto novamente
-        self.object.save()
-
-        return url
-
-	# Altera a query para buscar o objeto do usuário logado
-
-
-    def get_object(self, queryset=None):
-       self.object = get_object_or_404(Venda, pk=self.kwargs['pk'], usuario=self.request.user)
-       return self.object
 
 
 class ProdutoDelete(LoginRequiredMixin, DeleteView):
