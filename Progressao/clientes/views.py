@@ -191,7 +191,7 @@ class ProdutoDetailView(DetailView):
 #Criando a venda
 class VendaCreate(LoginRequiredMixin, CreateView):
     model = Venda
-    fields = ['valor', 'desconto', 'parcelas', 'usuario', 'forma_pagamento']
+    fields = ['valor', 'desconto', 'parcelas', 'usuario', 'forma_pagamento', 'forma_envio']
     template_name = 'clientes/pagamento.html'
     login_url = reverse_lazy('login')
 
@@ -218,7 +218,7 @@ class VendaCreate(LoginRequiredMixin, CreateView):
             # Atualiza o valor total da venda
             valorTotal = valorTotal + subtotal
 
-            # Cria um objeto no ItemsVenda no banco de dados para saber os produtos que foram vendidos
+            # Cria um objeto no ProdutoVenda no banco de dados para saber os produtos que foram vendidos
             ProdutoVenda.objects.create(
                 preco=subtotal,
                 qtde=Carrinho.quantidade,

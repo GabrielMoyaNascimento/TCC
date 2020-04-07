@@ -63,13 +63,14 @@
                
                 <div class="col-lg-4">
                     <div class="order_box">
+                        {% for v in ProdutoVenda %}
                         <h2>Seu Pedido</h2>
                         <ul class="list">
                             <li><a href="#">Produto <span>Total</span></a></li>
-                            <li><a href="#">{{produto.nome}}<span class="middle">x {{produto.quantidade}}</span> 
-                            <span class="last">R${{produto.valorVenda}}</span></a></li>
+                            <li><a href="#">{{v.produto.nome}}<span class="middle">x {{v.qtde}}</span> 
+                            <span class="last">R${{v.produto.valorVenda}}</span></a></li>
                         </ul>
-
+                        {% endfor %}    
                         <ul class="list list_2">
                             <li><a href="#">Subtotal <span>R$2160.00</span></a></li>
                             <li><a href="#">Frete <span>Flat rate: R$50.00</span></a></li>

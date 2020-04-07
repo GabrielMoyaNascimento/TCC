@@ -13,7 +13,6 @@ urlpatterns = [
     path('verificar/', Verificar.as_view(), name="verificar"),
 
     path('pagamento/', VendaCreate.as_view(), name="clientes-pagamento"),
-    
     path('adicionar/produto/<int:id_produto>/<int:quantidade>/', AdicionarProdutoCarrinho.as_view(), name="adicionar-produto"),
     path('atualizar/carrinho/<int:id_carrinho>/<int:quantidade>/', AtualizarProdutoCarrinho.as_view(), name="atualizar-carrinho"),
     path('remover/produto/<int:id_carrinho>', ExcluirProdutoCarrinho.as_view(), name="deletar-produto"),
