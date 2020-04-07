@@ -191,15 +191,13 @@ class ProdutoDetailView(DetailView):
 #Criando a venda
 class VendaCreate(LoginRequiredMixin, CreateView):
     model = Venda
-    fields = ['valor', 'desconto', 'parcelas', 'pessoa', 'forma_pagamento']
+    fields = ['valor', 'desconto', 'parcelas', 'usuario', 'forma_pagamento']
     template_name = 'clientes/pagamento.html'
     login_url = reverse_lazy('login')
 
     def form_valid(self, form):
         # Define o usuário como usuário logado
         form.instance.usuario = self.request.user
-
-        url = super().form_valid(form)
 
         # Executa o form_valid padrão para validar e salvar no banco de dados
         redirect_url = super(VendaCreate, self).form_valid(form)
@@ -209,14 +207,14 @@ class VendaCreate(LoginRequiredMixin, CreateView):
 
         """ Agora temos a venda no banco, vamos pegar os produtos do carrinho e salvar nessa venda """
         # buscar todos os objetos da classe ItensCarrinho no banco
-        ProdutosCarrinho = Carrinho.objects.all()
+        produtosCarrinho = Carrinho.objects.all()
 
  
         # Para cada produto no carrinho, salva no ItemsVenda (foreach)
-        for Carrinho in ProdutosCarrinho:
+        for carrinho in produtosCarrinho:
 
             # Calcula o subtotal = quantidade x valor do produto
-            subtotal = Carrinho.produto.valorVenda * Carrinho.quantidade
+            subtotal = carrinho.produto.valorVenda * carrinho.quantidade
             # Atualiza o valor total da venda
             valorTotal = valorTotal + subtotal
 
@@ -229,13 +227,13 @@ class VendaCreate(LoginRequiredMixin, CreateView):
             )
 
             # Da baixa no estoque no produto
-            ProdutoCarrinho.produto.estoque = Carrinho.produto.estoque - \
+            produtoCarrinho.produto.estoque = produtoCarrinho.produto.estoque - \
                ProdutoVenda.qtde
             # Atualiza o produto no banco de dados
-            ProdutosCarrinho.produto.save()
+            produtosCarrinho.produto.save()
 
             # Deleta o item do carrinho
-            ProdutoCarrinho.delete()
+            produtoCarrinho.delete()
 
         # Atualiza o objeto dessa venda com o valor total
         # Primeiro tira a % do desconto e transforma ele para inteiro e depois faz a conta

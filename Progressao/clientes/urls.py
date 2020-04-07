@@ -12,7 +12,7 @@ urlpatterns = [
     #Verificar Usuário para redirecionar para a pagina referente a seu grupo
     path('verificar/', Verificar.as_view(), name="verificar"),
 
-    path('pagamento/', PagamentoView.as_view(), name="clientes-pagamento"),
+    path('pagamento/', VendaCreate.as_view(), name="clientes-pagamento"),
     
     path('adicionar/produto/<int:id_produto>/<int:quantidade>/', AdicionarProdutoCarrinho.as_view(), name="adicionar-produto"),
     path('atualizar/carrinho/<int:id_carrinho>/<int:quantidade>/', AtualizarProdutoCarrinho.as_view(), name="atualizar-carrinho"),

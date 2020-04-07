@@ -13,7 +13,7 @@ urlpatterns = [
     path('cadastrar/categoria/', CategoriaCreate.as_view(), name="cadastrar-categoria"),
     path('cadastrar/formaPagamento/', FormaPagamentoCreate.as_view(), name="cadastrar-formaPagamento"),
     path('cadastrar/formaEnvio/', FormaEnvioCreate.as_view(),name="cadastrar-formaEnvio"),
-    path('cadastrar/venda/', VendaCreate.as_view(), name="cadastrar-venda"),
+   
     
     #Update View
     path('atualizar/estado/<int:pk>/',EstadoUpdate.as_view(), name="atualizar-estado"),

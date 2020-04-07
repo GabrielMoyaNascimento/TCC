@@ -91,7 +91,7 @@ class Venda(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.PROTECT,)
 
     def __str__(self):
-        return self.usuario + " - " + self.usuario.nome,
+        return self.usuario,
         self.forma_pagamento + " - " + self.forma_pagamento.nome,
         self.forma_envio + " - " + self.forma_envio.nome
 
