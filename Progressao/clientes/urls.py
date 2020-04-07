@@ -6,7 +6,7 @@ urlpatterns = [
     
     path('', PaginaInicial.as_view(), name="clientes-index"),
     path('contato/', ContatoView.as_view(), name="clientes-contato"),
-    path('clientes/confirmacaoCompra/', ConfirmacaoView.as_view(), name="clientes-confirmacao"),
+    path('confirmacaoCompra/', ConfirmacaoView.as_view(), name="clientes-confirmacao"),
     path('produto/<int:pk>', ProdutoDetailView.as_view(), name="clientes-paginaProduto"),
     
     #Verificar Usuário para redirecionar para a pagina referente a seu grupo
