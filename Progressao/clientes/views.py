@@ -206,7 +206,7 @@ class VendaCreate(LoginRequiredMixin, CreateView):
         valorTotal = 0
 
         """ Agora temos a venda no banco, vamos pegar os produtos do carrinho e salvar nessa venda """
-        # buscar todos os objetos da classe ItensCarrinho no banco
+        # buscar todos os objetos da classe Carrinho no banco
         produtosCarrinho = Carrinho.objects.all()
 
  
@@ -227,13 +227,13 @@ class VendaCreate(LoginRequiredMixin, CreateView):
             )
 
             # Da baixa no estoque no produto
-            produtoCarrinho.produto.estoque = produtoCarrinho.produto.estoque - \
+            produtosCarrinho.produto.estoque = produtosCarrinho.produto.estoque - \
                ProdutoVenda.qtde
             # Atualiza o produto no banco de dados
             produtosCarrinho.produto.save()
 
             # Deleta o item do carrinho
-            produtoCarrinho.delete()
+            produtosCarrinho.delete()
 
         # Atualiza o objeto dessa venda com o valor total
         # Primeiro tira a % do desconto e transforma ele para inteiro e depois faz a conta

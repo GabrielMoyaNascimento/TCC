@@ -56,7 +56,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="/cadastrar/index">Inicio</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="/adm">Inicio</a></li>
                             {% if request.user.is_authenticated  %}
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
@@ -85,12 +85,12 @@
                                     <li class="nav-item"><a class="nav-link" href="{% url 'listar-formaPagamentos' %}">Forma Pagamento</a>
                                 </ul>
                             </li>
-                            
-                            <li class="nav-item"><a class="nav-link" href="{% url 'alterar-senha' %}">Alterar senha</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'exemplo-cliente' %}">Exemplo Tela Cliente</a></li>
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                    aria-expanded="false">Informações Pessoais</a>
+                                aria-expanded="false">Informações Pessoais</a>
                                 <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'alterar-senha' %}">Alterar senha</a></li>
                                     <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                                 </ul>
                             </li>

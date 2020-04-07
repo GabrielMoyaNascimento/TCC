@@ -63,12 +63,12 @@
                
                 <div class="col-lg-4">
                     <div class="order_box">
-                        {% for v in ProdutoVenda %}
+                        {% for v in produtosCarrinho %}
                         <h2>Seu Pedido</h2>
                         <ul class="list">
                             <li><a href="#">Produto <span>Total</span></a></li>
-                            <li><a href="#">{{v.produto.nome}}<span class="middle">x {{v.qtde}}</span> 
-                            <span class="last">R${{v.produto.valorVenda}}</span></a></li>
+                            <li><a href="#">{{v.produto.nome}}<span class="middle">x {{v.quantidade}}</span> 
+                            <span class="last">R${{v.produto.valor_unid}}</span></a></li>
                         </ul>
                         {% endfor %}    
                         <ul class="list list_2">
