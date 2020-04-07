@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <h3>Detalhes</h3>
-                    <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                    <!-- <form class="row contact_form" action="#" method="post" novalidate="novalidate">
                         <div class="col-md-6 form-group p_star">
                             <input type="text" class="form-control" id="first" name="name">
                             <span class="placeholder" data-placeholder="Nome"></span>
@@ -51,16 +51,85 @@
                         <div class="col-md-12 form-group">
                             <input type="text" class="form-control" id="zip" name="zip" placeholder="CEP">
                         </div>
-                        <div class="col-md-12 form-group">
-                            <div class="creat_account">
-                                <h3>Complemento</h3>
-                                <textarea class="form-control" name="message" id="message" rows="1"
-                                placeholder="Informações Adicionais"></textarea>
-                            </div>
+                        
+                    </form> -->
+              
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Nome:</label>
                         </div>
-                    </form>
+                        <div class="col-md-6">
+                            <p>{{object.nome}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Email:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{object.usuario.email}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>RG:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{object.rg}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>CPF:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{object.cpf}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Telefone:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{object.telefone}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Endereço:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{object.endereco}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Número:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{object.numero}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>CEP:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{object.cep}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Cidade:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{object.cidade.nome}}</p>
+                        </div>
+                    </div>
+                    <div class="my-3">
+                    <a class="primary-btn" href="{% url 'clientes-alterar-perfil' %}">Alterar dados da Compra</a>
+                    </div>
                 </div>
-               
                 <div class="col-lg-4">
                     <div class="order_box">
                         {% for v in produtosCarrinho %}
