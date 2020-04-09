@@ -18,16 +18,17 @@
 <!--================Order Details Area =================-->
 <section class="order_details section_gap">
     <div class="container">
-        <h3 class="title_confirmation">Obrigado por comprar Conosco. Ja recebemos seu pedido.</h3>
+        <h2 class="title_confirmation">
+            Pedido <strong>{{ultima_venda.pk}}</strong> realizado com sucesso!</h2>
         <div class="row order_d_inner">
             <div class="col-lg-4">
                 <div class="details_item">
                     <h4>Informações da Compra</h4>
                     <ul class="list">
-                        <li><a href="#"><span>Numero do Pedido</span> : 0004</a></li>
-                        <li><a href="#"><span>Data</span> : 08/04/2020</a></li>
-                        <li><a href="#"><span>Total</span> : R$450,00</a></li>
-                        <li><a href="#"><span>Forma Pagamento</span> : Cartão de Crédito</a></li>
+                        <li><a href="#"><span>Numero do Pedido</span> : {{ultima_venda.pk}}</a></li>
+                        <li><a href="#"><span>Data</span> : {{ultima_venda.data_da_venda|date:"d/m/Y"}}</a></li>
+                        <li><a href="#"><span>Total</span> : R${{ultima_venda.valor}}</a></li>
+                        <li><a href="#"><span>Forma Pagamento</span> : {{ultima_venda.forma_pagamento.nome}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -55,39 +56,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for pv in produtos_venda %}
                         <tr>
                             <td>
-                                <p>Bolsa de Couro</p>
+                                <p>{{ pv.produto.nome }}</p>
                             </td>
                             <td>
-                                <h5>x 02</h5>
+                                <h5>x {{ pv.quantidade }}</h5>
                             </td>
                             <td>
-                                <p>R$200,00</p>
+                                <p>R${{ pv.preco }}</p>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <h4>Subtotal</h4>
-                            </td>
-                            <td>
-                                <h5></h5>
-                            </td>
-                            <td>
-                                <p>R$400,00</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>Frete</h4>
-                            </td>
-                            <td>
-                                <h5></h5>
-                            </td>
-                            <td>
-                                <p> R$50,00</p>
-                            </td>
-                        </tr>
+                        {% endfor %}
+                        
                         <tr>
                             <td>
                                 <h4>Total</h4>
@@ -96,7 +78,7 @@
                                 <h5></h5>
                             </td>
                             <td>
-                                <p>R$450,00</p>
+                                <p>R${{ ultima_venda.valor }}</p>
                             </td>
                         </tr>
                     </tbody>

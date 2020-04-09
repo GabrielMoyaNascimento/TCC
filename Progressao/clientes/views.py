@@ -55,6 +55,14 @@ class ContatoView( TemplateView):
 class ConfirmacaoView(LoginRequiredMixin, TemplateView):
     template_name = 'clientes/confirmacao.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        venda = Venda.objects.filter(usuario=self.request.user).last()
+
+        context['ultima_venda'] = venda
+        context['produtos_venda'] = ProdutoVenda.objects.filter(venda=venda)
+        return context
+
 
 class Verificar(TemplateView):
     
@@ -191,54 +199,62 @@ class ProdutoDetailView(DetailView):
 #Criando a venda
 class VendaCreate(LoginRequiredMixin, CreateView):
     model = Venda
-    fields = ['valor', 'desconto', 'parcelas', 'usuario', 'forma_pagamento', 'forma_envio']
+    fields = [ 'desconto', 'parcelas', 'forma_pagamento', 'forma_envio']
     template_name = 'clientes/pagamento.html'
+    success_url = reverse_lazy('clientes-confirmacao')
     login_url = reverse_lazy('login')
 
     def form_valid(self, form):
+
+        # buscar todos os objetos da classe Carrinho no banco
+        produtosCarrinho = Carrinho.objects.filter(usuario=self.request.user)
+
+        # if produtosCarrinho == None:
+        #     form.error(None, "Nenhum item no carrinho")
+        #     return form_invalid(form)
+
         # Define o usuário como usuário logado
         form.instance.usuario = self.request.user
 
         # Executa o form_valid padrão para validar e salvar no banco de dados
-        redirect_url = super(VendaCreate, self).form_valid(form)
+        url = super().form_valid(form)
 
         # Cria uma variável pra essa venda
         valorTotal = 0
 
         """ Agora temos a venda no banco, vamos pegar os produtos do carrinho e salvar nessa venda """
-        # buscar todos os objetos da classe Carrinho no banco
-        produtosCarrinho = Carrinho.objects.all()
-
- 
         # Para cada produto no carrinho, salva no ItemsVenda (foreach)
         for carrinho in produtosCarrinho:
 
             # Calcula o subtotal = quantidade x valor do produto
-            subtotal = carrinho.produto.valorVenda * carrinho.quantidade
             # Atualiza o valor total da venda
-            valorTotal = valorTotal + subtotal
+            valorTotal += carrinho.produto.valorVenda * carrinho.quantidade
 
             # Cria um objeto no ProdutoVenda no banco de dados para saber os produtos que foram vendidos
             ProdutoVenda.objects.create(
-                preco=subtotal,
-                qtde=Carrinho.quantidade,
-                produto=Carrinho.produto,
+                preco=carrinho.produto.valorVenda * carrinho.quantidade,
+                qtde=carrinho.quantidade,
+                produto=carrinho.produto,
                 venda=self.object
             )
 
             # Da baixa no estoque no produto
-            produtosCarrinho.produto.estoque = produtosCarrinho.produto.estoque - \
-               ProdutoVenda.qtde
+            carrinho.produto.estoque = carrinho.produto.estoque - carrinho.quantidade
+
             # Atualiza o produto no banco de dados
-            produtosCarrinho.produto.save()
+            carrinho.produto.save()
 
             # Deleta o item do carrinho
-            produtosCarrinho.delete()
+            carrinho.delete()
 
         # Atualiza o objeto dessa venda com o valor total
         # Primeiro tira a % do desconto e transforma ele para inteiro e depois faz a conta
-        desconto = valorTotal * \
-            int(self.object.desconto.replace("%", "")) / 100
+        # cupom = Cupom.objects.get(nome=self.object.desconto)
+        # if cupom is not None:
+        #     desconto = valorTotal * cupom.desconto / 100
+        # else:
+        #     desconto = 0
+        desconto = 0
         # Define o valor bruto (sem desconto)
         self.object.valor_bruto = valorTotal
         # Calcula o valor com desconto
@@ -247,22 +263,20 @@ class VendaCreate(LoginRequiredMixin, CreateView):
         self.object.save()
 
         # Fim do form_valid
-        return redirect_url
+        return url
 
     def get_context_data(self, *args, **kwargs):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
-        context = super(VendaCreate, self).get_context_data(*args, **kwargs)
+        context = super().get_context_data(*args, **kwargs)
 
-        pessoa = Pessoa.objects.filter(usuario=self.request.user)
-        carrinho = Carrinho.objects.filter(usuario=self.request.user)
+        context["pessoa"] = Pessoa.objects.get(usuario=self.request.user)
+
+        context["produtosCarrinho"] = Carrinho.objects.filter(usuario=self.request.user)
         total = 0
-        for c in carrinho:
-            total += c.valor_unid * c.quantidade
+        for c in context["produtosCarrinho"]:
+            total += c.produto.valorVenda * c.quantidade
 
-        # Listar tudo do carrinho desse usuário
-        context["produtosCarrinho"] = carrinho
         context["valor"] = total
-        context["pessoa"] = pessoa
 
-    # Devolve/envia o context para seu comportamento padrão
+        # Devolve/envia o context para seu comportamento padrão
         return context
