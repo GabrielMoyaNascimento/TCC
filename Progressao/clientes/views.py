@@ -253,10 +253,16 @@ class VendaCreate(LoginRequiredMixin, CreateView):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
         context = super(VendaCreate, self).get_context_data(*args, **kwargs)
 
-        # Adicionar coisas ao contexto que serão enviadas para o html
-        context['titulo'] = "Cadastro de nova Venda"
-        context['botao'] = "Cadastrar"
-        context['classe'] = "btn-success"
+        pessoa = Pessoa.objects.filter(usuario=self.request.user)
+        carrinho = Carrinho.objects.filter(usuario=self.request.user)
+        total = 0
+        for c in carrinho:
+            total += c.valor_unid * c.quantidade
+
+        # Listar tudo do carrinho desse usuário
+        context["produtosCarrinho"] = carrinho
+        context["valor"] = total
+        context["pessoa"] = pessoa
 
     # Devolve/envia o context para seu comportamento padrão
         return context

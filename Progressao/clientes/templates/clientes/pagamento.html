@@ -25,6 +25,7 @@
         </div>
         <div class="billing_details">
             <div class="row">
+                {%for p in pessoa%}
                 <div class="col-lg-8">
                     <h3>Detalhes</h3>
                     <div class="row">
@@ -32,15 +33,7 @@
                             <label>Nome:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{object.nome}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Email:</label>
-                        </div>
-                        <div class="col-md-6">
-                            <p>{{object.usuario.email}}</p>
+                            <p>{{p.nome}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -48,7 +41,7 @@
                             <label>RG:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{object.rg}}</p>
+                            <p>{{p.rg}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -56,7 +49,7 @@
                             <label>CPF:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{object.cpf}}</p>
+                            <p>{{p.cpf}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -64,7 +57,7 @@
                             <label>Telefone:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{object.telefone}}</p>
+                            <p>{{p.telefone}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -72,7 +65,7 @@
                             <label>Endereço:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{object.endereco}}</p>
+                            <p>{{p.endereco}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -80,7 +73,7 @@
                             <label>Número:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{object.numero}}</p>
+                            <p>{{p.numero}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -88,7 +81,7 @@
                             <label>CEP:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{object.cep}}</p>
+                            <p>{{p.cep}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -96,25 +89,26 @@
                             <label>Cidade:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{object.cidade.nome}}</p>
+                            <p>{{p.cidade.nome}}</p>
                         </div>
                     </div>
                     <div class="my-3">
                     <a class="primary-btn" href="{% url 'clientes-alterar-perfil' %}">Alterar dados da Compra</a>
                     </div>
+                {%endfor%}    
                 </div>
                 <div class="col-lg-4">
                     <div class="order_box">
-                        {% for v in carrinho %}
                         <h2>Seu Pedido</h2>
                         <ul class="list">
                             <li><a href="#">Produto <span>Total</span></a></li>
-                            <li><a href="#">{{v.produto.nome}}<span class="middle">x {{v.quantidade}}</span> 
-                            <span class="last">R${{v.produto.valor_unid}}</span></a></li>
+                            {% for v in produtosCarrinho %}
+                            <li><a href="#">{{v.produto.nome}}<span class="middle">{{v.quantidade}}X</span> 
+                            <span class="last">R${{v.valor_unid}}</span></a></li>
                         </ul>
                         {% endfor %}    
                         <ul class="list list_2">
-                            <li><a href="#">Subtotal <span>R$2160.00</span></a></li>
+                            <li><a href="#">Subtotal <span>R${{valor}}</span></a></li>
                             <li><a href="#">Frete <span>Flat rate: R$50.00</span></a></li>
                             <li><a href="#">Total <span>R$2210.00</span></a></li>
                         </ul>
