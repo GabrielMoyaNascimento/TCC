@@ -210,9 +210,9 @@ class VendaCreate(LoginRequiredMixin, CreateView):
         # buscar todos os objetos da classe Carrinho no banco
         produtosCarrinho = Carrinho.objects.filter(usuario=self.request.user)
 
-        # if produtosCarrinho == None:
-        #     form.error(None, "Nenhum item no carrinho")
-        #     return form_invalid(form)
+        if produtosCarrinho == None:
+            form.errors(None, "Nenhum item no carrinho")
+            return form_invalid(form)
 
         # Define o usuário como usuário logado
         form.instance.usuario = self.request.user
