@@ -61,6 +61,7 @@ class ConfirmacaoView(LoginRequiredMixin, TemplateView):
 
         context['ultima_venda'] = venda
         context['produtos_venda'] = ProdutoVenda.objects.filter(venda=venda)
+        context["pessoa"] = Pessoa.objects.get(usuario=self.request.user)
         return context
 
 

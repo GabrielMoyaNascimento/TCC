@@ -15,9 +15,10 @@ urlpatterns = [
     path('adm/cadastrar/produto/', ProdutoCreate.as_view(), name="cadastrar-produto"),
     path('adm/cadastrar/categoria/', CategoriaCreate.as_view(), name="cadastrar-categoria"),
     path('adm/cadastrar/formaPagamento/', FormaPagamentoCreate.as_view(), name="cadastrar-formaPagamento"),
-    path('adm/cadastrar/cupom/', CupomCreate.as_view(), name="cadastrar-cupom"),
+    path('adm/cadastrar/formaPagamento/', FormaPagamentoCreate.as_view(), name="cadastrar-formaPagamento"),
     path('adm/cadastrar/formaEnvio/', FormaEnvioCreate.as_view(),name="cadastrar-formaEnvio"),
-   
+    path('adm/cadastrar/cupom/', CupomCreate.as_view(), name="cadastrar-cupom"),
+
     
     #Update View
     path('adm/atualizar/estado/<int:pk>/',EstadoUpdate.as_view(), name="atualizar-estado"),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('adm/atualizar/formaEnvio/<int:pk>/',FormaEnvioUpdate.as_view(), name="atualizar-formaEnvio"),
     path('adm/atualizar/cupom/<int:pk>/',CupomUpdate.as_view(), name="atualizar-cupom"),
 
+
     #Delete View
     path('adm/excluir/estado/<int:pk>/', EstadoDelete.as_view(), name="deletar-estado"),
     path('adm/excluir/cidade/<int:pk>/', CidadeDelete.as_view(), name="deletar-cidade"),
@@ -37,7 +39,7 @@ urlpatterns = [
     path('adm/excluir/formaEnvio/<int:pk>/', FormaEnvioDelete.as_view(), name="deletar-formaEnvio"),
     path('adm/excluir/cupom/<int:pk>/', CupomDelete.as_view(), name="deletar-cupom"),
 
-    
+
     #List View
     path('adm/listar/estados/', EstadoList.as_view(), name="listar-estados"),
     path('adm/listar/cidades/', CidadeList.as_view(), name="listar-cidades"),
@@ -48,4 +50,5 @@ urlpatterns = [
     path('adm/listar/formaEnvios/', FormaEnvioList.as_view(), name="listar-formaEnvios"),
     path('adm/listar/vendas/', VendaList.as_view(), name="listar-vendas"),
     path('adm/listar/cupons/', CupomList.as_view(), name="listar-cupons"),
+
 ]

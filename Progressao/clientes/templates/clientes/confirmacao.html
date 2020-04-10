@@ -35,12 +35,16 @@
             <div class="col-lg-4">
                 <div class="details_item">
                     <h4>Endereço de Envio</h4>
+                    {% if pessoa %}
+                    {% with p=pessoa %}
                     <ul class="list">
-                        <li><a href="#"><span>Cidade</span> : Paranavaí</a></li>
-                        <li><a href="#"><span>Rua</span> : Curitiba</a></li>
-                        <li><a href="#"><span>Número</span> : 2345</a></li>
-                        <li><a href="#"><span>CEP </span> : 87703300</a></li>
+                        <li><a href="#"><span>Cidade</span> : {{p.cidade.nome}}</a></li>
+                        <li><a href="#"><span>Rua</span> : {{p.endereco}}</a></li>
+                        <li><a href="#"><span>Número</span> : {{p.numero}}</a></li>
+                        <li><a href="#"><span>CEP </span> : {{p.cep}}</a></li>
                     </ul>
+                    {%endwith%}
+                    {%endif%}
                 </div>
             </div>
         </div>

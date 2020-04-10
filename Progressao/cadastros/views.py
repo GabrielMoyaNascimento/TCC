@@ -110,7 +110,11 @@ class ProdutoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     # Devolve/envia o context para seu comportamento padrão
         return context
 
-
+# class ProdutoVendaCreate(CreateView):
+#	model = ProdutoVenda
+#	fields = ['produto', 'venda', 'valor_total', 'forma_envio', 'quantidade']
+#	template_name = 'cadastros/form.html'
+#	success_url = reverse_lazy('index')
 
 
 class FormaPagamentoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
@@ -198,7 +202,9 @@ class CupomCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
         return context
 
 
+
 # Update View
+
 class EstadoUpdate(LoginRequiredMixin, UpdateView):
     model = Estado
     fields = ['sigla', 'nome']
@@ -259,6 +265,12 @@ class ProdutoUpdate(LoginRequiredMixin, UpdateView):
 
     # Devolve/envia o context para seu comportamento padrão
         return context
+
+# class ProdutoVendaUpdate(UpdateView):
+#	model = ProdutoVenda
+#	fields = ['produto', 'venda', 'valor_total', 'valor_envio', 'quantidade']
+#	template_name = 'cadastros/form.html'
+#	success_url = reverse_lazy('index')
 
 
 
@@ -323,7 +335,7 @@ class CategoriaUpdate(LoginRequiredMixin, UpdateView):
 
 
 class CupomUpdate(LoginRequiredMixin, UpdateView):
-    model = Cupom 
+    model = Cupom
     fields = ['nome', 'desconto']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-cupons')
@@ -368,7 +380,10 @@ class ProdutoDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('listar-produtos')
     login_url = reverse_lazy('login')
 
-
+# class ProdutoVendaDelete(DeleteView):
+#	model = ProdutoVenda
+#	template_name = 'cadastros/formDelete.html'
+#	success_url = reverse_lazy('index')
 
 
 class FormaPagamentoDelete(LoginRequiredMixin, DeleteView):
@@ -398,9 +413,8 @@ class CupomDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('listar-cupons')
     login_url = reverse_lazy('login')
 
+
 # List View
-
-
 class EstadoList(LoginRequiredMixin, ListView):
     model = Estado
     template_name = 'cadastros/listar_estados.html'
@@ -411,7 +425,7 @@ class CidadeList(LoginRequiredMixin, ListView):
     model = Cidade
     template_name = 'cadastros/listar_cidades.html'
     login_url = reverse_lazy('login')
-
+    login_url = reverse_lazy('login')
 
 
 class PessoaList(LoginRequiredMixin, ListView):
