@@ -110,11 +110,7 @@ class ProdutoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     # Devolve/envia o context para seu comportamento padrão
         return context
 
-# class ProdutoVendaCreate(CreateView):
-#	model = ProdutoVenda
-#	fields = ['produto', 'venda', 'valor_total', 'forma_envio', 'quantidade']
-#	template_name = 'cadastros/form.html'
-#	success_url = reverse_lazy('index')
+
 
 
 class FormaPagamentoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
@@ -179,9 +175,30 @@ class CategoriaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     # Devolve/envia o context para seu comportamento padrão
         return context
 
+
+class CupomCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
+    model = Cupom
+    fields = ['nome', 'desconto']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-cupons')
+    login_url = reverse_lazy('login')
+    group_required = u"Administrador"
+
+    def get_context_data(self, *args, **kwargs):
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super(CupomCreate, self).get_context_data(
+            *args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Cadastro de novo Cupom"
+        context['botao'] = "Cadastrar"
+        context['classe'] = "btn-success"
+
+    # Devolve/envia o context para seu comportamento padrão
+        return context
+
+
 # Update View
-
-
 class EstadoUpdate(LoginRequiredMixin, UpdateView):
     model = Estado
     fields = ['sigla', 'nome']
@@ -242,12 +259,6 @@ class ProdutoUpdate(LoginRequiredMixin, UpdateView):
 
     # Devolve/envia o context para seu comportamento padrão
         return context
-
-# class ProdutoVendaUpdate(UpdateView):
-#	model = ProdutoVenda
-#	fields = ['produto', 'venda', 'valor_total', 'valor_envio', 'quantidade']
-#	template_name = 'cadastros/form.html'
-#	success_url = reverse_lazy('index')
 
 
 
@@ -311,6 +322,26 @@ class CategoriaUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
+class CupomUpdate(LoginRequiredMixin, UpdateView):
+    model = Cupom 
+    fields = ['nome', 'desconto']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-cupons')
+    login_url = reverse_lazy('login')
+
+    def get_context_data(self, *args, **kwargs):
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super(CupomUpdate, self).get_context_data(
+            *args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Update de Cupom"
+        context['botao'] = "Salvar"
+        context['classe'] = "btn-success"
+
+    # Devolve/envia o context para seu comportamento padrão
+        return context
+
 
 
 
@@ -337,10 +368,7 @@ class ProdutoDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('listar-produtos')
     login_url = reverse_lazy('login')
 
-# class ProdutoVendaDelete(DeleteView):
-#	model = ProdutoVenda
-#	template_name = 'cadastros/formDelete.html'
-#	success_url = reverse_lazy('index')
+
 
 
 class FormaPagamentoDelete(LoginRequiredMixin, DeleteView):
@@ -362,6 +390,14 @@ class CategoriaDelete(LoginRequiredMixin, DeleteView):
     template_name = 'cadastros/formDelete.html'
     success_url = reverse_lazy('listar-categorias')
     login_url = reverse_lazy('login')
+
+
+class CupomDelete(LoginRequiredMixin, DeleteView):
+    model = Cupom
+    template_name = 'cadastros/formDelete.html'
+    success_url = reverse_lazy('listar-cupons')
+    login_url = reverse_lazy('login')
+
 # List View
 
 
@@ -375,7 +411,7 @@ class CidadeList(LoginRequiredMixin, ListView):
     model = Cidade
     template_name = 'cadastros/listar_cidades.html'
     login_url = reverse_lazy('login')
-    login_url = reverse_lazy('login')
+
 
 
 class PessoaList(LoginRequiredMixin, ListView):
@@ -421,3 +457,8 @@ class FormaEnvioList(LoginRequiredMixin, ListView):
 class CategoriaList(LoginRequiredMixin, ListView):
     model = Categoria
     template_name = 'cadastros/listar_categorias.html'
+
+
+class CupomList(LoginRequiredMixin, ListView):
+    model = Cupom
+    template_name = 'cadastros/listar_cupons.html'

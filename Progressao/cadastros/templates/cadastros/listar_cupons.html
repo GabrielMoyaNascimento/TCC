@@ -1,0 +1,52 @@
+{% extends 'cadastros/formulario.html' %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+<div class="container mt-5 py-5">
+
+    <div class="row pt-5 mt-3">
+        <div class="col-lg">
+            {% if request.user.groups.all.0.name == "Administrador" %}
+            <h3>Olá Admin,</h3><br>
+            {% else %}
+            <h3>Olá Funcionário,</h3><br>
+            {% endif %}
+
+            <a href="{% url 'cadastrar-cupom' %}" class="btn btn-warning">Adicionar Cupom</a>
+            <table class="table table-striped">
+            
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Desconto</th>
+                    <th>Opções</th>
+                </tr>
+            
+                {% for cupom in object_list %}
+            
+                <tr>
+                    <td>{{cupom.pk}}</td>
+                    <td>{{cupom.nome}}</td>
+                    <td>{{cupom.descricao}}</td>
+                    <td>
+                        <a href="{% url 'atualizar-cupom' cupom.pk %}" class="btn btn-warning">Editar</a>
+                        <a href="{% url 'deletar-cupom' cupom.pk %}" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            
+                {% empty %}
+                <tr>
+                    <td colspan="3">Nenhuma Cupom cadastrado!</td>
+                </tr>
+                {% endfor %}
+            
+            </table>
+
+
+
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

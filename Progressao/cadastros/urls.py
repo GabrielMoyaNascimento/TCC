@@ -15,7 +15,7 @@ urlpatterns = [
     path('adm/cadastrar/produto/', ProdutoCreate.as_view(), name="cadastrar-produto"),
     path('adm/cadastrar/categoria/', CategoriaCreate.as_view(), name="cadastrar-categoria"),
     path('adm/cadastrar/formaPagamento/', FormaPagamentoCreate.as_view(), name="cadastrar-formaPagamento"),
-    path('adm/cadastrar/formaPagamento/', FormaPagamentoCreate.as_view(), name="cadastrar-formaPagamento"),
+    path('adm/cadastrar/cupom/', CupomCreate.as_view(), name="cadastrar-cupom"),
     path('adm/cadastrar/formaEnvio/', FormaEnvioCreate.as_view(),name="cadastrar-formaEnvio"),
    
     
@@ -26,7 +26,7 @@ urlpatterns = [
     path('adm/atualizar/categoria/<int:pk>/',CategoriaUpdate.as_view(), name="atualizar-categoria"),
     path('adm/atualizar/formaPagamento/<int:pk>/',FormaPagamentoUpdate.as_view(), name="atualizar-formaPagamento"),
     path('adm/atualizar/formaEnvio/<int:pk>/',FormaEnvioUpdate.as_view(), name="atualizar-formaEnvio"),
-    # path('atualizar/venda/<int:pk>/',VendaUpdate.as_view(), name="atualizar-venda"),
+    path('adm/atualizar/cupom/<int:pk>/',CupomUpdate.as_view(), name="atualizar-cupom"),
 
     #Delete View
     path('adm/excluir/estado/<int:pk>/', EstadoDelete.as_view(), name="deletar-estado"),
@@ -35,7 +35,8 @@ urlpatterns = [
     path('adm/excluir/categoria/<int:pk>/', CategoriaDelete.as_view(), name="deletar-categoria"),
     path('adm/excluir/formaPagamento/<int:pk>/', FormaPagamentoDelete.as_view(), name="deletar-formaPagamento"),
     path('adm/excluir/formaEnvio/<int:pk>/', FormaEnvioDelete.as_view(), name="deletar-formaEnvio"),
-    # path('excluir/venda/<int:pk>/', VendaDelete.as_view(), name="deletar-venda"),
+    path('adm/excluir/cupom/<int:pk>/', CupomDelete.as_view(), name="deletar-cupom"),
+
     
     #List View
     path('adm/listar/estados/', EstadoList.as_view(), name="listar-estados"),
@@ -46,4 +47,5 @@ urlpatterns = [
     path('adm/listar/formaPagamentos/', FormaPagamentoList.as_view(), name="listar-formaPagamentos"),
     path('adm/listar/formaEnvios/', FormaEnvioList.as_view(), name="listar-formaEnvios"),
     path('adm/listar/vendas/', VendaList.as_view(), name="listar-vendas"),
+    path('adm/listar/cupons/', CupomList.as_view(), name="listar-cupons"),
 ]
