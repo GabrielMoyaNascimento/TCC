@@ -23,7 +23,6 @@
                     <th>Pessoa</th>
                     <th>Forma de Pagamento</th>
                     <th>Forma de Envio</th>                    
-                    <th>Opções</th>
                 </tr>
             
                 {% for venda in object_list %}
@@ -34,7 +33,7 @@
                     <td>{{venda.desconto}}</td>
                     <td>{{venda.valor}}</td>
                     <td>{{venda.parcelas}}</td>
-                    <td>{{venda.pessoa.nome}}</td>
+                    <td>{{venda.usuario.pessoa.nome}}</td>
                     <td>{{venda.formaPagamento.nome}}</td>
                     <td>{{venda.formaEnvio.nome}}</td>
                 </tr>

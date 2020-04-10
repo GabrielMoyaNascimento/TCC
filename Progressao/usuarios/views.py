@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User, Group
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import CreateView
-from cadastros.models import Pessoa
+from cadastros.models import Pessoa, Venda
 from .forms import UsuarioForm
 
 class UsuarioCreate(CreateView):
@@ -58,8 +58,9 @@ class PerfilView(LoginRequiredMixin, DetailView):
     def get_context_data(self, *args, **kwargs):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
         context = super().get_context_data(*args, **kwargs)
+        venda = Venda.objects.filter(usuario=self.request.user)
 
-        # context["vendas"] = Venda.objects.filter(usuario=self.request.user)
+        context['venda'] = venda
 
         return context
 

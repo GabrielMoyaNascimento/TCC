@@ -28,12 +28,12 @@
                     </h5>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                            aria-controls="home" aria-selected="true">Informações</a>
+                            <a class="nav-link active" id="informacoes-tab" data-toggle="tab" href="#informacoes" role="tab"
+                            aria-controls="informacoes" aria-selected="true">Informações</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#" role="tab"
-                            aria-controls="profile" aria-selected="false">Histórico de Compra</a>
+                            <a class="nav-link" id="historico-tab" data-toggle="tab" href="#historico" role="tab"
+                            aria-controls="historico" aria-selected="false">Histórico de Compra</a>
                         </li>
                     </ul>
                 </div>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="tab-pane fade show active " id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
                         <div class="row">
                             <div class="col-md-6">
                                 <label>Nome</label>
@@ -121,22 +121,31 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="tab-pane fade show active" id="historico" role="tabpanel" aria-labelledby="historico-tab">
                         <table class="table table-striped">
                             <tr>
                                 <th>Data da Compra</th>
-                                <th>Desconto</th>
                                 <th>Valor</th>
                                 <th>Parcelas</th>
                                 <th>Forma de Pagamento</th>
                                 <th>Forma de Envio</th>
                             </tr>
+                            {% for v in venda%}
+                            <tr>
+                                <td>{{v.data_da_venda}}</td>
+                                <td>{{v.valor}}</td>
+                                <td>{{v.parcelas}}</td>
+                                <td>{{v.forma_pagamento.nome}}</td>
+                                <td>{{v.forma_envio.nome}}</td>
+                            </tr>
+                            {%endfor%}
                         </table>    
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
     </form>
 </div>
 
