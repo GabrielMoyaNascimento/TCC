@@ -119,7 +119,7 @@ class ProdutoVenda(models.Model):
 
 class Cupom(models.Model):
     nome = models.CharField(max_length=100)
-    desconto = models.DecimalField(max_digits=2, decimal_places=2)
+    desconto = models.DecimalField(max_digits=3, decimal_places=0)
 
     def __str__(self):
-        return self.nome
+        return self.nome, self.desconto

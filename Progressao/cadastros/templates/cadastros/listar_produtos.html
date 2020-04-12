@@ -43,8 +43,13 @@
                     {%endif%}
                     </td>
                     <td>
-                        <a href="{% url 'atualizar-produto' produto.pk %}" class="btn btn-warning">Editar</a>
-                        <a href="{% url 'deletar-produto' produto.pk %}" class="btn btn-danger">Excluir</a>
+                        <a href="{% url 'atualizar-produto' produto.pk %}" class="btn btn-warning"  title="Editar">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+
+                        </a>
+                        <a href="{% url 'deletar-produto' produto.pk %}" class="btn btn-danger"  title="Excluir">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
             
