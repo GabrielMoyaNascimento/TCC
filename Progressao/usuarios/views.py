@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User, Group
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import CreateView
+from django.core.paginator import Paginator
 from cadastros.models import Pessoa, Venda
 from .forms import UsuarioForm
 
@@ -59,7 +60,9 @@ class PerfilView(LoginRequiredMixin, DetailView):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
         context = super().get_context_data(*args, **kwargs)
         venda = Venda.objects.filter(usuario=self.request.user)
-
+        paginator = Paginator(venda, 5)  # Divide  em páginas
+        page = self.request.GET.get('pagina')  # Recebe a página atual
+        venda = paginator.get_page(page)  # Filtra os objetos dessa página
         context['venda'] = venda
 
         return context
