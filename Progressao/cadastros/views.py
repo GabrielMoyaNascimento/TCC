@@ -420,40 +420,85 @@ class EstadoList(LoginRequiredMixin, ListView):
     template_name = 'cadastros/listar_estados.html'
     login_url = reverse_lazy('login')
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        
+        estados = Estado.objects.all().reverse()
+
+        paginator = Paginator(estados, 5)  # Divide os estados em páginas
+        page = self.request.GET.get('pagina')  # Recebe a página atual
+        estados = paginator.get_page(page)  # Filtra os estados dessa página
+        context['estados'] = estados
+        return context
+
 
 class CidadeList(LoginRequiredMixin, ListView):
     model = Cidade
     template_name = 'cadastros/listar_cidades.html'
     login_url = reverse_lazy('login')
-    login_url = reverse_lazy('login')
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        cidades = Cidade.objects.all().reverse()
+
+        paginator = Paginator(cidades, 5)  # Divide  em páginas
+        page = self.request.GET.get('pagina')  # Recebe a página atual
+        cidades = paginator.get_page(page)  # Filtra os objetos dessa página
+        context['cidades'] = cidades
+        return context
 
 class PessoaList(LoginRequiredMixin, ListView):
     model = Pessoa
     template_name = 'cadastros/listar_pessoas.html'
     login_url = reverse_lazy('login')
 
-    def get_queryset(self):
-        # O object_list armazena uma lista de objetos de um ListView
-        self.object_list = Pessoa.objects.all()
-        return self.object_list
+   
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
 
+        pessoas = Pessoa.objects.all().reverse()
+
+        paginator = Paginator(pessoas, 10)  # Divide  em páginas
+        page = self.request.GET.get('pagina')  # Recebe a página atual
+        pessoas = paginator.get_page(page)  # Filtra os objetos dessa página
+        context['pessoas'] = pessoas
+        return context
 
 class VendaList(LoginRequiredMixin, ListView):
     model = Venda
     template_name = 'cadastros/listar_vendas.html'
     login_url = reverse_lazy('login')
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
 
-    def get_queryset(self):
-       # O object_list armazena uma lista de objetos de um ListView
-       self.object_list = Venda.objects.filter(usuario=self.request.user)
-       return self.object_list
+        vendas = Venda.objects.all().reverse()
+
+        paginator = Paginator(vendas, 10)  # Divide  em páginas
+        page = self.request.GET.get('pagina')  # Recebe a página atual
+        vendas = paginator.get_page(page)  # Filtra os objetos dessa página
+        context['vendas'] = vendas
+        return context
+
 
 class ProdutoList(LoginRequiredMixin, ListView):
     model = Produto
     template_name = 'cadastros/listar_produtos.html'
     login_url = reverse_lazy('login')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        produtos = Produto.objects.all().reverse()
+
+        paginator = Paginator(produtos, 10)  # Divide  em páginas
+        page = self.request.GET.get('pagina')  # Recebe a página atual
+        produtos = paginator.get_page(page)  # Filtra os objetos dessa página
+        context['produtos'] = produtos
+        return context
+
     
     
 
@@ -461,18 +506,62 @@ class FormaPagamentoList(LoginRequiredMixin, ListView):
     model = FormaPagamento
     template_name = 'cadastros/listar_formaPagamentos.html'
     login_url = reverse_lazy('login')
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        pagamentos = FormaPagamento.objects.all().reverse()
+
+        paginator = Paginator(pagamentos, 5)  # Divide  em páginas
+        page = self.request.GET.get('pagina')  # Recebe a página atual
+        pagamentos = paginator.get_page(page)  # Filtra os objetos dessa página
+        context['pagamentos'] = pagamentos
+        return context
 
 
 class FormaEnvioList(LoginRequiredMixin, ListView):
     model = FormaEnvio
     template_name = 'cadastros/listar_formaEnvios.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        envios = FormaEnvio.objects.all().reverse()
+
+        paginator = Paginator(envios, 5)  # Divide  em páginas
+        page = self.request.GET.get('pagina')  # Recebe a página atual
+        envios = paginator.get_page(page)  # Filtra os objetos dessa página
+        context['envios'] = envios
+        return context
+
 
 class CategoriaList(LoginRequiredMixin, ListView):
     model = Categoria
     template_name = 'cadastros/listar_categorias.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        categorias = Categoria.objects.all().reverse()
+
+        paginator = Paginator(categorias, 5)  # Divide  em páginas
+        page = self.request.GET.get('pagina')  # Recebe a página atual
+        categorias = paginator.get_page(page)  # Filtra os objetos dessa página
+        context['categorias'] = categorias
+        return context
+
 
 class CupomList(LoginRequiredMixin, ListView):
     model = Cupom
     template_name = 'cadastros/listar_cupons.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        cupons = Cupom.objects.all().reverse()
+
+        paginator = Paginator(cupons, 5)  # Divide  em páginas
+        page = self.request.GET.get('pagina')  # Recebe a página atual
+        cupons = paginator.get_page(page)  # Filtra os objetos dessa página
+        context['cupons'] = cupons
+        return context

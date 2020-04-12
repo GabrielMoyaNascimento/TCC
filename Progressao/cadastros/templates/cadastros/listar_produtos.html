@@ -12,7 +12,10 @@
             {% else %}
             <h3>Olá Funcionário,</h3><br>
             {% endif %}
-            <a href="{% url 'cadastrar-produto' %}" class="btn btn-warning">Adicionar Produto</a>
+
+            <div class="text-right py-2">
+                <a href="{% url 'cadastrar-produto' %}" class="btn btn-primary btn-sm">Adicionar Produto</a>
+            </div>
             <table class="table table-striped">
             
                 <tr>
@@ -27,7 +30,7 @@
                     <th>Opções</th>
                 </tr>
             
-                {% for produto in object_list %}
+                {% for produto in produtos %}
             
                 <tr>
                     <td>{{produto.pk}}</td>
@@ -60,7 +63,28 @@
                 {% endfor %}
             
             </table>
-
+            <div class="filter-bar d-flex flex-wrap align-items-center">
+                <div class="pagination mx-auto">
+                    <span class="step-links">
+            
+                        {% if produtos.has_previous %}
+                        <a href="?pagina={{ produtos.previous_page_number }}">
+                            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                        </a>
+                        {% endif %}
+            
+                        <span class="current text-white">
+                            {{ produtos.number }} de {{ produtos.paginator.num_pages }}
+                        </span>
+            
+                        {% if produtos.has_next %}
+                        <a href="?pagina={{ produtos.next_page_number }}">
+                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
 
 
 
