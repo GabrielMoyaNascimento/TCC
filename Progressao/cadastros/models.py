@@ -90,6 +90,13 @@ class Produto(models.Model):
     def __str__(self):
         return self.categoria.nome + " - " + self.categoria.nome
 
+class EntradaProduto(models.Model):
+    quantidade = models.DecimalField(max_digits=8, decimal_places=0)
+    produto = models.ForeignKey(Produto, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.quantidade
+
 
 class ProdutoVenda(models.Model):
     preco = models.DecimalField(max_digits=8, decimal_places=2)
@@ -107,4 +114,4 @@ class Cupom(models.Model):
     validade = models.DateField(verbose_name='data de validade', null=True)
 
     def __str__(self):
-        return self.nome, self.desconto
+        return self.nome

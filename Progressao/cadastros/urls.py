@@ -25,6 +25,7 @@ urlpatterns = [
     path('adm/atualizar/cidade/<int:pk>/',CidadeUpdate.as_view(), name="atualizar-cidade"),
     path('adm/atualizar/produto/<int:pk>/',ProdutoUpdate.as_view(), name="atualizar-produto"),
     path('adm/atualizar/categoria/<int:pk>/',CategoriaUpdate.as_view(), name="atualizar-categoria"),
+    path('adm/entradaProduto/<int:id_produto>', EntradaProdutoUpdate.as_view(), name="entrada-produto"),
     path('adm/atualizar/formaPagamento/<int:pk>/',FormaPagamentoUpdate.as_view(), name="atualizar-formaPagamento"),
     path('adm/atualizar/formaEnvio/<int:pk>/',FormaEnvioUpdate.as_view(), name="atualizar-formaEnvio"),
     path('adm/atualizar/cupom/<int:pk>/',CupomUpdate.as_view(), name="atualizar-cupom"),

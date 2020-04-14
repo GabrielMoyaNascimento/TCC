@@ -14,7 +14,7 @@
             {% endif %}
 
             <div class="text-right py-2">
-                <a href="{% url 'cadastrar-produto' %}" class="btn btn-primary btn-sm">Adicionar Produto</a>
+                <a href="{% url 'cadastrar-produto' %}" class="btn btn-primary btn-sm">Adicionar novo Produto</a>
             </div>
             <table class="table table-striped">
             
@@ -46,9 +46,11 @@
                     {%endif%}
                     </td>
                     <td>
+                        <a href="{% url 'entrada-produto' produto.pk %}" class="btn btn-primary" title="Entrada Estoque">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </a>
                         <a href="{% url 'atualizar-produto' produto.pk %}" class="btn btn-warning"  title="Editar">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
-
                         </a>
                         <a href="{% url 'deletar-produto' produto.pk %}" class="btn btn-danger"  title="Excluir">
                             <i class="fa fa-trash" aria-hidden="true"></i>

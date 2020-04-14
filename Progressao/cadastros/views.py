@@ -86,9 +86,6 @@ class CidadeCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
 
 
-
-
-
 class ProdutoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Produto
     fields = ['nome', 'codigo', 'descricao', 'estoque',
@@ -110,11 +107,6 @@ class ProdutoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     # Devolve/envia o context para seu comportamento padrão
         return context
 
-# class ProdutoVendaCreate(CreateView):
-#	model = ProdutoVenda
-#	fields = ['produto', 'venda', 'valor_total', 'forma_envio', 'quantidade']
-#	template_name = 'cadastros/form.html'
-#	success_url = reverse_lazy('index')
 
 
 class FormaPagamentoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
@@ -212,6 +204,8 @@ class EstadoUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('listar-estados')
     login_url = reverse_lazy('login')
 
+    
+    
     def get_context_data(self, *args, **kwargs):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
         context = super(EstadoUpdate, self).get_context_data(*args, **kwargs)
@@ -245,10 +239,32 @@ class CidadeUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
+class EntradaProdutoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
+    model = EntradaProduto
+    fields = ['produto', 'quantidade']
+    success_url = reverse_lazy('listar-produtos')
+    login_url = reverse_lazy('login')
+    group_required = u"Administrador"
+
+    def form_valid(self, form):
+        pro = get_object_or_404(Produto, pk=kwargs['id_produto'])
+        for p in pro:
+            p.estoque += self.object.quantidade
+            p.pro.save()
+
+
+    def get_context_data(self, *args, **kwargs):
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super(EntradaProdutoCreate, self).get_context_data(*args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Cadastro nova Entrada de Produto"
+        context['botao'] = "Cadastrar"
+        context['classe'] = "btn-success"
 
 class ProdutoUpdate(LoginRequiredMixin, UpdateView):
     model = Produto
-    fields = ['nome', 'codigo', 'descricao', 'estoque',
+    fields = ['nome', 'codigo', 'descricao',
               'categoria', 'valorVenda', 'imagem']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-produtos')
