@@ -257,9 +257,9 @@ class VendaCreate(LoginRequiredMixin, CreateView):
         #     desconto = 0
         desconto = 0
         # Define o valor bruto (sem desconto)
-        self.object.valor_bruto = valorTotal
+        self.object.valor = valorTotal
         # Calcula o valor com desconto
-        self.object.valor_total = self.object.valor_bruto - desconto
+        self.object.valor_total -= desconto
         # Salva a venda
         self.object.save()
 
