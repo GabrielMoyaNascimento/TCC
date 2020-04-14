@@ -182,7 +182,7 @@ class CategoriaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
 class CupomCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Cupom
-    fields = ['nome', 'desconto']
+    fields = ['nome', 'desconto', 'validade']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-cupons')
     login_url = reverse_lazy('login')
@@ -336,7 +336,7 @@ class CategoriaUpdate(LoginRequiredMixin, UpdateView):
 
 class CupomUpdate(LoginRequiredMixin, UpdateView):
     model = Cupom
-    fields = ['nome', 'desconto']
+    fields = ['nome', 'desconto', 'validade']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-cupons')
     login_url = reverse_lazy('login')
