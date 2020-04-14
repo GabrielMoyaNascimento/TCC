@@ -14,163 +14,172 @@
 </section>
 
 <div class="container emp-profile my-3">
-    <form method="post">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="{% static 'img/userlogo.png'  %}" class="border rounded border-secondary" alt="" />
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                    <h5>
-                        Olá, {{object.nome}}
-                    </h5>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="informacoes-tab" data-toggle="tab" href="#informacoes" role="tab"
-                            aria-controls="informacoes" aria-selected="true">Informações</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="historico-tab" data-toggle="tab" href="#historico" role="tab"
-                            aria-controls="historico" aria-selected="false">Histórico de Compra</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <a class="primary-btn" href="{% url 'clientes-alterar-perfil' %}">Editar</a>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-img">
+                <img src="{% static 'img/userlogo.png'  %}" class="border rounded border-secondary" alt="" />
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active " id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Nome</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{object.nome}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Email</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{object.usuario.email}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>RG</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{object.rg}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>CPF</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{object.cpf}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Telefone</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{object.telefone}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Endereço</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{object.endereco}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Número</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{object.numero}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>CEP</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{object.cep}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Cidade</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{object.cidade.nome}}</p>
-                            </div>
-                        </div>
+        <div class="col-md-8">
+
+
+            <div class="row">
+                <div class="col-md-8">
+                    
+                    <div class="profile-head">
+                        <h5 class="mb-4">
+                            Olá, {{object.nome}}
+                        </h5>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="informacoes-tab" data-toggle="tab" href="#informacoes" role="tab"
+                                    aria-controls="informacoes" aria-selected="true">Informações</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="historico-tab" data-toggle="tab" href="#historico" role="tab"
+                                    aria-controls="historico" aria-selected="false">Histórico de Compra</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="tab-pane fade show active" id="historico" role="tabpanel" aria-labelledby="historico-tab">
-                        <table class="table table-striped">
-                            <tr>
-                                <th>Data da Compra</th>
-                                <th>Valor</th>
-                                <th>Parcelas</th>
-                                <th>Forma de Pagamento</th>
-                                <th>Forma de Envio</th>
-                            </tr>
-                            {% for v in venda%}
-                            <tr>
-                                <td>{{v.data_da_venda}}</td>
-                                <td>{{v.valor}}</td>
-                                <td>{{v.parcelas}}</td>
-                                <td>{{v.forma_pagamento.nome}}</td>
-                                <td>{{v.forma_envio.nome}}</td>
-                            </tr>
-                            {%endfor%}
-                        </table>  
-                        <div class="filter-bar d-flex flex-wrap align-items-center">
-                            <div class="pagination mx-auto">
-                                <span class="step-links">
-                        
-                                    {% if venda.has_previous %}
-                                    <a href="?pagina={{ venda.previous_page_number }}">
-                                        <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-                                    </a>
-                                    {% endif %}
-                        
-                                    <span class="current text-white">
-                                        {{ venda.number }} de {{ venda.paginator.num_pages }}
+                </div>
+                <div class="col-md-4">
+                    <a class="primary-btn" href="{% url 'clientes-alterar-perfil' %}">Editar</a>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active " id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Nome</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{object.nome}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{object.usuario.email}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>RG</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{object.rg}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>CPF</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{object.cpf}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Telefone</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{object.telefone}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Endereço</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{object.endereco}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Número</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{object.numero}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>CEP</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{object.cep}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Cidade</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{object.cidade.nome}}</p>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="tab-pane fade" id="historico" role="tabpanel" aria-labelledby="historico-tab">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Data da Compra</th>
+                                    <th>Valor</th>
+                                    <th>Parcelas</th>
+                                    <th>Forma de Pagamento</th>
+                                    <th>Forma de Envio</th>
+                                </tr>
+                                {% for v in venda%}
+                                <tr>
+                                    <td>{{v.data_da_venda}}</td>
+                                    <td>{{v.valor}}</td>
+                                    <td>{{v.parcelas}}</td>
+                                    <td>{{v.forma_pagamento.nome}}</td>
+                                    <td>{{v.forma_envio.nome}}</td>
+                                </tr>
+                                {%endfor%}
+                            </table>
+                            <div class="filter-bar d-flex flex-wrap align-items-center">
+                                <div class="pagination mx-auto">
+                                    <span class="step-links">
+            
+                                        {% if venda.has_previous %}
+                                        <a href="?pagina={{ venda.previous_page_number }}">
+                                            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                        </a>
+                                        {% endif %}
+            
+                                        <span class="current text-white">
+                                            {{ venda.number }} de {{ venda.paginator.num_pages }}
+                                        </span>
+            
+                                        {% if venda.has_next %}
+                                        <a href="?pagina={{ venda.next_page_number }}">
+                                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                        </a>
+                                        {% endif %}
                                     </span>
-                        
-                                    {% if venda.has_next %}
-                                    <a href="?pagina={{ venda.next_page_number }}">
-                                        <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                                    </a>
-                                    {% endif %}
-                                </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
+        
     </div>
-    
-    </form>
+
+</div>
+
+</form>
 </div>
 
 
 {%endblock%}
-

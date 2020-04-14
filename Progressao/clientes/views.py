@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
-from cadastros.models import Categoria, Produto, Pessoa, Venda, ProdutoVenda
+from cadastros.models import Categoria, Produto, Pessoa, Venda, ProdutoVenda, Cupom
 from .models import Carrinho
 from django.contrib.auth.models import User,Group
 
@@ -250,16 +250,15 @@ class VendaCreate(LoginRequiredMixin, CreateView):
 
         # Atualiza o objeto dessa venda com o valor total
         # Primeiro tira a % do desconto e transforma ele para inteiro e depois faz a conta
-        # cupom = Cupom.objects.get(nome=self.object.desconto)
-        # if cupom is not None:
-        #     desconto = valorTotal * cupom.desconto / 100
-        # else:
-        #     desconto = 0
-        desconto = 0
+        cupom = Cupom.objects.get(nome=self.object.desconto)
+        if cupom is not None:
+            desconto = valorTotal * cupom.desconto / 100
+        else:
+            desconto = 0
         # Define o valor bruto (sem desconto)
         self.object.valor = valorTotal
         # Calcula o valor com desconto
-        self.object.valor_total -= desconto
+        self.object.valor -= desconto
         # Salva a venda
         self.object.save()
 
