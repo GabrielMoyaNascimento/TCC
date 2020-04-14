@@ -21,6 +21,7 @@
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Desconto</th>
+                    <th>Validade</th>
                     <th>Opções</th>
                 </tr>
             
@@ -30,7 +31,7 @@
                     <td>{{cupom.pk}}</td>
                     <td>{{cupom.nome}}</td>
                     <td>{{cupom.desconto}}%</td>
-                    <td>{{cupom.validade}}%</td>
+                    <td>{{cupom.validade}}</td>
                     <td>
                         <a href="{% url 'atualizar-cupom' cupom.pk %}" class="btn btn-warning" title="Editar">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
