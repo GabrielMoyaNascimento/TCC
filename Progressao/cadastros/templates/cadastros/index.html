@@ -12,36 +12,47 @@
         </div>
     </div>
 </section>
+<div class="container mt-5 py-5">
 
-<table class="table table-striped">
+    <div class="row pt-5 mt-3">
+        <div class="col-lg">
+            {% if request.user.groups.all.0.name == "Administrador" %}
+            <h3>Olá Admin,</h3><br>
+            {% else %}
+            <h3>Olá Funcionário,</h3><br>
+            {% endif %}
 
-    <tr>
-        <th>Data da Venda</th>
-        <th>Valor</th>
-    </tr>
+            <table class="table table-striped">
 
-    {% for venda in vendas %}
+                <tr>
+                    <th>Data da Venda</th>
+                    <th>Valor</th>
+                </tr>
 
-    <tr>
-        <td>{{venda.data_da_venda}}</td>
-        <td>{{venda.valor}}</td>
-        
-    </tr>
+                {% for venda in vendas %}
+
+                <tr>
+                    <td>{{venda.data_da_venda}}</td>
+                    <td>{{venda.valor}}</td>   
+                </tr>
     
-    {% empty %}
-    <tr>
-        <td colspan="3">Nenhum venda Registrada!</td>
-    </tr>
-    {% endfor %}
-    {% if vendas %}
-    <table class="table table-striped">
-        <tr>
-            <th>Total do dia</th><td>a</td>
-            <th>Total Geral</th><td>a</td>
-        </tr>
-    </table>
-    {% endif %}
-</table>
+                {% empty %}
+                <tr>
+                    <td colspan="3">Nenhum venda Registrada!</td>
+                </tr>
+                {% endfor %}
+                {% if vendas %}
+                <table class="table table-striped">
+                    <tr>
+                        <th>Total do dia</th><td>a</td>
+                        <th>Total Geral</th><td>a</td>
+                    </tr>
+                </table>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+    
 <div class="filter-bar d-flex flex-wrap align-items-center">
     <div class="pagination mx-auto">
         <span class="step-links">
@@ -63,5 +74,6 @@
             {% endif %}
         </span>
     </div>
+</div>
 </div>
 {%endblock%}
