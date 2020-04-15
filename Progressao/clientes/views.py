@@ -217,6 +217,10 @@ class VendaCreate(LoginRequiredMixin, CreateView):
         # Define o usuário como usuário logado
         form.instance.usuario = self.request.user
 
+        # Valida o desconto, caso tenha
+        if form.instance.desconto is None or form.instance.desconto == '':
+            form.instance.desconto = ''
+
         # Executa o form_valid padrão para validar e salvar no banco de dados
         url = super().form_valid(form)
 
@@ -248,13 +252,17 @@ class VendaCreate(LoginRequiredMixin, CreateView):
             # Deleta o item do carrinho
             carrinho.delete()
 
-        # Atualiza o objeto dessa venda com o valor total
+        # Verifica se tem cupom e busca ele
+        if self.object.desconto:
+            cupom = Cupom.objects.get(nome=self.object.desconto)
+        else:
+            cupom = None
+
         # Primeiro tira a % do desconto e transforma ele para inteiro e depois faz a conta
-        cupom = Cupom.objects.get(nome=self.object.desconto)
         if cupom is not None:
             desconto = valorTotal * cupom.desconto / 100
         else:
-            cupom = 0
+            desconto = 0
         # Define o valor bruto (sem desconto)
         self.object.valor = valorTotal
         # Calcula o valor com desconto
