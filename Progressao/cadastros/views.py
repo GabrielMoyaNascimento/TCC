@@ -108,6 +108,33 @@ class ProdutoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
         return context
 
 
+class EntradaProdutoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
+    model = EntradaProduto
+    fields = ['produto', 'quantidade']
+    template_name = 'cadastros/form_confirmacao.html'
+    success_url = reverse_lazy('listar-entrada-produtos')
+    login_url = reverse_lazy('login')
+    group_required = u"Administrador"
+
+    def form_valid(self, form):
+        url = super().form_valid(form)
+        self.object.produto
+        self.object.produto.estoque += self.object.quantidade
+        self.object.produto.save()
+        return url
+
+    def get_context_data(self, *args, **kwargs):
+        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
+        context = super().get_context_data(*args, **kwargs)
+
+        # Adicionar coisas ao contexto que serão enviadas para o html
+        context['titulo'] = "Cadastro Entrada de Produto"
+        context['botao'] = "Cadastrar"
+        context['classe'] = "btn-success"
+
+    # Devolve/envia o context para seu comportamento padrão
+        return context
+
 
 class FormaPagamentoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = FormaPagamento
@@ -239,28 +266,6 @@ class CidadeUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-class EntradaProdutoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
-    model = EntradaProduto
-    fields = ['produto', 'quantidade']
-    success_url = reverse_lazy('listar-produtos')
-    login_url = reverse_lazy('login')
-    group_required = u"Administrador"
-
-    def form_valid(self, form):
-        pro = get_object_or_404(Produto, pk=kwargs['id_produto'])
-        for p in pro:
-            p.estoque += self.object.quantidade
-            p.pro.save()
-
-
-    def get_context_data(self, *args, **kwargs):
-        # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
-        context = super(EntradaProdutoCreate, self).get_context_data(*args, **kwargs)
-
-        # Adicionar coisas ao contexto que serão enviadas para o html
-        context['titulo'] = "Cadastro nova Entrada de Produto"
-        context['botao'] = "Cadastrar"
-        context['classe'] = "btn-success"
 
 class ProdutoUpdate(LoginRequiredMixin, UpdateView):
     model = Produto
@@ -396,10 +401,7 @@ class ProdutoDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('listar-produtos')
     login_url = reverse_lazy('login')
 
-# class ProdutoVendaDelete(DeleteView):
-#	model = ProdutoVenda
-#	template_name = 'cadastros/formDelete.html'
-#	success_url = reverse_lazy('index')
+
 
 
 class FormaPagamentoDelete(LoginRequiredMixin, DeleteView):
@@ -515,7 +517,22 @@ class ProdutoList(LoginRequiredMixin, ListView):
         context['produtos'] = produtos
         return context
 
-    
+
+class EntradaProdutoList(LoginRequiredMixin, ListView):
+    model = EntradaProduto
+    template_name = 'cadastros/listar_entrada_produtos.html'
+    login_url = reverse_lazy('login')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        entrada = EntradaProduto.objects.all().reverse()
+
+        paginator = Paginator(entrada, 10)  # Divide  em páginas
+        page = self.request.GET.get('pagina')  # Recebe a página atual
+        entrada = paginator.get_page(page)  # Filtra os objetos dessa página
+        context['entrada'] = entrada
+        return context
     
 
 class FormaPagamentoList(LoginRequiredMixin, ListView):

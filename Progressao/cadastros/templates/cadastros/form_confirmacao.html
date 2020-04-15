@@ -1,0 +1,66 @@
+{% extends 'cadastros/formulario.html' %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+<div class="container mt-5 py-5">
+
+    <div class="row pt-5 mt-3">
+        <div class="col-lg">
+        {% if request.user.groups.all.0.name == "Administrador" %}
+        <h3>Olá Admin,</h3><br>
+        {% else %}
+        <h3>Olá Funcionário,</h3><br>
+        {% endif %}
+
+            {% if request.user.is_authenticated %}
+            <h3>{{ titulo }}</h3>
+            <form method="post" enctype="multipart/form-data">
+                <!-- Todo formulário tem que ter essa validação -->
+                {% csrf_token %}
+                <!-- Gera o formulário -->
+                {{ form|crispy }}
+                <button type="submit" onclick="myFunction();" class="btn {{ classe }}" >
+                    {{ botao }}
+                </button>
+            </form>
+
+            {% else %}
+            
+            <h4 class="mt-4 text-danger">Você não pode fazer isso!</h4>
+            
+            Redirecionando para a página inicial em 5 segundos...
+            <meta http-equiv="Refresh" content="5; url={% url 'cadastrar-index' %}" />
+            
+            {% endif %}
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Coloquei aqui, mas tem que ver a compatibilidade pq seu template usa a versão 2. -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script>
+    function myFunction() {
+
+        bootbox.confirm({
+                message: "Deseja cadastrar a entrada? Não poderá ser desfeito posteriormente!!",
+                buttons: {
+                    confirm: {
+                        label: 'Sim',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'Não',
+                        className: 'btn-danger'
+                    }
+                }
+        });
+    }
+     
+</script>
+
+{%endblock%}

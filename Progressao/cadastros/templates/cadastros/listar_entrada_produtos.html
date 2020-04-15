@@ -1,0 +1,73 @@
+{% extends 'cadastros/formulario.html' %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+<div class="container mt-5 py-5">
+
+    <div class="row pt-5 mt-3">
+        <div class="col-lg">
+
+            {% if request.user.groups.all.0.name == "Administrador" %}
+            <h3>Olá Admin,</h3><br>
+            {% else %}
+            <h3>Olá Funcionário,</h3><br>
+            {% endif %}
+
+            <div class="text-right py-2">
+                <a href="{% url 'entrada-produto' %}" class="btn btn-primary btn-sm">Adicionar nova Entrada</a>
+            </div>
+            <table class="table table-striped">
+            
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                </tr>
+            
+                {% for e in entrada %}
+            
+                <tr>
+                    <td>{{e.pk}}</td>
+                    <td>{{e.data_entrada}}</td>
+                    <td>{{e.produto.nome}}</td>
+                    <td>{{e.quantidade}}</td>
+                </tr>
+            
+                {% empty %}
+                <tr>
+                    <td colspan="3">Nenhuma entrada cadastrada!</td>
+                </tr>
+                {% endfor %}
+            
+            </table>
+            <div class="filter-bar d-flex flex-wrap align-items-center">
+                <div class="pagination mx-auto">
+                    <span class="step-links">
+            
+                        {% if entrada.has_previous %}
+                        <a href="?pagina={{ entrada.previous_page_number }}">
+                            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                        </a>
+                        {% endif %}
+            
+                        <span class="current text-white">
+                            {{ entrada.number }} de {{ entrada.paginator.num_pages }}
+                        </span>
+            
+                        {% if entrada.has_next %}
+                        <a href="?pagina={{ entrada.next_page_number }}">
+                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

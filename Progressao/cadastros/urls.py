@@ -18,6 +18,7 @@ urlpatterns = [
     path('adm/cadastrar/formaPagamento/', FormaPagamentoCreate.as_view(), name="cadastrar-formaPagamento"),
     path('adm/cadastrar/formaEnvio/', FormaEnvioCreate.as_view(),name="cadastrar-formaEnvio"),
     path('adm/cadastrar/cupom/', CupomCreate.as_view(), name="cadastrar-cupom"),
+    path('adm/cadastrar/entradaProduto/', EntradaProdutoCreate.as_view(), name="entrada-produto"),
 
     
     #Update View
@@ -25,7 +26,6 @@ urlpatterns = [
     path('adm/atualizar/cidade/<int:pk>/',CidadeUpdate.as_view(), name="atualizar-cidade"),
     path('adm/atualizar/produto/<int:pk>/',ProdutoUpdate.as_view(), name="atualizar-produto"),
     path('adm/atualizar/categoria/<int:pk>/',CategoriaUpdate.as_view(), name="atualizar-categoria"),
-    path('adm/entradaProduto/<int:id_produto>', EntradaProdutoUpdate.as_view(), name="entrada-produto"),
     path('adm/atualizar/formaPagamento/<int:pk>/',FormaPagamentoUpdate.as_view(), name="atualizar-formaPagamento"),
     path('adm/atualizar/formaEnvio/<int:pk>/',FormaEnvioUpdate.as_view(), name="atualizar-formaEnvio"),
     path('adm/atualizar/cupom/<int:pk>/',CupomUpdate.as_view(), name="atualizar-cupom"),
@@ -41,6 +41,7 @@ urlpatterns = [
     path('adm/excluir/cupom/<int:pk>/', CupomDelete.as_view(), name="deletar-cupom"),
 
 
+
     #List View
     path('adm/listar/estados/', EstadoList.as_view(), name="listar-estados"),
     path('adm/listar/cidades/', CidadeList.as_view(), name="listar-cidades"),
@@ -51,5 +52,6 @@ urlpatterns = [
     path('adm/listar/formaEnvios/', FormaEnvioList.as_view(), name="listar-formaEnvios"),
     path('adm/listar/vendas/', VendaList.as_view(), name="listar-vendas"),
     path('adm/listar/cupons/', CupomList.as_view(), name="listar-cupons"),
+    path('adm/listar/entradas/', EntradaProdutoList.as_view(), name="listar-entrada-produtos"),
 
 ]
