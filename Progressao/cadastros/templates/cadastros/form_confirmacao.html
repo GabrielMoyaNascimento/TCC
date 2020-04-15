@@ -19,7 +19,7 @@
                 {% csrf_token %}
                 <!-- Gera o formulário -->
                 {{ form|crispy }}
-                <button type="submit" onclick="myFunction();" class="btn {{ classe }}" >
+                <button type="button" onclick="myFunction();" class="btn {{ classe }}" >
                     {{ botao }}
                 </button>
             </form>
@@ -42,6 +42,8 @@
 {% block scripts %}
 <!-- Coloquei aqui, mas tem que ver a compatibilidade pq seu template usa a versão 2. -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="bootbox.min.js"></script>
+<script src="bootbox.locales.min.js"></script>
 
 <script>
     function myFunction() {

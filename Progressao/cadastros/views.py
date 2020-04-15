@@ -16,7 +16,7 @@ from .models import *
 class PaginaInicial(GroupRequiredMixin,LoginRequiredMixin, TemplateView):
     template_name = 'cadastros/index.html'
     group_required = u"Administrador"
-    
+
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 
