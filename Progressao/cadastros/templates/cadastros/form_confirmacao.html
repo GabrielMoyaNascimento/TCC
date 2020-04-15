@@ -1,4 +1,7 @@
 {% extends 'cadastros/formulario.html' %}
+
+{% load static %}
+
 {% load crispy_forms_tags %}
 
 {% block conteudo %}
@@ -6,11 +9,11 @@
 
     <div class="row pt-5 mt-3">
         <div class="col-lg">
-        {% if request.user.groups.all.0.name == "Administrador" %}
-        <h3>Olá Admin,</h3><br>
-        {% else %}
-        <h3>Olá Funcionário,</h3><br>
-        {% endif %}
+            {% if request.user.groups.all.0.name == "Administrador" %}
+            <h3>Olá Admin,</h3><br>
+            {% else %}
+            <h3>Olá Funcionário,</h3><br>
+            {% endif %}
 
             {% if request.user.is_authenticated %}
             <h3>{{ titulo }}</h3>
@@ -19,18 +22,18 @@
                 {% csrf_token %}
                 <!-- Gera o formulário -->
                 {{ form|crispy }}
-                <button type="button" onclick="myFunction();" class="btn {{ classe }}" >
+                <button type="button" id="btn-submit" class="btn {{ classe }}">
                     {{ botao }}
                 </button>
             </form>
 
             {% else %}
-            
+
             <h4 class="mt-4 text-danger">Você não pode fazer isso!</h4>
-            
+
             Redirecionando para a página inicial em 5 segundos...
             <meta http-equiv="Refresh" content="5; url={% url 'cadastrar-index' %}" />
-            
+
             {% endif %}
 
         </div>
@@ -41,28 +44,38 @@
 
 {% block scripts %}
 <!-- Coloquei aqui, mas tem que ver a compatibilidade pq seu template usa a versão 2. -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="bootbox.min.js"></script>
-<script src="bootbox.locales.min.js"></script>
+
+<script src="{% static 'js/bootbox.min.js' %}"></script>
+<script src="{% static 'js/bootbox.locales.min.js' %}"></script>
 
 <script>
-    function myFunction() {
+    $(document).ready(function () {
 
-        bootbox.confirm({
-                message: "Deseja cadastrar a entrada? Não poderá ser desfeito posteriormente!!",
+        $("#btn-submit").click(function (e) {
+
+            bootbox.confirm({
+                title: "Confirmar ação?",
+                message: "Deseja confirmar esta ação? Ela não poderá ser desfeita posteriormente.",
                 buttons: {
                     confirm: {
                         label: 'Sim',
                         className: 'btn-success'
                     },
                     cancel: {
-                        label: 'Não',
-                        className: 'btn-danger'
+                        label: 'Cancelar',
+                        className: 'btn-light'
+                    }
+                },
+                callback: function (result) {
+                    if(result){
+                        $("form").submit();
                     }
                 }
+            });
+
         });
-    }
-     
+
+    });
 </script>
 
-{%endblock%}
+{% endblock %}
