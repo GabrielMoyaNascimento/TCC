@@ -17,6 +17,16 @@ class PaginaInicial(GroupRequiredMixin,LoginRequiredMixin, TemplateView):
     template_name = 'cadastros/index.html'
     group_required = u"Administrador"
     
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        vendas = Venda.objects.all().reverse()
+
+        paginator = Paginator(vendas, 10)  # Divide  em páginas
+        page = self.request.GET.get('pagina')  # Recebe a página atual
+        vendas = paginator.get_page(page)  # Filtra os objetos dessa página
+        context['vendas'] = vendas
+        return context
 
 
 class PaginaCliente(GroupRequiredMixin, LoginRequiredMixin, TemplateView):

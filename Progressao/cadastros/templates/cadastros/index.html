@@ -12,10 +12,56 @@
         </div>
     </div>
 </section>
-<!-- End Banner Area -->
-<br>
-<br>
-<br>
 
-<h2 class="text-center mt-2 mb-4"> nessa sessão terá os relatórios de venda</h2>
+<table class="table table-striped">
+
+    <tr>
+        <th>Data da Venda</th>
+        <th>Valor</th>
+    </tr>
+
+    {% for venda in vendas %}
+
+    <tr>
+        <td>{{venda.data_da_venda}}</td>
+        <td>{{venda.valor}}</td>
+        
+    </tr>
+    
+    {% empty %}
+    <tr>
+        <td colspan="3">Nenhum venda Registrada!</td>
+    </tr>
+    {% endfor %}
+    {% if vendas %}
+    <table class="table table-striped">
+        <tr>
+            <th>Total do dia</th><td>a</td>
+            <th>Total Geral</th><td>a</td>
+        </tr>
+    </table>
+    {% endif %}
+</table>
+<div class="filter-bar d-flex flex-wrap align-items-center">
+    <div class="pagination mx-auto">
+        <span class="step-links">
+
+            {% if vendas.has_previous %}
+            <a href="?pagina={{ vendas.previous_page_number }}">
+                <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+            </a>
+            {% endif %}
+
+            <span class="current text-white">
+                {{ vendas.number }} de {{ vendas.paginator.num_pages }}
+            </span>
+
+            {% if vendas.has_next %}
+            <a href="?pagina={{ vendas.next_page_number }}">
+                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </a>
+            {% endif %}
+        </span>
+    </div>
+</div>
 {%endblock%}
