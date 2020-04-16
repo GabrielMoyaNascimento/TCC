@@ -78,6 +78,14 @@ class Venda(models.Model):
         return "[{}] {}".format(self.pk, self.usuario.pessoa.nome)
 
 
+class Parcela(models.Model):
+    venda = models.ForeignKey(Venda, on_delete=models.PROTECT)
+    numero_parcela = models.DecimalField(max_digits=50, decimal_places=2)
+    valor_parcela = models.DecimalField(max_digits=50, decimal_places=2)
+
+    def __str__(self):
+        return self.numero_parcela + "-" + self.valor_parcela
+
 class Produto(models.Model):
     codigo = models.CharField(max_length=100)
     nome = models.CharField(max_length=100)
