@@ -65,11 +65,18 @@ class FormaEnvio(models.Model):
 
 
 class Venda(models.Model): 
+    PARCELA_CHOICES = (
+          ("1x","À Vista"),
+          ("2","2x"),
+          ("3","3x"),
+        
+    )
+
 
     data_da_venda = models.DateTimeField(auto_now=True)
     desconto = models.CharField(max_length=100, null=True, blank=True)
     valor = models.DecimalField(max_digits=50, decimal_places=2,null=True, blank=True)
-    parcelas = models.IntegerField()
+    parcelas = models.CharField(max_length = 100, choices = PARCELA_CHOICES)
     forma_pagamento = models.ForeignKey(FormaPagamento, on_delete=models.PROTECT,null=True, blank=True)
     forma_envio = models.ForeignKey(FormaEnvio, on_delete=models.PROTECT,null=True, blank=True)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)

@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
-from cadastros.models import Categoria, Produto, Pessoa, Venda, ProdutoVenda, Cupom
+from cadastros.models import Categoria, Produto, Pessoa, Venda, ProdutoVenda, Cupom,Parcela
 from .models import Carrinho
 from django.contrib.auth.models import User,Group
 
@@ -268,6 +268,23 @@ class VendaCreate(LoginRequiredMixin, CreateView):
         # Calcula o valor com desconto
         self.object.valor -= desconto
         # Salva a venda
+        if self.object.parcelas:
+            
+            i=1
+            parcelas = self.object.parcelas
+            for i in parcelas:
+                Parcela.objects.create(
+                    venda=self.object,
+                    numero_parcela = i,
+                    valor_parcela = valorTotal / int(self.object.parcelas)
+                )
+                print("parcela:",parcelas)
+                valorTotal = Parcela.valor_parcela
+                
+        else:
+            self.object.parcelas = 1
+
+
         self.object.save()
 
         # Fim do form_valid
