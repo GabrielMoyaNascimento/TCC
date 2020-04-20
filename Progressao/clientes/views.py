@@ -276,11 +276,13 @@ class VendaCreate(LoginRequiredMixin, CreateView):
                 Parcela.objects.create(
                     venda=self.object,
                     numero_parcela = i,
-                    valor_parcela = valorTotal / int(self.object.parcelas)
+                    valor_parcela = valorTotal / int(parcelas)
                 )
-                self.object.valorTotal = Parcela.valor_parcela
-                self.object.valor = valorTotal
                 print("parcela:",parcelas)
+                self.object.valorTotal = Parcela.valor_parcela
+                print("valor total:", valorTotal)
+                self.object.valor = valorTotal
+                print("valor final:", valorTotal)
                 
         else:
             self.object.parcelas = 1
