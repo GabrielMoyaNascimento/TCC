@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'cadastros.apps.CadastrosConfig',
     'usuarios.apps.UsuariosConfig',
     'clientes.apps.ClientesConfig',
+    'erros.apps.ErrosConfig',
     'django_cleanup.apps.CleanupConfig',  # app para remover arquivos antigos
 ]
 

@@ -26,5 +26,16 @@ urlpatterns = [
     # Importa todas as urls criadas no app páginas
     path('', include('cadastros.urls')),
     path('', include('usuarios.urls')),
+    path('', include('erros.urls')),
     path('', include('clientes.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
+   
+# Configurar as views que estão gerando os erros
+handler400 = 'erros.views.handler400'
+handler403 = 'erros.views.handler403'
+handler404 = 'erros.views.handler404'
+handler500 = 'erros.views.handler500'
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

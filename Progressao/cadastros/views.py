@@ -52,7 +52,8 @@ class PaginaCliente(GroupRequiredMixin, LoginRequiredMixin, TemplateView):
         context['categorias'] = Categoria.objects.all()
         return context
 
-class EstadoCreate(LoginRequiredMixin, CreateView):
+
+class EstadoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Estado
     fields = ['sigla', 'nome']
     template_name = 'cadastros/form.html'
@@ -234,12 +235,15 @@ class CupomCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
 # Update View
 
-class EstadoUpdate(LoginRequiredMixin, UpdateView):
+class EstadoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Estado
     fields = ['sigla', 'nome']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-estados')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
+
+
 
     
     
@@ -256,12 +260,16 @@ class EstadoUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-class CidadeUpdate(LoginRequiredMixin, UpdateView):
+class CidadeUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Cidade
     fields = ['nome', 'estado']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-cidades')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
+
+
+
 
     def get_context_data(self, *args, **kwargs):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
@@ -275,15 +283,14 @@ class CidadeUpdate(LoginRequiredMixin, UpdateView):
     # Devolve/envia o context para seu comportamento padrão
         return context
 
-
-
-class ProdutoUpdate(LoginRequiredMixin, UpdateView):
+class ProdutoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Produto
     fields = ['nome', 'codigo', 'descricao',
               'categoria', 'valorVenda', 'imagem']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-produtos')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
     def get_context_data(self, *args, **kwargs):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
@@ -297,20 +304,17 @@ class ProdutoUpdate(LoginRequiredMixin, UpdateView):
     # Devolve/envia o context para seu comportamento padrão
         return context
 
-# class ProdutoVendaUpdate(UpdateView):
-#	model = ProdutoVenda
-#	fields = ['produto', 'venda', 'valor_total', 'valor_envio', 'quantidade']
-#	template_name = 'cadastros/form.html'
-#	success_url = reverse_lazy('index')
 
-
-
-class FormaPagamentoUpdate(LoginRequiredMixin, UpdateView):
+class FormaPagamentoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = FormaPagamento
     fields = ['nome', 'descricao']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-formaPagamentos')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
+
+
+
 
     def get_context_data(self, *args, **kwargs):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
@@ -325,12 +329,15 @@ class FormaPagamentoUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-class FormaEnvioUpdate(LoginRequiredMixin, UpdateView):
+class FormaEnvioUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = FormaEnvio
     fields = ['nome', 'descricao']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-formaEnvios')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
+
+
 
     def get_context_data(self, *args, **kwargs):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
@@ -345,12 +352,13 @@ class FormaEnvioUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-class CategoriaUpdate(LoginRequiredMixin, UpdateView):
+class CategoriaUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Categoria
     fields = ['nome', 'descricao']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-categorias')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
     def get_context_data(self, *args, **kwargs):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
@@ -365,12 +373,13 @@ class CategoriaUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-class CupomUpdate(LoginRequiredMixin, UpdateView):
+class CupomUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Cupom
     fields = ['nome', 'desconto', 'validade']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-cupons')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
     def get_context_data(self, *args, **kwargs):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
@@ -389,64 +398,66 @@ class CupomUpdate(LoginRequiredMixin, UpdateView):
 
 
 # Delete View
-class EstadoDelete(LoginRequiredMixin, DeleteView):
+class EstadoDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Estado
     template_name = 'cadastros/formDelete.html'
     success_url = reverse_lazy('listar-estados')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
 
-class CidadeDelete(LoginRequiredMixin, DeleteView):
+class CidadeDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Cidade
     template_name = 'cadastros/formDelete.html'
     success_url = reverse_lazy('listar-cidades')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
-
-
-
-class ProdutoDelete(LoginRequiredMixin, DeleteView):
+class ProdutoDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Produto
     template_name = 'cadastros/formDelete.html'
     success_url = reverse_lazy('listar-produtos')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
-
-
-
-class FormaPagamentoDelete(LoginRequiredMixin, DeleteView):
+class FormaPagamentoDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     model = FormaPagamento
     template_name = 'cadastros/formDelete.html'
     success_url = reverse_lazy('listar-formaPagamentos')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
 
-class FormaEnvioDelete(LoginRequiredMixin, DeleteView):
+class FormaEnvioDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     model = FormaEnvio
     template_name = 'cadastros/formDelete.html'
     success_url = reverse_lazy('listar-formaEnvios')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
 
-class CategoriaDelete(LoginRequiredMixin, DeleteView):
+class CategoriaDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Categoria
     template_name = 'cadastros/formDelete.html'
     success_url = reverse_lazy('listar-categorias')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
 
-class CupomDelete(LoginRequiredMixin, DeleteView):
+class CupomDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Cupom
     template_name = 'cadastros/formDelete.html'
     success_url = reverse_lazy('listar-cupons')
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
 
 # List View
-class EstadoList(LoginRequiredMixin, ListView):
+class EstadoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     model = Estado
     template_name = 'cadastros/listar_estados.html'
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -461,10 +472,11 @@ class EstadoList(LoginRequiredMixin, ListView):
         return context
 
 
-class CidadeList(LoginRequiredMixin, ListView):
+class CidadeList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     model = Cidade
     template_name = 'cadastros/listar_cidades.html'
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -477,10 +489,12 @@ class CidadeList(LoginRequiredMixin, ListView):
         context['cidades'] = cidades
         return context
 
-class PessoaList(LoginRequiredMixin, ListView):
+
+class PessoaList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     model = Pessoa
     template_name = 'cadastros/listar_pessoas.html'
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
    
     def get_context_data(self, *args, **kwargs):
@@ -494,10 +508,12 @@ class PessoaList(LoginRequiredMixin, ListView):
         context['pessoas'] = pessoas
         return context
 
-class VendaList(LoginRequiredMixin, ListView):
+
+class VendaList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     model = Venda
     template_name = 'cadastros/listar_vendas.html'
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -511,10 +527,11 @@ class VendaList(LoginRequiredMixin, ListView):
         return context
 
 
-class ProdutoList(LoginRequiredMixin, ListView):
+class ProdutoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     model = Produto
     template_name = 'cadastros/listar_produtos.html'
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -528,10 +545,11 @@ class ProdutoList(LoginRequiredMixin, ListView):
         return context
 
 
-class EntradaProdutoList(LoginRequiredMixin, ListView):
+class EntradaProdutoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     model = EntradaProduto
     template_name = 'cadastros/listar_entrada_produtos.html'
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -545,10 +563,11 @@ class EntradaProdutoList(LoginRequiredMixin, ListView):
         return context
     
 
-class FormaPagamentoList(LoginRequiredMixin, ListView):
+class FormaPagamentoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     model = FormaPagamento
     template_name = 'cadastros/listar_formaPagamentos.html'
     login_url = reverse_lazy('login')
+    group_required = u"Administrador"
     
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -562,9 +581,10 @@ class FormaPagamentoList(LoginRequiredMixin, ListView):
         return context
 
 
-class FormaEnvioList(LoginRequiredMixin, ListView):
+class FormaEnvioList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     model = FormaEnvio
     template_name = 'cadastros/listar_formaEnvios.html'
+    group_required = u"Administrador"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -578,9 +598,10 @@ class FormaEnvioList(LoginRequiredMixin, ListView):
         return context
 
 
-class CategoriaList(LoginRequiredMixin, ListView):
+class CategoriaList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     model = Categoria
     template_name = 'cadastros/listar_categorias.html'
+    group_required = u"Administrador"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -594,9 +615,10 @@ class CategoriaList(LoginRequiredMixin, ListView):
         return context
 
 
-class CupomList(LoginRequiredMixin, ListView):
+class CupomList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     model = Cupom
     template_name = 'cadastros/listar_cupons.html'
+    group_required = u"Administrador"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
