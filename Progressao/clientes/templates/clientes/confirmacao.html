@@ -35,16 +35,12 @@
             <div class="col-lg-4">
                 <div class="details_item">
                     <h4>Endereço de Envio</h4>
-                    {% if pessoa %}
-                    {% with p=pessoa %}
                     <ul class="list">
-                        <li><a href="#"><span>Cidade</span> : {{p.cidade.nome}}</a></li>
-                        <li><a href="#"><span>Rua</span> : {{p.endereco}}</a></li>
-                        <li><a href="#"><span>Número</span> : {{p.numero}}</a></li>
-                        <li><a href="#"><span>CEP </span> : {{p.cep}}</a></li>
+                        <li><a href="#"><span>Cidade</span> : {{request.user.pessoa.cidade.nome}}</a></li>
+                        <li><a href="#"><span>Rua</span> : {{request.user.pessoa.endereco}}</a></li>
+                        <li><a href="#"><span>Número</span> : {{request.user.pessoa.numero}}</a></li>
+                        <li><a href="#"><span>CEP </span> : {{request.user.pessoa.cep}}</a></li>
                     </ul>
-                    {%endwith%}
-                    {%endif%}
                 </div>
             </div>
         </div>
@@ -52,15 +48,11 @@
             <h2>Detalhes da Compra</h2>
             <div class="table-responsive">
                 <table class="table">
-                    <thead>
                         <tr>
                             <th scope="col">Produto</th>
                             <th scope="col">Quantidade</th>
-                            <th scope="col">Parcelas</th>
                             <th scope="col">Total</th>
                         </tr>
-                    </thead>
-                    <tbody>
                         {% for pv in produtos_venda %}
                         <tr>
                             <td>
@@ -70,15 +62,32 @@
                                 <p>X {{ pv.qtde }}</p>
                             </td>
                             <td>
-                                <p>X{{ ultima_venda.parcelas }}</p>
-                            </td>
-                            <td>
                                 <p>R${{ pv.preco }}</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="100%">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Parcela</th>
+                            <th scope="col">&nbsp;</th>
+                            <th scope="col">Valor</th>
+                        </tr>
+                        {% for p in parcela %}
+                        <tr>
+                            <td>
+                                <p>X {{ p.numero_parcela }}</p>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <p>R${{ p.valor_parcela }}</p>
                             </td>
                         </tr>
                         {% endfor %}
                         
                         <tr>
+                            
                             <td>
                                 <h4>Total</h4>
                             </td>
@@ -89,7 +98,6 @@
                                 <p>R${{ ultima_venda.valor }}</p>
                             </td>
                         </tr>
-                    </tbody>
                 </table>
             </div>
         </div>

@@ -28,7 +28,7 @@
                 {% for venda in vendas %}
             
                 <tr>
-                    <td>{{venda.pk}}</td>
+                    <td>{{venda.pk}}/{{venda.usuario.pk}}</td>
                     <td>{{venda.data_da_venda}}</td>
                     <td>{{venda.desconto}}</td>
                     <td>{{venda.valor}}</td>

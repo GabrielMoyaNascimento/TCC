@@ -57,11 +57,11 @@ class ConfirmacaoView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        venda = Venda.objects.filter(usuario=self.request.user).last()
+        venda = Venda.objects.filter(usuario=self.request.user).first()
 
         context['ultima_venda'] = venda
         context['produtos_venda'] = ProdutoVenda.objects.filter(venda=venda)
-        context["pessoa"] = Pessoa.objects.get(usuario=self.request.user)
+        context["parcela"] = Parcela.objects.filter(venda=venda)
         return context
 
 
@@ -253,42 +253,45 @@ class VendaCreate(LoginRequiredMixin, CreateView):
             carrinho.delete()
 
         # Verifica se tem cupom e busca ele
-        if self.object.desconto:
-            cupom = Cupom.objects.get(nome=self.object.desconto)
-        else:
-            cupom = None
-
-        # Primeiro tira a % do desconto e transforma ele para inteiro e depois faz a conta
-        if cupom is not None:
+        try:
+            cupom = Cupom.objects.get(nome=self.object.desconto.upper())
             desconto = valorTotal * cupom.desconto / 100
-        else:
+        except:
+            cupom = ''    
             desconto = 0
+            self.object.desconto = ''
+
         # Define o valor bruto (sem desconto)
         self.object.valor = valorTotal
         # Calcula o valor com desconto
         self.object.valor -= desconto
+        self.object.valor += self.object.forma_envio.valor
         # Salva a venda
-        if self.object.parcelas:
+        self.object.save()
             
-            i=1
-            parcelas = self.object.parcelas
-            for i in parcelas:
+        i=1
+        parcelas = int(self.object.parcelas)
+        valorTotal = self.object.valor
+        valor_parcela = round((valorTotal / parcelas),2) 
+        for i in range (1,parcelas+1):
+
+            if i == parcelas:
                 Parcela.objects.create(
                     venda=self.object,
                     numero_parcela = i,
-                    valor_parcela = valorTotal / int(parcelas)
+                    valor_parcela = valorTotal 
                 )
-                print("parcela:",parcelas)
-                self.object.valorTotal = Parcela.valor_parcela
-                print("valor total:", valorTotal)
-                self.object.valor = valorTotal
-                print("valor final:", valorTotal)
+            else:
+                valorTotal -= valor_parcela
+                Parcela.objects.create(
+                    venda=self.object,
+                    numero_parcela = i,
+                    valor_parcela = valor_parcela 
+                )
+
+
+
                 
-        else:
-            self.object.parcelas = 1
-
-
-        self.object.save()
 
         # Fim do form_valid
         return url

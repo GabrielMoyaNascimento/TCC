@@ -20,7 +20,7 @@ class PaginaInicial(GroupRequiredMixin,LoginRequiredMixin, TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 
-        vendas = Venda.objects.all().reverse()
+        vendas = Venda.objects.all()
 
         paginator = Paginator(vendas, 10)  # Divide  em páginas
         page = self.request.GET.get('pagina')  # Recebe a página atual
@@ -518,7 +518,7 @@ class VendaList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 
-        vendas = Venda.objects.all().reverse()
+        vendas = Venda.objects.all()
 
         paginator = Paginator(vendas, 10)  # Divide  em páginas
         page = self.request.GET.get('pagina')  # Recebe a página atual

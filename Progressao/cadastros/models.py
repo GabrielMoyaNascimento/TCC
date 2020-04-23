@@ -59,14 +59,18 @@ class FormaPagamento(models.Model):
 class FormaEnvio(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.CharField(max_length=100)
+    valor = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
-        return self.nome
+        if self.valor > 0:
+            return self.nome + ' - R$' + str(self.valor)
+        else:    
+            return self.nome + ' - Grátis' 
 
 
 class Venda(models.Model): 
     PARCELA_CHOICES = (
-          ("1x","À Vista"),
+          ("1","À Vista"),
           ("2","2x"),
           ("3","3x"),
         
@@ -74,7 +78,7 @@ class Venda(models.Model):
 
 
     data_da_venda = models.DateTimeField(auto_now=True)
-    desconto = models.CharField(max_length=100, null=True, blank=True)
+    desconto = models.CharField(max_length=100, null=True, blank=True, verbose_name="cupom de desconto")
     valor = models.DecimalField(max_digits=50, decimal_places=2,null=True, blank=True)
     parcelas = models.CharField(max_length = 100, choices = PARCELA_CHOICES)
     forma_pagamento = models.ForeignKey(FormaPagamento, on_delete=models.PROTECT,null=True, blank=True)
@@ -83,11 +87,14 @@ class Venda(models.Model):
 
     def __str__(self):
         return "[{}] {}".format(self.pk, self.usuario.pessoa.nome)
+    
+    class Meta:
+        ordering = ["-pk"]
 
 
 class Parcela(models.Model):
     venda = models.ForeignKey(Venda, on_delete=models.PROTECT)
-    numero_parcela = models.DecimalField(max_digits=50, decimal_places=2)
+    numero_parcela = models.IntegerField()
     valor_parcela = models.DecimalField(max_digits=50, decimal_places=2)
 
     def __str__(self):
