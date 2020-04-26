@@ -170,7 +170,7 @@ class FormaPagamentoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
 class FormaEnvioCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = FormaEnvio
-    fields = ['nome', 'descricao']
+    fields = ['nome', 'descricao', 'valor']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-formaEnvios')
     login_url = reverse_lazy('login')
@@ -331,7 +331,7 @@ class FormaPagamentoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
 
 class FormaEnvioUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = FormaEnvio
-    fields = ['nome', 'descricao']
+    fields = ['nome', 'descricao', 'valor']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-formaEnvios')
     login_url = reverse_lazy('login')

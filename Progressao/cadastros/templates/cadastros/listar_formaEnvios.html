@@ -22,6 +22,7 @@
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Descrição</th>
+                    <th>Valor</th>
                     <th>Opções</th>
                 </tr>
             
@@ -31,6 +32,7 @@
                     <td>{{formaEnvio.pk}}</td>
                     <td>{{formaEnvio.nome}}</td>
                     <td>{{formaEnvio.descricao}}</td>
+                    <td>{{formaEnvio.valor}}</td>
                     <td>
                         <a href="{% url 'atualizar-formaEnvio' formaEnvio.pk %}" class="btn btn-warning" title= "Editar">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
