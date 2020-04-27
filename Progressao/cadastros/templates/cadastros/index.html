@@ -17,25 +17,27 @@
     <div class="row pt-5 mt-3">
         <div class="col-lg">
             {% if request.user.groups.all.0.name == "Administrador" %}
-            <h3>Olá Admin,</h3><br>
-            {% else %}
-            <h3>Olá Funcionário,</h3><br>
-            {% endif %}
-
+            <h3>Olá Admin, bem vindo a pagina inicial do administrativo</h3><br>
+            <h3>Relatório de vendas</h3>
+            Data Inicial
+            <input type="date" class="rounded">
+            Data Final
+            <input type="date" class="rounded">
+            <button class="primary-btn my-3">Pesquisar</button>
             <table class="table table-striped">
-
+                
                 <tr>
                     <th>Data da Venda</th>
                     <th>Valor</th>
                 </tr>
-
+                
                 {% for venda in vendas %}
-
+                
                 <tr>
                     <td>{{venda.data_da_venda}}</td>
                     <td>{{venda.valor}}</td>   
                 </tr>
-    
+                
                 {% empty %}
                 <tr>
                     <td colspan="3">Nenhum venda Registrada!</td>
@@ -49,31 +51,35 @@
                     </tr>
                 </table>
                 {% endif %}
+
             </table>
         </div>
     </div>
     
-<div class="filter-bar d-flex flex-wrap align-items-center">
-    <div class="pagination mx-auto">
-        <span class="step-links">
-
-            {% if vendas.has_previous %}
-            <a href="?pagina={{ vendas.previous_page_number }}">
-                <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-            </a>
+    <div class="filter-bar d-flex flex-wrap align-items-center">
+        <div class="pagination mx-auto">
+            <span class="step-links">
+                
+                {% if vendas.has_previous %}
+                <a href="?pagina={{ vendas.previous_page_number }}">
+                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                </a>
+                {% endif %}
+                
+                <span class="current text-white">
+                    {{ vendas.number }} de {{ vendas.paginator.num_pages }}
+                </span>
+                
+                {% if vendas.has_next %}
+                <a href="?pagina={{ vendas.next_page_number }}">
+                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
             {% endif %}
-
-            <span class="current text-white">
-                {{ vendas.number }} de {{ vendas.paginator.num_pages }}
             </span>
-
-            {% if vendas.has_next %}
-            <a href="?pagina={{ vendas.next_page_number }}">
-                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-            </a>
-            {% endif %}
-        </span>
+        </div>
     </div>
-</div>
+    {% else %}
+    <h3>Olá Funcionário, bem vindo a pagina inicial do administrativo</h3><br>
+    {% endif %}
 </div>
 {%endblock%}

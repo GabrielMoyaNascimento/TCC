@@ -59,7 +59,7 @@ class EstadoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-estados')
     login_url = reverse_lazy('login')
-    
+    group_required = u"Administrador"
 
     def get_context_data(self, *args, **kwargs):
         # Chamar o "pai" para que sempre tenha o comportamento padrão, além do nosso
