@@ -19,9 +19,9 @@
             {% if request.user.groups.all.0.name == "Administrador" %}
             <h3>Olá Admin, bem vindo a pagina inicial do administrativo</h3><br>
             <h3>Relatório de vendas</h3>
-            Data Inicial
+            Data Inicial: 
             <input type="date" class="rounded">
-            Data Final
+            Data Final: 
             <input type="date" class="rounded">
             <button class="primary-btn my-3">Pesquisar</button>
             <table class="table table-striped">
@@ -46,7 +46,7 @@
                 {% if vendas %}
                 <table class="table table-striped">
                     <tr>
-                        <th>Total do dia</th><td>a</td>
+                        <th>Total da Pesquisa</th><td>a</td>
                         <th>Total Geral</th><td>a</td>
                     </tr>
                 </table>
