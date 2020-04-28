@@ -11,6 +11,7 @@ from django.core.paginator import Paginator
 from cadastros.models import Categoria, Produto, Pessoa, Venda, ProdutoVenda, Cupom,Parcela
 from .models import Carrinho
 from django.contrib.auth.models import User,Group
+from datetime import datetime
 
 
 class PaginaInicial(TemplateView):
@@ -18,7 +19,14 @@ class PaginaInicial(TemplateView):
     
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-
+        
+        #Filtro de vendas por data
+        dmin = self.request.GET.get('min_date')
+        dmax = self.request.GET.get('max_date')
+        if dmin is not None & dmax is not None:
+            dmin = datetime.strptime(dmin, "%d/%m/%Y")
+            dmax = datetime.strptime(dmax, "%d/%m/%Y")
+            Venda.objects.filter(data_da_venda__range=(dmin, dmax))
 
         # Filtra a categoria
         cat = self.request.GET.get('categoria')  # Recebe a página atual

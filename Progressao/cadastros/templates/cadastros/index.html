@@ -19,11 +19,13 @@
             {% if request.user.groups.all.0.name == "Administrador" %}
             <h3>Olá Admin, bem vindo a pagina inicial do administrativo</h3><br>
             <h3>Relatório de vendas</h3>
-            Data Inicial: 
-            <input type="date" class="rounded">
-            Data Final: 
-            <input type="date" class="rounded">
-            <button class="primary-btn my-3">Pesquisar</button>
+            <form action="">
+                Data Inicial: 
+                <input type="date" class="rounded">
+                Data Final: 
+                <input type="date" class="rounded">
+                <button type="submit" class="primary-btn my-3">Pesquisar</button>
+            </form>
             <table class="table table-striped">
                 
                 <tr>
