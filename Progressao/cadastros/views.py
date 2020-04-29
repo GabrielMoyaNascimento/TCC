@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from .models import *
 from datetime import datetime
+from django.db.models import Sum
 
 # Create View
 
@@ -26,6 +27,8 @@ class PaginaInicial(GroupRequiredMixin,LoginRequiredMixin, TemplateView):
         if dmin is not None and dmax is not None:
             lista = Venda.objects.filter(data_da_venda__range=(dmin, dmax))
 
+
+            context['valorTotal'] = lista.aggregate(Sum('valor'))
             context['lista'] = lista
         return context
 

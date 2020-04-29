@@ -111,37 +111,11 @@
 
                             <ul class="list list_2">
                                 <li><a href="#">Subtotal <span>R${{valor}}</span></a></li>
-                                <li><a href="#">Frete <span>R$50.00</span></a></li>
-                                <li><a href="#">Total <span>R$450.00</span></a></li>
                             </ul>
 
                             <div class="payment_item active">
                                 {{ form|crispy }}
 
-                                <!-- <div class="radion_btn">
-                                    <input type="radio" id="f-option5" name="selector">
-                                    <label for="f-option5">Boleto </label>
-                                    <img src="{% static 'karma/img/product/boleto.png'%}" alt="">
-                                    <div class="check"></div>
-                                </div>
-                                <div class="radion_btn">
-                                    <input type="radio" id="f-option6" name="selector">
-                                    <label for="f-option6">Cartão de Crédito </label>
-                                    <img src="{% static 'karma/img/product/cartoes.png'%}" alt="">
-                                    <div class="check"></div>
-                                    <div class="form-row align-items-center">
-                                        <div class="col-auto my-3">
-                                            <label class="mr-sm-2" for="inlineFormCustomSelect">Parcelamento</label>
-                                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                                <option selected>Selecionar</option>
-                                                <option value="1">1X</option>
-                                                <option value="2">2X</option>
-                                                <option value="3">3X</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                
                                 <button type="submit" class="primary-btn">Finalizar Pagamento</button>
                             </div>
                         </form>
@@ -150,6 +124,7 @@
                 {%else%}
                 <div class="col-md">
                     <h4>Você não possui itens no carrinho!</h4>
+                    <a class="primary-btn" href="{% url 'clientes-index' %}">Voltar</a>
                 </div>
                 {% endif %}
             </div>
