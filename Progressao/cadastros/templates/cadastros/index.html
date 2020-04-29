@@ -1,5 +1,6 @@
 {% extends 'cadastros/formulario.html' %}
 
+
 {%block conteudo%}
 <h2 class="text-center mt-2 mb-4">Bem vindo ao Administrativo</h2>
 <!-- Start Banner Area -->
@@ -13,7 +14,7 @@
     </div>
 </section>
 <div class="container mt-5 py-5">
-
+    
     <div class="row pt-5 mt-3">
         <div class="col-lg">
             {% if request.user.groups.all.0.name == "Administrador" %}
@@ -21,67 +22,65 @@
             <h3>Relatório de vendas</h3>
             <form action="">
                 Data Inicial: 
-                <input type="date" name="min_date"class="rounded">
+                <input type="date" name="min_date"class="rounded" required="required">
                 Data Final: 
-                <input type="date" name="max_date" class="rounded">
+                <input type="date" name="max_date" class="rounded" required="required">
                 <button type="submit" class="primary-btn my-3">Pesquisar</button>
             </form>
-            <table class="table table-striped">
-                
-                <tr>
-                    <th>Data da Venda</th>
-                    <th>Valor</th>
-                </tr>
+            <table class="table table-striped mydatatable">
+                <thead>
+                    
+                    <tr>
+                        <th>Data da Venda</th>
+                        <th>Forma Pagamento</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
                 
                 {% for venda in lista %}
-                
-                <tr>
-                    <td>{{venda.data_da_venda}}</td>
-                    <td>{{venda.valor}}</td>   
-                </tr>
-                
-                {% empty %}
-                <tr>
-                    <td colspan="3">Nenhum filtro selecionado!</td>
-                </tr>
+                <tbody>
+                    
+                    <tr>
+                        <td>{{venda.data_da_venda}}</td>
+                        <td>{{venda.forma_pagamento}}</td>   
+                        <td>{{venda.valor}}</td>   
+                    </tr>
+                    
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">Nenhum filtro selecionado!</td>
+                    </tr>
+                </tbody>
                 {% endfor %}
                 {% if lista %}
-                <table class="table table-striped">
+                <tfoot>
                     <tr>
                         <th>Total da Pesquisa</th><td>R$</td>
                         <th>Total Geral</th><td>R$</td>
                     </tr>
-                </table>
+                </tfoot>
                 {% endif %}
-
+                
             </table>
         </div>
     </div>
     
-    <div class="filter-bar d-flex flex-wrap align-items-center">
-        <div class="pagination mx-auto">
-            <span class="step-links">
-                
-                {% if vendas.has_previous %}
-                <a href="?pagina={{ vendas.previous_page_number }}">
-                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-                </a>
-                {% endif %}
-                
-                <span class="current text-white">
-                    {{ vendas.number }} de {{ vendas.paginator.num_pages }}
-                </span>
-                
-                {% if vendas.has_next %}
-                <a href="?pagina={{ vendas.next_page_number }}">
-                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                </a>
-            {% endif %}
-            </span>
-        </div>
-    </div>
     {% else %}
     <h3>Olá Funcionário, bem vindo a pagina inicial do administrativo</h3><br>
     {% endif %}
 </div>
+{%endblock%}
+
+{%block scripts%}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="https://stachpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stachpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $('.mydatatable').DataTable();
+</script>
+
 {%endblock%}
