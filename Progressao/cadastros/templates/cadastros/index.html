@@ -21,9 +21,9 @@
             <h3>Relatório de vendas</h3>
             <form action="">
                 Data Inicial: 
-                <input type="date" class="rounded">
+                <input type="date" name="min_date"class="rounded">
                 Data Final: 
-                <input type="date" class="rounded">
+                <input type="date" name="max_date" class="rounded">
                 <button type="submit" class="primary-btn my-3">Pesquisar</button>
             </form>
             <table class="table table-striped">
@@ -33,7 +33,7 @@
                     <th>Valor</th>
                 </tr>
                 
-                {% for venda in vendas %}
+                {% for venda in lista %}
                 
                 <tr>
                     <td>{{venda.data_da_venda}}</td>
@@ -42,14 +42,14 @@
                 
                 {% empty %}
                 <tr>
-                    <td colspan="3">Nenhum venda Registrada!</td>
+                    <td colspan="3">Nenhum filtro selecionado!</td>
                 </tr>
                 {% endfor %}
-                {% if vendas %}
+                {% if lista %}
                 <table class="table table-striped">
                     <tr>
-                        <th>Total da Pesquisa</th><td>a</td>
-                        <th>Total Geral</th><td>a</td>
+                        <th>Total da Pesquisa</th><td>R$</td>
+                        <th>Total Geral</th><td>R$</td>
                     </tr>
                 </table>
                 {% endif %}

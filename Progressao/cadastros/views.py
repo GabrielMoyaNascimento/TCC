@@ -8,7 +8,7 @@ from braces.views import GroupRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from .models import *
-
+from datetime import datetime
 
 # Create View
 
@@ -20,12 +20,16 @@ class PaginaInicial(GroupRequiredMixin,LoginRequiredMixin, TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 
-        vendas = Venda.objects.all()
+        #Filtro de vendas por data
+        dmin = self.request.GET.get('min_date')
+        dmax = self.request.GET.get('max_date')
+        if dmin is not None and dmax is not None:
+            lista = Venda.objects.filter(data_da_venda__range=(dmin, dmax))
 
-        paginator = Paginator(vendas, 10)  # Divide  em páginas
-        page = self.request.GET.get('pagina')  # Recebe a página atual
-        vendas = paginator.get_page(page)  # Filtra os objetos dessa página
-        context['vendas'] = vendas
+            # paginator = Paginator(lista, 10)  # Divide  em páginas
+            # page = self.request.GET.get('pagina')  # Recebe a página atual
+            # lista = paginator.get_page(page)  # Filtra os objetos dessa página
+            context['lista'] = lista
         return context
 
 
