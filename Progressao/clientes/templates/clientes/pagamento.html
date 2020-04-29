@@ -18,6 +18,7 @@
     <div class="container">
         <div class="billing_details">
             <div class="row">
+                {% if produtosCarrinho %}
                 {% if pessoa %}
                 {% with p=pessoa %}
                 <div class="col-lg-8">
@@ -146,6 +147,11 @@
                         </form>
                     </div>
                 </div>
+                {%else%}
+                <div class="col-md">
+                    <h4>Você não possui itens no carrinho!</h4>
+                </div>
+                {% endif %}
             </div>
         </div>
 </section>

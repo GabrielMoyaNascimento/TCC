@@ -1,5 +1,5 @@
 {% extends 'cadastros/formulario.html' %}
-
+{% load static %}
 
 {%block conteudo%}
 <h2 class="text-center mt-2 mb-4">Bem vindo ao Administrativo</h2>
@@ -27,7 +27,7 @@
                 <input type="date" name="max_date" class="rounded" required="required">
                 <button type="submit" class="primary-btn my-3">Pesquisar</button>
             </form>
-            <table class="table table-striped mydatatable">
+            <table class="table table-striped " id="tabela-listar">
                 <thead>
                     
                     <tr>
@@ -37,8 +37,8 @@
                     </tr>
                 </thead>
                 
-                {% for venda in lista %}
                 <tbody>
+                    {% for venda in lista %}
                     
                     <tr>
                         <td>{{venda.data_da_venda}}</td>
@@ -48,17 +48,15 @@
                     
                     {% empty %}
                     <tr>
-                        <td colspan="3">Nenhum filtro selecionado!</td>
+                        <td colspan="100%">Nenhum registro encontrado!</td>
                     </tr>
+                    {% endfor %}
                 </tbody>
-                {% endfor %}
                 {% if lista %}
-                <tfoot>
                     <tr>
-                        <th>Total da Pesquisa</th><td>R$</td>
-                        <th>Total Geral</th><td>R$</td>
+                        <!-- <th>Total da Pesquisa</th> -->
+                        <th colspan="100%">Total Geral</th>
                     </tr>
-                </tfoot>
                 {% endif %}
                 
             </table>
@@ -72,15 +70,10 @@
 {%endblock%}
 
 {%block scripts%}
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="https://stachpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stachpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<script>
-    $('.mydatatable').DataTable();
-</script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
+<script src="{% static 'js/datatablesbr.js' %}"></script>
 
+{%endblock%}
+{%block styles%}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css" />
 {%endblock%}

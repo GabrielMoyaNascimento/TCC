@@ -26,9 +26,6 @@ class PaginaInicial(GroupRequiredMixin,LoginRequiredMixin, TemplateView):
         if dmin is not None and dmax is not None:
             lista = Venda.objects.filter(data_da_venda__range=(dmin, dmax))
 
-            # paginator = Paginator(lista, 10)  # Divide  em páginas
-            # page = self.request.GET.get('pagina')  # Recebe a página atual
-            # lista = paginator.get_page(page)  # Filtra os objetos dessa página
             context['lista'] = lista
         return context
 
