@@ -15,10 +15,10 @@
 </section>
 <div class="container">
     <div class="row">
-        <div class="col-xl-3 col-lg-4 col-md-5">
+        <div class="col-xl-3 col-lg-4 col-md-5 ">
             <h2 class="text-center mt-2 mb-4">&nbsp;</h2>
-            <div class="sidebar-categories">
-                <div class="head">Categorias</div>
+            <div class="sidebar-categories border rounded">
+                <div class="head border rounded">Categorias</div>
                 {% for categoria in categorias %}
                 <ul class="main-categories">
                     <li class="main-nav-list">
@@ -39,7 +39,7 @@
             <h2 class="text-center mt-2 mb-4">&nbsp;</h2>
 
             <!-- Start Filter Bar -->
-            <div class="filter-bar d-flex flex-wrap align-items-center">
+            <div class="filter-bar d-flex flex-wrap align-items-center border rounded">
                 <div class="pagination mx-auto">
                     <span class="step-links">
 
@@ -62,7 +62,7 @@
                         {% endif %}
 
                         <a href="{% url 'clientes-index' %}" class="ml-5" title="Limpar filtro">
-                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                            <i class="fa fa-filter" aria-hidden="true"></i>
                         </a>
                     </span>
                 </div>
@@ -98,13 +98,13 @@
                         </div>
                     </div>
                     {% empty %}
-                    <span>Nenhum Produto cadastrado.</span>
+                    <span class="col-lg-4 col-md-6 my-3">Nenhum Produto encontrado.</span>
                     {% endfor %}
                 </div>
             </section>
 
             <!-- Start Filter Bar -->
-            <div class="filter-bar d-flex flex-wrap align-items-center mb-3">
+            <div class="filter-bar d-flex flex-wrap align-items-center mb-3 my-3 border rounded">
 
                 <div class="pagination mx-auto">
                     <span class="step-links">
@@ -128,7 +128,7 @@
                         {% endif %}
 
                         <a href="{% url 'clientes-index' %}" class="ml-5" title="Limpar filtro">
-                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                            <i class="fa fa-filter" aria-hidden="true"></i>
                         </a>
                     </span>
                 </div>

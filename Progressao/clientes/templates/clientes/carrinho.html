@@ -27,7 +27,7 @@
                         {% for c in carrinho %}
                         <tr>
                             <td>
-                                <img src="{{ c.produto.imagem.url }}" width="150" />
+                                <img src="{{ c.produto.imagem.url }}" class="border rounded" width="150" />
                             </td>
                             <td>{{c.produto.nome}}</td>
                             <td>R${{c.valor_unid|floatformat:2}}</td>
@@ -69,10 +69,7 @@
                             
                         </tr>
                         <tr>
-                            <td colspan="1"></td>
-                            <td colspan="2" class="text-dark text-right">
-                                
-                            </td>
+                            
                         </tr>
                         <tr class="out_button_area">
                             <td>
@@ -82,7 +79,7 @@
 
                             </td>
                             
-                            <td colspan="2">
+                            <td colspan="4">
                                 <div class="checkout_btn_inner d-flex align-items-center">
                                     <a class="gray_btn" href="{% url 'clientes-index' %}">Continuar comprando</a>
                                     <a class="primary-btn" href="{% url 'clientes-pagamento'  %}">Continuar para Pagamento</a>

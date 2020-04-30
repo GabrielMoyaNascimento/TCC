@@ -13,13 +13,13 @@
         </div>
     </div>
 </section>
-<div class="container mt-5 py-5">
-    
+<div class="container">   
     <div class="row pt-5 mt-3">
         <div class="col-lg">
             {% if request.user.groups.all.0.name == "Administrador" %}
-            <h3>Olá Admin, bem vindo a pagina inicial do administrativo</h3><br>
+            <h3>Olá {{user.pessoa.nome}},</h3><br>
             <h3>Relatório de vendas</h3>
+            <p class="font-weight-light">Selecione um período e fazer uma pesquisa para verificar as vendas e o lucro.</p>
             <form action="">
                 Data Inicial: 
                 <input type="date" name="min_date"class="rounded" required="required">

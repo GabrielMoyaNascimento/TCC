@@ -22,7 +22,7 @@
                 <div class="col-lg-6">
                     <div class="s_Product_carousel">
                         <div class="single-prd-item">
-                            <img class="img-fluid" src="{{object.imagem.url}}" alt="">
+                            <img class="img-fluid border rounded" src="{{object.imagem.url}}" alt="">
                         </div>
                     </div>
                 </div>
@@ -31,8 +31,8 @@
                         <h3>{{object.nome}}</h3>
                         <h2>R${{object.valorVenda}}</h2>
                         <ul class="list">
-                            <li><a class="active" href="#"><span>Categoria</span> : {{object.categoria.nome}}</a></li>
-                            <li><a href="#"><span>Info</span> : {{object.estoque}} em estoque</a></li>
+                            <li><a class="active"><span>Categoria</span> : {{object.categoria.nome}}</a></li>
+                            <li><a href="#"><span>Info</span> : {{object.estoque}} </a><u class="text-success"> Disponível</u></li>
                         </ul>
                         <p>&nbsp;</p>
                         <div class="product_count">
@@ -53,6 +53,7 @@
             </div>
         </div>
     </div>
+    
     <!--================End Single Product Area =================-->
     
     <!--================Product Description Area =================-->
@@ -71,6 +72,7 @@
                 
             </div>
         </div>
+    </section>
 <div class="clearfix"></div>
 {% endblock %}
 

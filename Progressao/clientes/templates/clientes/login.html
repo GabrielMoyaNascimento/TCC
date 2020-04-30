@@ -22,7 +22,7 @@
 
             <h3 class="text-warning">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                Você já está autenticado e não é possivel acessar essa página.
+                Você já está autenticado ou não é possivel acessar essa página.
             </h3>
 
             <img src="{% static 'img/loading.gif' %}" alt="" class="img-fluid">
@@ -45,7 +45,7 @@
                     <div class="hover">
                         <h4>Novo no nosso Site?</h4>
                         <p>Conheça as vantagens de nossos produtos feitos a mão dentro do conforto de sua casa.</p>
-                        <a class="primary-btn" href="/registrar">Criar Uma Conta</a>
+                        <a class="primary-btn rounded" href="/registrar">Criar Uma Conta</a>
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Senha'">
                         </div>
                         <div class="col-md-12 form-group">
-                            <button type="submit" value="submit" class="primary-btn">Entrar</button>
+                            <button type="submit" value="submit" class="primary-btn rounded">Entrar</button>
                             <a href="{% url 'password_reset' %}">Esqueceu a senha?</a>
                         </div>
                     </form>
