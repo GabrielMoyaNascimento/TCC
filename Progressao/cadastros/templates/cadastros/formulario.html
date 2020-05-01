@@ -45,69 +45,85 @@
     <header class="header_area sticky-header">
         <div class="main_menu">
             <nav class="navbar navbar-expand-lg navbar-light main_box border rounded">
-                <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="{% url 'cadastrar-index' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="/adm">Inicio</a></li>
-                            {% if request.user.is_authenticated  %}
-                            <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                                    aria-haspopup="true" aria-expanded="false">Cadastros</a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'cadastrar-estado' %}">Estado</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'cadastrar-cidade' %}">Cidade</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'cadastrar-categoria' %}">Categoria</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'cadastrar-produto' %}">Produto</a>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'entrada-produto' %}">Entrada de Produto</a>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'cadastrar-cupom' %}">Cupom</a>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'cadastrar-formaEnvio' %}">Forma Envio</a>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'cadastrar-formaPagamento' %}">Forma Pagamento</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                                    aria-haspopup="true" aria-expanded="false">Listas</a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'listar-estados' %}">Estado</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'listar-cidades' %}">Cidade</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'listar-pessoas' %}">Pessoa</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'listar-categorias' %}">Categoria</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'listar-produtos' %}">Produto</a>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'listar-entrada-produtos' %}">Entrada de Produto</a>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'listar-cupons' %}">Cupom</a>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'listar-vendas' %}">Vendas</a>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'listar-formaEnvios' %}">Forma Envio</a>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'listar-formaPagamentos' %}">Forma Pagamento</a>
-                                </ul>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'exemplo-cliente' %}">Exemplo Tela Cliente</a></li>
-                            <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                aria-expanded="false">Informações Pessoais</a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="https://dashboard.tawk.to/login">Canal de Perguntas</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'alterar-senha' %}">Alterar senha</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
-                                </ul>
-                            </li>
-                            {% else %}
-                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Entrar</a></li>
-                            {% endif %}
+              <div class="container">
+                <a class="navbar-brand logo_h" href="{% url 'cadastrar-index' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/adm">Inicio</a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Cadastros
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'cadastrar-estado' %}">Estado</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'cadastrar-cidade' %}">Cidade</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'cadastrar-categoria' %}">Categoria</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'cadastrar-produto' %}">Produto</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'entrada-produto' %}">Entrada de Produto</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'cadastrar-cupom' %}">Cupom</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'cadastrar-formaEnvio' %}">Forma Envio</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'cadastrar-formaPagamento' %}">Forma Pagamento</a></li>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Listas
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-estados' %}">Estado</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-cidades' %}">Cidade</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-pessoas' %}">Pessoa</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-categorias' %}">Categoria</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-produtos' %}">Produto</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-entrada-produtos' %}">Entrada de Produto</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-cupons' %}">Cupom</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-vendas' %}">Vendas</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-formaEnvios' %}">Forma Envio</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-formaPagamentos' %}">Forma Pagamento</a></li>
+                            </ul>
                             
-                        </ul>
-                    </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'exemplo-cliente'%}">Exemplo Tela Cliente</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Informações Pessoais
+                            </a>
+                            <ul class="dropdown-menu">
+                                    <li class="dropdown-item"><a class="nav-link" href="https://dashboard.tawk.to/login">Canal de Perguntas</a></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li class="dropdown-item"><a class="nav-link" href="{% url 'alterar-senha' %}">Alterar senha</a></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li class="dropdown-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                            </ul> 
+                        </li>
+                    </ul>
                 </div>
+              </div>
             </nav>
         </div>
     </header>

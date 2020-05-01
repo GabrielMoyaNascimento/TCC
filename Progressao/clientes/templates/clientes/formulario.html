@@ -60,13 +60,15 @@
                             <li class="nav-item active"><a class="nav-link" href="{% url 'clientes-index' %}">Inicio</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'clientes-carrinho' %}">Carrinho</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'clientes-contato' %}">Contato</a></li>
-                            <li class="nav-item submenu dropdown">
+                            <li class="nav-item  dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                 aria-expanded="false">Informações Pessoais</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'clientes-perfil' %}">Perfil</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'alterar-senha' %}">Alterar senha</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                                    <li class="dropdown-item"><a class="nav-link" href="{% url 'clientes-perfil' %}">Perfil</a></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li class="dropdown-item"><a class="nav-link" href="{% url 'alterar-senha' %}">Alterar senha</a></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li class="dropdown-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                                 </ul>
                             </li>
                             {% else %}
