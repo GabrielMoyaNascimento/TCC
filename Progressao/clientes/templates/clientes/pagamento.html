@@ -131,3 +131,43 @@
         </div>
 </section>
 {%endblock%}
+
+
+
+{% block scripts %}
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+
+<script>
+    $(document).ready(function () {
+
+        // Ativa o a vista
+        $("#id_parcelas").val("1");
+        // Esconde as outras opções
+        $("#id_parcelas option[value=2]").css("display", "none");
+        $("#id_parcelas option[value=3]").css("display", "none");
+        
+        // Quando o usuário alterar a forma de pagamento...
+        $("#id_forma_pagamento").change(function (e) { 
+
+            // Pega o texto da opção selecionada
+            var forma = $("#id_forma_pagamento option:selected").text();
+
+            // Verifica o tipo e des/ativa as opções para cada um
+            if(forma == "Cartão de Crédito"){
+                $("#id_parcelas option[value=2]").css("display","block");
+                $("#id_parcelas option[value=3]").css("display","block");
+
+            } else{
+                $("#id_parcelas").val("1");
+                $("#id_parcelas option[value=2]").css("display", "none");
+                $("#id_parcelas option[value=3]").css("display", "none");
+            }
+            
+                
+        });
+        
+    });
+</script>
+
+{% endblock %}
+    
