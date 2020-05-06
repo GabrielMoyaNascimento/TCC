@@ -200,7 +200,7 @@ class ProdutoDetailView(DetailView):
 #Criando a venda
 class VendaCreate(LoginRequiredMixin, CreateView):
     model = Venda
-    fields = [ 'desconto', 'parcelas', 'forma_pagamento', 'forma_envio']
+    fields = ['desconto', 'forma_pagamento', 'parcelas', 'forma_envio']
     template_name = 'clientes/pagamento.html'
     success_url = reverse_lazy('clientes-confirmacao')
     login_url = reverse_lazy('login')

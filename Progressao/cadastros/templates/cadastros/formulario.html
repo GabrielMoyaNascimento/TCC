@@ -80,7 +80,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                Listas
+                                Lista Cadastros
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-estados' %}">Estado</a></li>
@@ -92,8 +92,17 @@
                                 <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-categorias' %}">Categoria</a></li>
                                 <div class="dropdown-divider"></div>
                                 <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-produtos' %}">Produto</a></li>
-                                <div class="dropdown-divider"></div>
-                                <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-entrada-produtos' %}">Entrada de Produto</a></li>
+                            </ul>
+                            
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Lista Gerencial
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-entrada-produtos' %}">Entrada de Produto</a>
+                                </li>
                                 <div class="dropdown-divider"></div>
                                 <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-cupons' %}">Cupom</a></li>
                                 <div class="dropdown-divider"></div>
@@ -103,7 +112,7 @@
                                 <div class="dropdown-divider"></div>
                                 <li class="dropdown-item"><a class="nav-link" href="{% url 'listar-formaPagamentos' %}">Forma Pagamento</a></li>
                             </ul>
-                            
+                        
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'exemplo-cliente'%}">Exemplo Tela Cliente</a>

@@ -1,5 +1,6 @@
 {% extends 'cadastros/formulario.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block conteudo %}
 <div class="container mt-5 py-5">
@@ -16,32 +17,33 @@
             <div class="text-right py-2">
                 <a href="{% url 'entrada-produto' %}" class="btn btn-primary btn-sm">Adicionar nova Entrada</a>
             </div>
-            <table class="table table-striped">
+            <table class="table table-striped" id="tabela-listar">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Data</th>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in entrada %}
             
-                <tr>
-                    <th>ID</th>
-                    <th>Data</th>
-                    <th>Produto</th>
-                    <th>Quantidade</th>
-                </tr>
+                    <tr>
+                        <td>{{e.pk}}</td>
+                        <td>{{e.data_entrada}}</td>
+                        <td>{{e.produto.nome}}</td>
+                        <td>{{e.quantidade}}</td>
+                    </tr>
             
-                {% for e in entrada %}
-            
-                <tr>
-                    <td>{{e.pk}}</td>
-                    <td>{{e.data_entrada}}</td>
-                    <td>{{e.produto.nome}}</td>
-                    <td>{{e.quantidade}}</td>
-                </tr>
-            
-                {% empty %}
-                <tr>
-                    <td colspan="3">Nenhuma entrada cadastrada!</td>
-                </tr>
-                {% endfor %}
-            
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">Nenhuma entrada cadastrada!</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
-            <div class="filter-bar d-flex flex-wrap align-items-center">
+            <!-- <div class="filter-bar d-flex flex-wrap align-items-center">
                 <div class="pagination mx-auto">
                     <span class="step-links">
             
@@ -62,12 +64,17 @@
                         {% endif %}
                     </span>
                 </div>
-            </div>
-
-
-
+            </div> -->
         </div>
     </div>
-
 </div>
 {% endblock %}
+
+{%block scripts%}
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
+<script src="{% static 'js/datatablesbr.js' %}"></script>
+{%endblock%}
+
+{%block styles%}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css" />
+{%endblock%}

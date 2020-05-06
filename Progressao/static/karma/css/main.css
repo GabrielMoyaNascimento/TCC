@@ -1043,7 +1043,7 @@ h1, h2, h3, h4, h5, h6 {
       .header_area .navbar .nav .nav-item .nav-link {
         text-transform: uppercase;
         padding: 0px;
-        display: inline-block;
+        display: block;
         font-size: 12px;
         font-weight: 500;
         color: #222222; }

@@ -1,5 +1,6 @@
 {% extends 'cadastros/formulario.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block conteudo %}
 <div class="container mt-5 py-5">
@@ -15,35 +16,38 @@
             <div class="text-right py-2">
                 <a href="{% url 'cadastrar-categoria' %}" class="btn btn-primary btn-sm">Adicionar Categoria</a>
             </div>
-            <table class="table table-striped">
-            
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Opções</th>
-                </tr>
-            
-                {% for categoria in categorias %}
-            
-                <tr>
-                    <td>{{categoria.pk}}</td>
-                    <td>{{categoria.nome}}</td>
-                    <td>{{categoria.descricao}}</td>
-                    <td>
-                        <a href="{% url 'atualizar-categoria' categoria.pk %}" class="btn btn-warning">Editar</a>
-                        <a href="{% url 'deletar-categoria' categoria.pk %}" class="btn btn-danger">Excluir</a>
-                    </td>
-                </tr>
-            
-                {% empty %}
-                <tr>
-                    <td colspan="3">Nenhuma categoria cadastrada!</td>
-                </tr>
-                {% endfor %}
-            
+            <table class="table table-striped" id="tabela-listar">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>          
+                <tbody>
+                    {% for categoria in categorias %}
+                    <tr>
+                        <td>{{categoria.pk}}</td>
+                        <td>{{categoria.nome}}</td>
+                        <td>{{categoria.descricao}}</td>
+                        <td>
+                            <a href="{% url 'atualizar-categoria' categoria.pk %}" class="btn btn-warning">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                            <a href="{% url 'deletar-categoria' categoria.pk %}" class="btn btn-danger">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">Nenhuma categoria cadastrada!</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
-            <div class="filter-bar d-flex flex-wrap align-items-center">
+            <!-- <div class="filter-bar d-flex flex-wrap align-items-center">
                 <div class="pagination mx-auto">
                     <span class="step-links">
             
@@ -64,12 +68,16 @@
                         {% endif %}
                     </span>
                 </div>
-            </div>
-
-
-
+            </div> -->
         </div>
     </div>
-
 </div>
 {% endblock %}
+{%block scripts%}
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
+<script src="{% static 'js/datatablesbr.js' %}"></script>
+{%endblock%}
+
+{%block styles%}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css" />
+{%endblock%}

@@ -25,9 +25,8 @@ class PaginaInicial(GroupRequiredMixin,LoginRequiredMixin, TemplateView):
         dmin = self.request.GET.get('min_date')
         dmax = self.request.GET.get('max_date')
         if dmin is not None and dmax is not None:
+            
             lista = Venda.objects.filter(data_da_venda__range=(dmin, dmax))
-
-
             context['valorTotal'] = lista.aggregate(Sum('valor'))
             context['lista'] = lista
         return context
@@ -468,10 +467,9 @@ class EstadoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
         
         estados = Estado.objects.all().reverse()
-
-        paginator = Paginator(estados, 5)  # Divide os estados em páginas
-        page = self.request.GET.get('pagina')  # Recebe a página atual
-        estados = paginator.get_page(page)  # Filtra os estados dessa página
+        # paginator = Paginator(estados, 5)  # Divide os estados em páginas
+        # page = self.request.GET.get('pagina')  # Recebe a página atual
+        # estados = paginator.get_page(page)  # Filtra os estados dessa página
         context['estados'] = estados
         return context
 
@@ -487,9 +485,9 @@ class CidadeList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
         cidades = Cidade.objects.all().reverse()
 
-        paginator = Paginator(cidades, 5)  # Divide  em páginas
-        page = self.request.GET.get('pagina')  # Recebe a página atual
-        cidades = paginator.get_page(page)  # Filtra os objetos dessa página
+        # paginator = Paginator(cidades, 5)  # Divide  em páginas
+        # page = self.request.GET.get('pagina')  # Recebe a página atual
+        # cidades = paginator.get_page(page)  # Filtra os objetos dessa página
         context['cidades'] = cidades
         return context
 
@@ -506,9 +504,9 @@ class PessoaList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
         pessoas = Pessoa.objects.all().reverse()
 
-        paginator = Paginator(pessoas, 10)  # Divide  em páginas
-        page = self.request.GET.get('pagina')  # Recebe a página atual
-        pessoas = paginator.get_page(page)  # Filtra os objetos dessa página
+        # paginator = Paginator(pessoas, 10)  # Divide  em páginas
+        # page = self.request.GET.get('pagina')  # Recebe a página atual
+        # pessoas = paginator.get_page(page)  # Filtra os objetos dessa página
         context['pessoas'] = pessoas
         return context
 
@@ -524,9 +522,9 @@ class VendaList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
         vendas = Venda.objects.all()
 
-        paginator = Paginator(vendas, 10)  # Divide  em páginas
-        page = self.request.GET.get('pagina')  # Recebe a página atual
-        vendas = paginator.get_page(page)  # Filtra os objetos dessa página
+        # paginator = Paginator(vendas, 10)  # Divide  em páginas
+        # page = self.request.GET.get('pagina')  # Recebe a página atual
+        # vendas = paginator.get_page(page)  # Filtra os objetos dessa página
         context['vendas'] = vendas
         return context
 
@@ -560,9 +558,9 @@ class EntradaProdutoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
         entrada = EntradaProduto.objects.all().reverse()
 
-        paginator = Paginator(entrada, 10)  # Divide  em páginas
-        page = self.request.GET.get('pagina')  # Recebe a página atual
-        entrada = paginator.get_page(page)  # Filtra os objetos dessa página
+        # paginator = Paginator(entrada, 10)  # Divide  em páginas
+        # page = self.request.GET.get('pagina')  # Recebe a página atual
+        # entrada = paginator.get_page(page)  # Filtra os objetos dessa página
         context['entrada'] = entrada
         return context
     
@@ -578,9 +576,9 @@ class FormaPagamentoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
         pagamentos = FormaPagamento.objects.all().reverse()
 
-        paginator = Paginator(pagamentos, 5)  # Divide  em páginas
-        page = self.request.GET.get('pagina')  # Recebe a página atual
-        pagamentos = paginator.get_page(page)  # Filtra os objetos dessa página
+        # paginator = Paginator(pagamentos, 5)  # Divide  em páginas
+        # page = self.request.GET.get('pagina')  # Recebe a página atual
+        # pagamentos = paginator.get_page(page)  # Filtra os objetos dessa página
         context['pagamentos'] = pagamentos
         return context
 
@@ -595,9 +593,9 @@ class FormaEnvioList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
         envios = FormaEnvio.objects.all().reverse()
 
-        paginator = Paginator(envios, 5)  # Divide  em páginas
-        page = self.request.GET.get('pagina')  # Recebe a página atual
-        envios = paginator.get_page(page)  # Filtra os objetos dessa página
+        # paginator = Paginator(envios, 5)  # Divide  em páginas
+        # page = self.request.GET.get('pagina')  # Recebe a página atual
+        # envios = paginator.get_page(page)  # Filtra os objetos dessa página
         context['envios'] = envios
         return context
 
@@ -612,9 +610,9 @@ class CategoriaList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
         categorias = Categoria.objects.all().reverse()
 
-        paginator = Paginator(categorias, 5)  # Divide  em páginas
-        page = self.request.GET.get('pagina')  # Recebe a página atual
-        categorias = paginator.get_page(page)  # Filtra os objetos dessa página
+        # paginator = Paginator(categorias, 5)  # Divide  em páginas
+        # page = self.request.GET.get('pagina')  # Recebe a página atual
+        # categorias = paginator.get_page(page)  # Filtra os objetos dessa página
         context['categorias'] = categorias
         return context
 
@@ -629,8 +627,8 @@ class CupomList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
         cupons = Cupom.objects.all().reverse()
 
-        paginator = Paginator(cupons, 5)  # Divide  em páginas
-        page = self.request.GET.get('pagina')  # Recebe a página atual
-        cupons = paginator.get_page(page)  # Filtra os objetos dessa página
+        # paginator = Paginator(cupons, 5)  # Divide  em páginas
+        # page = self.request.GET.get('pagina')  # Recebe a página atual
+        # cupons = paginator.get_page(page)  # Filtra os objetos dessa página
         context['cupons'] = cupons
         return context
