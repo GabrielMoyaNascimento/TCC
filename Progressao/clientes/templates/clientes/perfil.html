@@ -122,6 +122,7 @@
                             <table class="table table-striped " id="tabela-listar">
                                 <thead>
                                     <tr>
+                                        <th>Detalhes</th>
                                         <th>Data da Compra</th>
                                         <th>Valor</th>
                                         <th>Parcelas</th>
@@ -132,7 +133,10 @@
                                 <tbody>
                                     {% for v in venda%}
                                     <tr>
-                                        <td>{{v.data_da_venda}}</td>
+                                        <td><a href="{% url 'detalhe-compra' v.pk %}" class="btn btn-secondary" title="Detalhes">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </a></td>
+                                        <td>{{v.data_da_venda|date:"d/m/Y"}}</td>
                                         <td>{{v.valor}}</td>
                                         <td>{{v.parcelas}}</td>
                                         <td>{{v.forma_pagamento.nome}}</td>

@@ -58,12 +58,21 @@ class ConfirmacaoView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         venda = Venda.objects.filter(usuario=self.request.user).first()
-
         context['ultima_venda'] = venda
         context['produtos_venda'] = ProdutoVenda.objects.filter(venda=venda)
         context["parcela"] = Parcela.objects.filter(venda=venda)
         return context
 
+
+class ConfirmacaoDetalhes(LoginRequiredMixin, TemplateView):
+    template_name = 'clientes/confirmacao.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        venda = get_object_or_404(Venda, pk=kwargs['id_venda'], usuario=self.request.user)
+        context['ultima_venda'] = venda
+        context['produtos_venda'] = ProdutoVenda.objects.filter(venda=venda)
+        context["parcela"] = Parcela.objects.filter(venda=venda)
+        return context
 
 class Verificar(TemplateView):
     
