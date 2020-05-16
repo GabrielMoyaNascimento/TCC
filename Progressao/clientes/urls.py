@@ -7,7 +7,7 @@ urlpatterns = [
     path('', PaginaInicial.as_view(), name="clientes-index"),
     path('contato/', ContatoView.as_view(), name="clientes-contato"),
     path('confirmacaoCompra/', ConfirmacaoView.as_view(), name="clientes-confirmacao"),
-    path('/detalhesCompra/<int:id_venda>', ConfirmacaoDetalhes.as_view(), name="detalhe-compra"),
+    path('detalhesCompra/<int:id_venda>', ConfirmacaoDetalhes.as_view(), name="detalhe-compra"),
     path('produto/<int:pk>', ProdutoDetailView.as_view(), name="clientes-paginaProduto"),
     
     #Verificar Usuário para redirecionar para a pagina referente a seu grupo

@@ -1,7 +1,55 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import EMPTY_VALUES
+from django.forms import ValidationError
+import re
 
+error_messages = {
+    'invalid': ("Número de CPF inválido."),
+    'digits_only': ("Esse campo aceita apenas números."),
+    'max_digits': ("Esse campo requer 11 dígitos."),
+}
 
+def DV_maker(v):
+    if v >= 2:
+        return 11 - v
+    return 0
+
+def validate_CPF(value):
+    """
+    Value can be either a string in the format XXX.XXX.XXX-XX or an
+    11-digit number.
+    """
+    iguais = ['00000000000', '11111111111', '22222222222', '33333333333', '44444444444', '55555555555', '66666666666', '77777777777', '88888888888', '99999999999']
+
+    if value in EMPTY_VALUES:
+        return u''
+    if not value.isdigit():
+        value = re.sub("[-\.]", "", value)
+    orig_value = value[:]
+    try:
+        int(value)
+    except ValueError:
+        raise ValidationError(error_messages['digits_only'])
+    if len(value) != 11:
+        raise ValidationError(error_messages['max_digits'])
+    orig_dv = value[-2:]
+
+    new_1dv = sum([i * int(value[idx])
+                   for idx, i in enumerate(range(10, 1, -1))])
+    new_1dv = DV_maker(new_1dv % 11)
+    value = value[:-2] + str(new_1dv) + value[-1]
+    new_2dv = sum([i * int(value[idx])
+                   for idx, i in enumerate(range(11, 1, -1))])
+    new_2dv = DV_maker(new_2dv % 11)
+    value = value[:-1] + str(new_2dv)
+    if value[-2:] != orig_dv:
+        raise ValidationError(error_messages['invalid'])
+    if value in iguais:
+        raise ValidationError(error_messages['invalid'])
+
+    return orig_value
+#_________________________________________________#
 class Estado(models.Model):
     sigla = models.CharField(max_length=2)
     nome = models.CharField(max_length=50)
@@ -18,6 +66,7 @@ class Cidade(models.Model):
         return self.nome + " - " + self.estado.sigla
 
 
+
 class Pessoa(models.Model):
 
     nome = models.CharField(max_length=50, verbose_name="Qual seu nome?", help_text="Digite seu nome completo", null=True)
@@ -26,7 +75,7 @@ class Pessoa(models.Model):
     numero = models.CharField(max_length=10, verbose_name="Número", null=True)
     cep = models.CharField(max_length=25, null=True)
     rg = models.CharField(max_length=25, null=True)
-    cpf = models.CharField(max_length=25, null=True)
+    cpf = models.CharField(max_length=25, null=True, validators=[validate_CPF])
     telefone = models.CharField(max_length=25, null=True)
     cidade = models.ForeignKey(Cidade, on_delete=models.PROTECT, null=True)
     usuario = models.OneToOneField(User, on_delete=models.PROTECT)
