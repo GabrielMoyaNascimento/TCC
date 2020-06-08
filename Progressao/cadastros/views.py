@@ -563,6 +563,22 @@ class EntradaProdutoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
         # entrada = paginator.get_page(page)  # Filtra os objetos dessa página
         context['entrada'] = entrada
         return context
+
+class BaixoEstoqueProdutoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
+    model = Produto
+    template_name = 'cadastros/listar_baixo_estoque.html'
+    login_url = reverse_lazy('login')
+    group_required = u"Administrador"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        baixo = Produto.objects.filter(estoque__range=(-10, 3))
+        # paginator = Paginator(entrada, 10)  # Divide  em páginas
+        # page = self.request.GET.get('pagina')  # Recebe a página atual
+        # entrada = paginator.get_page(page)  # Filtra os objetos dessa página
+        context['baixo'] = baixo
+        return context
     
 
 class FormaPagamentoList(GroupRequiredMixin, LoginRequiredMixin, ListView):

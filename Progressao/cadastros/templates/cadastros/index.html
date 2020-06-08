@@ -34,6 +34,7 @@
                         <th>Data da Venda</th>
                         <th>Forma Pagamento</th>
                         <th>Valor</th>
+                        <th>Detalhes</th>
                     </tr>
                 </thead>
                 
@@ -44,6 +45,10 @@
                         <td>{{venda.data_da_venda}}</td>
                         <td>{{venda.forma_pagamento}}</td>   
                         <td>{{venda.valor}}</td>   
+                        <td><a href="{% url 'detalhe-compra' venda.pk %}" class="btn btn-secondary" title="Detalhes">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                        </td>
                     </tr>
                     
                     {% empty %}

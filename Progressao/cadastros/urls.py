@@ -53,5 +53,6 @@ urlpatterns = [
     path('adm/listar/vendas/', VendaList.as_view(), name="listar-vendas"),
     path('adm/listar/cupons/', CupomList.as_view(), name="listar-cupons"),
     path('adm/listar/entradas/', EntradaProdutoList.as_view(), name="listar-entrada-produtos"),
+    path('adm/listar/baixoEstoque/', BaixoEstoqueProdutoList.as_view(), name="listar-baixo-estoque-produtos"),
 
 ]
