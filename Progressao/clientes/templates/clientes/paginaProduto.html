@@ -32,7 +32,7 @@
                         <h2>R${{object.valorVenda}}</h2>
                         <ul class="list">
                             <li><a class="active"><span>Categoria</span> : {{object.categoria.nome}}</a></li>
-                            {% if object.estoque == 0 %}
+                            {% if object.estoque <= 0 %}
                             <li><a href="#"><span>Info</span> :  </a><u class="text-warning"> indisponível</u></li>
                             {% else %}
                             <li><a href="#"><span>Info</span> : {{object.estoque}} </a><u class="text-success"> Disponível</u></li>
@@ -48,7 +48,7 @@
                             <button
                                 class="reduced items-count btn-menos" type="button"><i class="lnr lnr-chevron-down"></i></button>
                         </div>
-                            {% if object.estoque == 0 %}
+                            {% if object.estoque <= 0 %}
 
                         <div class="card_area d-flex align-items-center">
                             <a class="primary-btn" id="btn-adicionar" >Produto Indisponível</a>

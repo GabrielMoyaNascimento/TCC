@@ -543,9 +543,9 @@ class ProdutoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
         produtos = Produto.objects.all().reverse()
 
-        paginator = Paginator(produtos, 10)  # Divide  em páginas
-        page = self.request.GET.get('pagina')  # Recebe a página atual
-        produtos = paginator.get_page(page)  # Filtra os objetos dessa página
+        # paginator = Paginator(produtos, 10)  # Divide  em páginas
+        # page = self.request.GET.get('pagina')  # Recebe a página atual
+        # produtos = paginator.get_page(page)  # Filtra os objetos dessa página
         context['produtos'] = produtos
         return context
 

@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
 from django.shortcuts import get_object_or_404
+from django.http import Http404
 from django.core.paginator import Paginator
 from cadastros.models import Categoria, Produto, Pessoa, Venda, ProdutoVenda, Cupom,Parcela
 from .models import Carrinho
@@ -113,18 +114,25 @@ class AdicionarProdutoCarrinho(LoginRequiredMixin, TemplateView):
         for c in carrinho:
             if c.produto == prod:
                 c.quantidade = c.quantidade + qtde
-                c.save()
+                if c.quantidade <= prod.estoque:
+                    c.save()
+                #Informar o usuario caso else
+                else:
+                    raise Http404("O produto {} não tem a quantidade desejada no estoque.".format(c.produto.nome))
                 carrinho_tem = True
                 break
 
 
         # Cria um objeto "Carrinho" com os dados do produto e a quantidade da URL
-        if carrinho_tem == False:
+        if carrinho_tem == False and qtde <= prod.estoque:
+
             carrinho = Carrinho.objects.create(
                 quantidade=kwargs['quantidade'],
                 produto=prod,
                 valor_unid=prod.valorVenda,
                 usuario=self.request.user)
+        else:
+            raise Http404("O produto {} não tem a quantidade desejada no estoque.".format(prod.nome))
         # Redireciona o usuário para a lista
         return redirect('clientes-carrinho')
 
@@ -218,6 +226,11 @@ class VendaCreate(LoginRequiredMixin, CreateView):
 
         # buscar todos os objetos da classe Carrinho no banco
         produtosCarrinho = Carrinho.objects.filter(usuario=self.request.user)
+
+        for p in produtosCarrinho:
+            if p.quantidade > p.produto.estoque:
+                form.add_error(None, 'Houve um problema ao fazer a venda. O produto {} não tem a quantidade desejada em estoque'.format(p.produto.nome))
+                return self.form_invalid(form)
 
         # if produtosCarrinho == None:
         #     form.errors(None, "Nenhum item no carrinho")
