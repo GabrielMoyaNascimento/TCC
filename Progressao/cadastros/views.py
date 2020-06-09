@@ -29,6 +29,9 @@ class PaginaInicial(GroupRequiredMixin,LoginRequiredMixin, TemplateView):
             lista = Venda.objects.filter(data_da_venda__range=(dmin, dmax))
             context['valorTotal'] = lista.aggregate(Sum('valor'))
             context['lista'] = lista
+            context['estoque'] = Produto.objects.filter(estoque__range=(-10, 3)).count()
+            context['produto'] = Produto.objects.all().count()
+            context['venda'] = Venda.objects.all().count()
         return context
 
 

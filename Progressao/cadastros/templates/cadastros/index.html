@@ -18,6 +18,13 @@
         <div class="col-lg">
             {% if request.user.groups.all.0.name == "Administrador" %}
             <h3>Olá {{user.pessoa.nome}},</h3><br>
+            {% else %}
+            <h3>Olá Funcionário, bem vindo a pagina inicial do administrativo</h3><br>
+            {% endif %}
+            <h3>Estatísticas:</h3>
+            <p class="font-weight-light">Produtos cadastrados: {{produto}}</p>
+            <p class="font-weight-light">Produtos com estoque baixo: {{estoque}}</p>
+            <p class="font-weight-light">Quantidade de vendas totais: {{venda}}</p>
             <h3>Relatório de vendas</h3>
             <p class="font-weight-light">Selecione um período e fazer uma pesquisa para verificar as vendas e o lucro.</p>
             <form action="">
@@ -68,9 +75,7 @@
         </div>
     </div>
     
-    {% else %}
-    <h3>Olá Funcionário, bem vindo a pagina inicial do administrativo</h3><br>
-    {% endif %}
+    
 </div>
 {%endblock%}
 
