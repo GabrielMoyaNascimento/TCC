@@ -159,7 +159,7 @@ class Produto(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.categoria.nome + " - " + self.categoria.nome
+        return self.codigo + " - " + self.nome + " - " + self.categoria.nome
 
 class EntradaProduto(models.Model):
     quantidade = models.DecimalField(max_digits=8, decimal_places=0)
