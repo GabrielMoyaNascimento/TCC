@@ -531,6 +531,22 @@ class VendaList(GroupRequiredMixin, LoginRequiredMixin, ListView):
         context['vendas'] = vendas
         return context
 
+class ParcelaList(GroupRequiredMixin, LoginRequiredMixin, ListView):
+    model = Parcela
+    template_name = 'cadastros/listar_parcelas.html'
+    login_url = reverse_lazy('login')
+    group_required = u"Administrador"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        parcelas = Parcela.objects.filter(numero_parcela__range=(2, 3))
+
+        # paginator = Paginator(parcelas, 10)  # Divide  em páginas
+        # page = self.request.GET.get('pagina')  # Recebe a página atual
+        # parcelas = paginator.get_page(page)  # Filtra os objetos dessa página
+        context['parcelas'] = parcelas
+        return context
 
 class ProdutoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     model = Produto

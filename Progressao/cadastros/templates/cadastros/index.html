@@ -23,7 +23,7 @@
             {% endif %}
             <h3>Estatísticas:</h3>
             <p class="font-weight-light">Produtos cadastrados: {{produto}}</p>
-            <p class="font-weight-light">Produtos com estoque baixo: {{estoque}}</p>
+            <p class="font-weight-light">Produtos com estoque baixo: {{estoque}} <a href="{% url 'listar-baixo-estoque-produtos' %}"><u><i>Ver</i></u></a></p>
             <p class="font-weight-light">Quantidade de vendas totais: {{venda}}</p>
             <h3>Relatório de vendas</h3>
             <p class="font-weight-light">Selecione um período e fazer uma pesquisa para verificar as vendas e o lucro.</p>
