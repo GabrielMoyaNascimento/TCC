@@ -226,12 +226,17 @@ class VendaCreate(LoginRequiredMixin, CreateView):
 
         # buscar todos os objetos da classe Carrinho no banco
         produtosCarrinho = Carrinho.objects.filter(usuario=self.request.user)
+        pessoa = Pessoa.objects.filter(usuario=self.request.user)
 
         for p in produtosCarrinho:
             if p.quantidade > p.produto.estoque:
                 form.add_error(None, 'Houve um problema ao fazer a venda. O produto {} não tem a quantidade desejada em estoque'.format(p.produto.nome))
                 return self.form_invalid(form)
 
+        for pe in pessoa:
+            if pe.rg == None or pe.rg == '':
+                form.add_error(None, 'O cadastro de usuário não foi finalizado')
+                return self.form_invalid(form)
         # if produtosCarrinho == None:
         #     form.errors(None, "Nenhum item no carrinho")
         #     return form_invalid(form)

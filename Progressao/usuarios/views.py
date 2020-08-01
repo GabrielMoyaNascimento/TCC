@@ -63,10 +63,7 @@ class PerfilView(LoginRequiredMixin, DetailView):
         # paginator = Paginator(venda, 5)  # Divide  em páginas
         # page = self.request.GET.get('pagina')  # Recebe a página atual
         # venda = paginator.get_page(page)  # Filtra os objetos dessa página
-        if self.request.user.groups.all.name == "Administrador":
-            context['venda'] = Venda.objects.filter()
-        else:
-            context['venda'] = Venda.objects.filter(usuario=self.request.user)
+        context['venda'] = Venda.objects.filter(usuario=self.request.user)
         return context
 
 
