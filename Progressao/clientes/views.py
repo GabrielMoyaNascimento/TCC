@@ -85,7 +85,7 @@ class Verificar(TemplateView):
         elif user.groups.filter(name='Clientes'):
             return redirect('clientes-index')
         else:
-            return redirect('clientes-login')
+            return redirect('login')
 
 
 
