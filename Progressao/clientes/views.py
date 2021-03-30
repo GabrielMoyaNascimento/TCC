@@ -178,10 +178,16 @@ class AtualizarProdutoCarrinho(LoginRequiredMixin, TemplateView):
         if(qtde <= 0):
             carrinho.delete()
         else:
-            # Atualiza o objeto, adicionando a qtde na quantidade
-            carrinho.quantidade = qtde
+            # Verifica se tem em estoque
+            if(carrinho.produto.estoque >= qtde):
+                # Atualiza o objeto, adicionando a qtde na quantidade
+                carrinho.quantidade = qtde
+            else:
+                carrinho.quantidade = carrinho.produto.estoque
+
             # Salva o objeto
             carrinho.save()
+    
 
         # depois de remover, já redirecina o usuário de novo pra lista
         # Ou seja, o excluir nem tela vai ter... ele vai deletar e voltar pra lista

@@ -36,7 +36,7 @@
                             <label>RG:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{p.rg}}</p>
+                            <p>{{p.rg|default_if_none:"-"}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -44,7 +44,7 @@
                             <label>CPF:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{p.cpf}}</p>
+                            <p>{{p.cpf|default_if_none:"-"}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -52,7 +52,7 @@
                             <label>Telefone:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{p.telefone}}</p>
+                            <p>{{p.telefone|default_if_none:"-"}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -60,7 +60,7 @@
                             <label>Endereço:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{p.endereco}}</p>
+                            <p>{{p.endereco|default_if_none:"-"}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -68,7 +68,7 @@
                             <label>Número:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{p.numero}}</p>
+                            <p>{{p.numero|default_if_none:"-"}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -76,7 +76,7 @@
                             <label>CEP:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{p.cep}}</p>
+                            <p>{{p.cep|default_if_none:"-"}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -84,7 +84,7 @@
                             <label>Cidade:</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{p.cidade.nome}}</p>
+                            <p>{{p.cidade.nome|default_if_none:"-"}}</p>
                         </div>
                     </div>
                     <div class="my-3">
@@ -104,13 +104,25 @@
                             <ul class="list">
                                 <li><a href="#">Produto <span>Total</span></a></li>
                                 {% for v in produtosCarrinho %}
-                                <li><a href="#">{{v.produto.nome}}<span class="middle">{{v.quantidade}}X</span>
+                                <li>
+                                    <a href="#">{{v.quantidade}}x {{v.produto.nome}}<span class="middle"></span>
                                         <span class="last">R${{v.valor_unid}}</span></a></li>
                                 {% endfor %}
                             </ul>
 
+                            <ul class="list list_3" id="parcelas" style="display: none;" >
+                                <li>
+                                    Parcelas
+                                    <div style="float: right;">
+                                        <span id="parcelas_x"></span>x
+                                        R$<span id="parcelas_valor"></span>
+                                    </div>
+                                    <div style="clear: both;"></div>
+                                </li>
+                            </ul>
+
                             <ul class="list list_2">
-                                <li><a href="#">Subtotal <span>R${{valor}}</span></a></li>
+                                <li><a href="#">Subtotal R$<span id="valor_total">{{valor}}</span></a></li>
                             </ul>
 
                             <div class="payment_item active">
@@ -147,6 +159,14 @@
         $("#id_parcelas option[value=3]").css("display", "none");
         
         // Quando o usuário alterar a forma de pagamento...
+        $("#id_parcelas").change(function (e) {
+            if($("#id_parcelas").val()>=1){
+                var parcela = parseFloat($("#valor_total").text()) / parseInt($("#id_parcelas").val());
+                $("#parcelas_x").text($("#id_parcelas").val());
+                $("#parcelas_valor").text( ("" + parcela.toFixed(2)).replace(".",",") );
+            }
+        });
+
         $("#id_forma_pagamento").change(function (e) { 
 
             // Pega o texto da opção selecionada
@@ -156,11 +176,17 @@
             if(forma == "Cartão de Crédito"){
                 $("#id_parcelas option[value=2]").css("display","block");
                 $("#id_parcelas option[value=3]").css("display","block");
+                $("#parcelas").css("display","inline");
+
+                var parcela = parseFloat($("#valor_total").text()) / parseInt($("#id_parcelas").val());
+                $("#parcelas_x").text($("#id_parcelas").val());
+                $("#parcelas_valor").text(("" + parcela.toFixed(2)).replace(".", ","));
 
             } else{
                 $("#id_parcelas").val("1");
                 $("#id_parcelas option[value=2]").css("display", "none");
                 $("#id_parcelas option[value=3]").css("display", "none");
+                $("#parcelas").css("display", "none");
             }
             
                 
